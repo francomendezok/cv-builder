@@ -10,7 +10,7 @@ import Resume from './Resume'
 function App() {
 
   return (
-    <div className="flex flex-col justify-center items-center">
+    <div className="container">
       <EditLayout />
       <EditInfo />
       <Personal />
