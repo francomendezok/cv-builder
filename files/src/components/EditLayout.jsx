@@ -1,5 +1,7 @@
 export default function EditLayout () {
     return (
-        <h2>s</h2>
+        <div className="editLayout">
+            <h2>Edit Layout</h2>
+        </div>
     )
 }

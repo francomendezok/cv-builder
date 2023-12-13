@@ -1,5 +1,7 @@
 export default function EditInfo () {
     return (
-        <h2>Wey</h2>
+        <div className="editInfo">
+            <h2>Edit Info</h2>
+        </div>
     )
 }

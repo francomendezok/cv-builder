@@ -1,5 +1,7 @@
 export default function Personal () {
     return (
-        <h2>personal</h2>
+        <div className="personal">
+            <h2>Personal</h2>
+        </div>
     )
 }

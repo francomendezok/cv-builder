@@ -1,5 +1,7 @@
 export default function Education () {
     return (
-        <h2>sd</h2>
+        <div className="education">
+            <h2>Education</h2>
+        </div>
     )
 }
