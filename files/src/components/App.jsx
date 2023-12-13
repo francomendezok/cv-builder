@@ -1,21 +1,15 @@
 import '../styles/index.css'
-import EditInfo from './EditInfo'
-import EditLayout from './EditLayout'
-import Education from './Education'
-import Experience from './Experience'
-import Personal from './Personal'
 import Resume from './Resume'
+import InfoSection from './Content'
+import EditSection from './EditSection'
 
 
 function App() {
 
   return (
     <div className="container">
-      <EditLayout />
-      <EditInfo />
-      <Personal />
-      <Education />
-      <Experience />
+      <EditSection />
+      <InfoSection />
       <Resume />
     </div>
   )
