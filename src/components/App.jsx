@@ -4,7 +4,7 @@ import InfoSection from './Content'
 import EditSection from './EditSection'
 
 
-function App() {
+export default function App() {
 
   return (
     <div className="container">
@@ -15,4 +15,3 @@ function App() {
   )
 }
 
-export default App
