@@ -1,11 +1,12 @@
+/* eslint-disable no-undef */
 /** @type {import('tailwindcss').Config} */
 export default {
   content: [
-    './src/**/*.{js,jsx,ts,tsx}', // Archivos donde Tailwind buscará clases
+    './src/**/*.{js,jsx,ts,tsx}', 
   ],
   theme: {
     extend: {},
   },
-  plugins: [],
+  plugins: [require("daisyui")],
 }
 
