@@ -75,3 +75,38 @@ body {
   width: 30px;
   height: 30px;
 }
+
+input[type=color] {
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+input[type=color]::-webkit-color-swatch {
+border: none;
+border-radius: 50%;
+padding: 0;
+}
+
+input[type=color]::-webkit-color-swatch-wrapper {
+  border: none;
+  border-radius: 50%;
+  padding: 0;
+}
+
+input[type=text] {
+  overflow: hidden;
+  background-color: #fefefe;
+  border-radius: 6px !important;
+  color: black;
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1); /* Subtle black box shadow */
+}
+
+input[type=text]:focus {
+  border: 2px solid rgb(75, 103, 239);
+}
+
+
+
+label {
+  font-weight: bold;
+}
