@@ -115,26 +115,13 @@ body {
 }
 
 
-.div-top {
+.div-position {
   width: 3rem; 
   height: 3rem; 
-  background: linear-gradient(to bottom, black 50%, white 50%);
   border: 1px solid black;
 }
 
-.div-left {
-  width: 3rem; 
-  height: 3rem; 
-  background: linear-gradient(to right, black 50%, white 50%);
-  border: 1px solid black;
-}
 
-.div-right {
-  width: 3rem; 
-  height: 3rem; 
-  background: linear-gradient(to left, black 50%, white 50%);
-  border: 1px solid black;
-}
 
 .btnEdit {
   width: 6rem;
@@ -151,6 +138,7 @@ body {
 input[type=color] {
   border-radius: 50%;
   overflow: hidden;
+  cursor: pointer;
 }
 
 input[type=color]::-webkit-color-swatch {
