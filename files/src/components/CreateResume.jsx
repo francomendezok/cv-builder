@@ -1,8 +1,6 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
 import { useState } from "react"
-
-
-
 
 function CompleteYourInfo () {
     return (
@@ -67,21 +65,21 @@ function CompleteYourInfo () {
     )
 }
 
-function CustomizeLayout () {
+function CustomizeLayout ({updateLayout, updateFonts}) {
     return (
         <section className="flex flex-col items-center justify-around rounded-xl h-4/5 mb-16">
             <div className="bg-slate-100 w-full h-1/4 pl-8 flex flex-col justify-evenly border-2 border-grey rounded-xl">
                 <h2 className="text-3xl font-bold mb-2">Layout</h2>
                 <div className="flex justify-start gap-4">
-                    <button>
+                    <button onClick={() => updateLayout('resumeTop')}>
                         <div className="div-top"></div>
                         Top
                     </button>
-                    <button>
+                    <button onClick={() => updateLayout('resumeLeft')}>
                         <div className="div-left"></div>
                         Left
                     </button>
-                    <button>
+                    <button onClick={() => updateLayout('resumeRight')}>
                         <div className="div-right"></div>
                         Right
                     </button>
@@ -97,15 +95,15 @@ function CustomizeLayout () {
             <div className="bg-slate-100 w-full h-1/4 pl-8 flex flex-col justify-evenly border-2 border-grey rounded-xl">
                 <h2 className="text-3xl font-bold mb-2">Fonts</h2>
                 <div className="flex justify-start gap-4">
-                    <div className="border-2 border-black rounded-md p-1">
+                    <div onClick={() => updateFonts('serif')} className="cursor-pointer transform hover:scale-95 hover:bg-blue-300 border-2 border-black rounded-md p-1">
                         <p className="text-2xl font-semibold" style={{fontFamily: 'serif'}}>Aa</p>
                         <p className="text-xl" style={{fontFamily: 'serif'}}>Serif</p>
                     </div>
-                    <div className="border-2 border-black rounded-md p-1">
+                    <div onClick={() => updateFonts('sans-serif')} className="cursor-pointer transform hover:scale-95 hover:bg-blue-300 border-2 border-black rounded-md p-1">
                         <p className="text-2xl font-semibold" style={{fontFamily: 'sans-serif'}}>Aa</p>
                         <p className="text-xl" style={{fontFamily: 'sans-serif'}}>Sans</p>
                     </div>
-                    <div className="border-2 border-black rounded-md p-1">
+                    <div onClick={() => updateFonts('monospace')} className="cursor-pointer transform hover:scale-95 hover:bg-blue-300 border-2 border-black rounded-md p-1">
                         <p className="text-2xl font-semibold" style={{fontFamily: 'monospace'}}>Aa</p>
                         <p className="text-xl" style={{fontFamily: 'monospace'}}>Mono</p>
                     </div>
@@ -127,11 +125,11 @@ function Btn ({img, alt, text, btnClass, callback}) {
 }
 
 
-export default function CreateResume() {
+export default function CreateResume({updateLayout, updateFonts}) {
     const [info, changeInfo] = useState(<CompleteYourInfo />);
   
     function layout() {
-      changeInfo(<CustomizeLayout />);
+      changeInfo(<CustomizeLayout updateLayout={updateLayout} updateFonts={updateFonts} />);
     }
     function content() {
         changeInfo(<CompleteYourInfo />);
@@ -178,3 +176,6 @@ export default function CreateResume() {
     );
   }
   
+
+
+  export {CustomizeLayout}
