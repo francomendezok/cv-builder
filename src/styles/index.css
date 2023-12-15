@@ -14,7 +14,7 @@ body {
   display: flex;
   align-items: start;
   justify-content: space-evenly;
-  background-color: #b3d6dd;
+  background-color: #d2e2e6;
   padding-top: 2rem;
   padding-bottom: 2rem;
   color: black;
@@ -59,11 +59,12 @@ body {
 
 #resumeLeft .personalInfo h1 {
   text-wrap: wrap;
+  text-align: left;
 }
 
 #resumeLeft .personalInfo div {
   flex-direction: column;
-  align-items: center;
+  align-items: start;
   margin-top: 2rem;
   gap: 2rem;
 }
@@ -88,11 +89,12 @@ body {
 
 #resumeRight .personalInfo h1 {
   text-wrap: wrap;
+  text-align: left;
 }
 
 #resumeRight .personalInfo div {
   flex-direction: column;
-  align-items: center;
+  align-items: start;
   margin-top: 2rem;
   gap: 2rem;
 }
@@ -109,9 +111,7 @@ body {
   text-align: center;
   width: 75%;
   height: 75%;
-  background-color: #eeeded;
-  padding: .5rem;
-  border: 1px solid black;
+  padding: .2rem;
 }
 
 
@@ -120,7 +120,6 @@ body {
   height: 3rem; 
   border: 1px solid black;
 }
-
 
 
 .btnEdit {
@@ -167,4 +166,9 @@ input[type=text]:focus {
 
 label {
   font-weight: bold;
+}
+
+.mailSVG, .telephoneSVG, .locationSVG {
+  width: 25px;
+  height: 25px;
 }
