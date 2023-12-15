@@ -7,7 +7,7 @@ import CreateResume from './CreateResume';
 
 export default function App() {
   const [layout, updateLayout] = useState('resumeTop');
-  const [color, updateColor] = useState('#000000');
+  const [color, updateColor] = useState('#5165F5');
   const [fonts, updateFonts] = useState('sans-serif');
 
 

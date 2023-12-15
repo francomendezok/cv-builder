@@ -67,24 +67,29 @@ function CompleteYourInfo () {
 }
 
 function CustomizeLayout ({updateLayout, updateColor, updateFonts, color}) {
-    const invertedColor = getContrastColor(color);
+    const [newColor, setColor] = useState(color);
+
+    function handler (e) {
+        updateColor(e.target.value);
+        setColor(e.target.value);
+    }
     return (
         <section className="flex flex-col items-center justify-around rounded-xl h-4/5 mb-16">
             <div className="bg-slate-100 w-full h-1/4 pl-8 flex flex-col justify-evenly border-2 border-grey rounded-xl">
                 <h2 className="text-3xl font-bold mb-2">Layout</h2>
                 <div className="flex justify-start gap-4">
                     <button onClick={() => updateLayout('resumeTop')}>
-                        <div style={{ background: `linear-gradient(to bottom, ${color} 0%, ${color} 50%, ${invertedColor} 50%, ${invertedColor} 100%)` }} className="div-position"></div>
+                        <div style={{ background: `linear-gradient(to bottom, ${newColor} 0%, ${newColor} 50%, #ffffff  50%, #ffffff  100%)` }} className="div-position"></div>
 
                         Top
                     </button>
                     <button onClick={() => updateLayout('resumeLeft')}>
-                        <div style={{ background: `linear-gradient(to right, ${color} 0%, ${color} 50%, ${invertedColor} 50%, ${invertedColor} 100%)` }} className="div-position"></div>
+                        <div style={{ background: `linear-gradient(to right, ${newColor} 0%, ${newColor} 50%, #ffffff  50%, #ffffff  100%)` }} className="div-position"></div>
 
                         Left
                     </button>
                     <button onClick={() => updateLayout('resumeRight')}>
-                        <div style={{ background: `linear-gradient(to left, ${color} 0%, ${color} 50%, ${invertedColor} 50%, ${invertedColor} 100%)` }} className="div-position"></div>
+                        <div style={{ background: `linear-gradient(to left, ${newColor} 0%, ${newColor} 50%, #ffffff  50%, #ffffff  100%)` }} className="div-position"></div>
 
                         Right
                     </button>
@@ -94,7 +99,7 @@ function CustomizeLayout ({updateLayout, updateColor, updateFonts, color}) {
                 <h2 className="text-3xl font-bold">Color</h2>
                 <span className="flex items-center">
                     Select Color
-                    <input onChange={(e) => updateColor(e.target.value)} className="colorPicker ml-2 mb-2 w-16 h-16" type="color" />
+                    <input value={newColor} onChange={handler} className="colorPicker ml-2 mb-2 w-16 h-16" type="color" />
                 </span>
             </div>
             <div className="bg-slate-100 w-full h-1/4 pl-8 flex flex-col justify-evenly border-2 border-grey rounded-xl">
