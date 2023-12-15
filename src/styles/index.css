@@ -26,9 +26,81 @@ body {
   height: 100vh;
 }
 
-#resume {
+#resumeTop {
   width: 50%;
   height: 150vh;
+}
+
+.resumeInfo {
+  max-width: 80%;
+  margin: auto;
+  margin-top: 1rem;
+}
+
+.parragraph {
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  min-height: 100%;
+  width: 33.3%;
+}
+
+
+#resumeLeft {
+  width: 50%;
+  height: 150vh;
+  display: flex;
+}
+
+#resumeLeft .personalInfo {
+  width: 40%;
+  height: 100%;
+}
+
+#resumeLeft .personalInfo h1 {
+  text-wrap: wrap;
+}
+
+#resumeLeft .personalInfo div {
+  flex-direction: column;
+  align-items: center;
+  margin-top: 2rem;
+  gap: 2rem;
+}
+
+#resumeLeft .infoContainer {
+  width: 60%;
+  height: 100%;
+  margin-top: 1rem;
+}
+
+#resumeRight {
+  width: 50%;
+  height: 150vh;
+  display: flex;
+  flex-direction: row-reverse;
+}
+
+#resumeRight .personalInfo {
+  width: 40%;
+  height: 100%;
+}
+
+#resumeRight .personalInfo h1 {
+  text-wrap: wrap;
+}
+
+#resumeRight .personalInfo div {
+  flex-direction: column;
+  align-items: center;
+  margin-top: 2rem;
+  gap: 2rem;
+}
+
+#resumeRight .infoContainer {
+  width: 60%;
+  height: 100%;
+  margin-top: 1rem;
 }
 
 
@@ -104,8 +176,6 @@ input[type=text] {
 input[type=text]:focus {
   border: 2px solid rgb(75, 103, 239);
 }
-
-
 
 label {
   font-weight: bold;
