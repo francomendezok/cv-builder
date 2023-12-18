@@ -76,7 +76,7 @@ function CompleteYourInfo({updateExample, example}) {
 
     const CreateInfo = ({text}) => {
         return (
-            <button className="buttonCreateInfo">+ {text}</button>
+            <button onClick={() => setExperience(AddExperience)} className="buttonCreateInfo">+ {text}</button>
         )
     }
 
@@ -86,12 +86,31 @@ function CompleteYourInfo({updateExample, example}) {
         )
     }
 
-    
+    const ContentList = () => {
+        return (
+            <>
+            {listOfExperience.map((exp, index) => (
+              <div key={index} className="divEye">
+                <p style={{cursor: 'pointer'}} onClick={() => setExperience(AddExperience)}>{exp.company}</p>
+                <img src="../src/assets/eye.png" alt=""  />
+              </div>
+            ))}
+            <CreateInfo text={'Experience'} />
+            
+          </>
+        )
+    }
 
-    const [experience, setExperience] = useState(AddExperience);
+    
+    
+    let myState = listOfExperience.length === 0 
+       ? <EmptyList></EmptyList>
+       : <ContentList></ContentList>
+
+    const [experience, setExperience] = useState(myState);
     const [education, setEducation] = useState(AddEducation);
     const [skills, setSkills] = useState(AddSkills);
-
+    
 
     return (
       <section className="h-full flex flex-col justify-evenly mb-24">
@@ -114,19 +133,7 @@ function CompleteYourInfo({updateExample, example}) {
             Experience
           </div>
             <div className="collapse-content">
-            {listOfExperience.length === 0 
-            ?  {experience}
-            : 
-            <>
-            {listOfExperience.map((exp, index) => (
-              <div key={index} className="divEye">
-                <p>{exp.company}</p>
-                <img src="../src/assets/eye.png" alt=""  />
-              </div>
-            ))}
-            <CreateInfo text={'Experience'} />
-          </>  
-            }
+                {experience}
             </div>
         </div>
         
