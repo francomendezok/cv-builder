@@ -3,67 +3,154 @@
 import { useState } from "react"
 import { getContrastColor } from "./Resume"
 
-function CompleteYourInfo () {
-    return (
-        <section className="h-full flex flex-col justify-evenly mb-24">
-            <div className="collapse bg-white mt-4 mb-4 min-w-full">
-                <input type="checkbox" /> 
-                <div className="collapse-title text-xl font-medium">
-                Personal Details
+const listOfExperience = [
+    {
+        company: 'Ama Hogar',
+        position: 'Full Stack Developer',
+        start: '12/17/23',
+        end: 'present',
+        location: 'Cordoba, Argentina',
+        description: 'Full Stack Developer focus on Front End with HTML, CSS, JavaScript and React. Responsive and Mobile Device'
+      },
+      {
+        company: 'The Odin Project',
+        position: 'Full Stack Developer',
+        start: '12/17/23',
+        end: 'present',
+        location: 'Cordoba, Argentina',
+        description: 'Full Stack Developer focus on Front End with HTML, CSS, JavaScript and React. Responsive and Mobile Device'
+      }
+];
+
+function CompleteYourInfo({updateExample, example}) {
+    const [openSection, setOpenSection] = useState(0);
+    const [firstDetails, setDetails] = useState(example);
+  
+    const handleToggle = (index) => {
+      setOpenSection((prevOpenSection) => (prevOpenSection === index ? null : index));
+    };
+
+    const AddExperience = () => {
+        return (
+            <div>
+                <div><label htmlFor="">Company Name</label><input type="text" placeholder="Enter Company Name" className="input w-full h-full" /></div>
+                <div><label htmlFor="">Position Title</label><input type="text" placeholder="Enter Position Title" className="input w-full h-full" /></div>
+                <div><label htmlFor="">Start Date</label><input type="text" placeholder="Enter Start Date" className="input w-full h-full" /></div>
+                <div><label htmlFor="">End Date</label><input type="text" placeholder="Enter End Date" className="input w-full h-full" /></div>
+                <div><label htmlFor="">Location</label><input type="text" placeholder="Enter Location" className="input w-full h-full" /></div>
+                <div><label htmlFor="">Description</label><input type="text" placeholder="Enter Description" className="input w-full h-full" /></div>
+                <div className="flex justify-between mt-4">
+              <div><button className="border-2 border-grey rounded-md p-2">🗑️ Delete</button></div>
+              <div className="flex gap-4"><button className="border-2 border-red-300 rounded-md p-2">Cancel</button><button className="border-2 border-blue-300 rounded-md p-2">Save</button></div>
                 </div>
-                 <div className="collapse-content"> 
-                    <div><label htmlFor="">Full Name</label><input type="text" placeholder="First and last name" className="input w-full h-full" /></div>
-                    <div><label htmlFor="">Email</label><input type="text" placeholder="Enter email" className="input w-full h-full" /></div>
-                    <div><label htmlFor="">Phone Number</label><input type="text" placeholder="Enter phone number" className="input w-full h-full" /></div>
-                    <div><label htmlFor="">Address</label><input type="text" placeholder="City, Country" className="input w-full h-full" /></div>
+          </div>
+        )
+    }
+
+    const AddEducation = () => {
+        return (
+            <div>
+                <div><label htmlFor="">School</label><input type="text" placeholder="Enter School / University" className="input w-full h-full" /></div>
+                <div><label htmlFor="">Degree</label><input type="text" placeholder="Enter Degree / Field Of Study" className="input w-full h-full" /></div>
+                <div><label htmlFor="">Start Date</label><input type="text" placeholder="Enter Start Date" className="input w-full h-full" /></div>
+                <div><label htmlFor="">End Date</label><input type="text" placeholder="Enter End Date" className="input w-full h-full" /></div>
+                <div><label htmlFor="">Description</label><input type="text" placeholder="Enter Description" className="input w-full h-full" /></div>
+                <div><label htmlFor="">Location</label><input type="text" placeholder="Enter Location" className="input w-full h-full" /></div>
+                <div className="flex justify-between mt-4">
+                <div><button className="border-2 border-grey rounded-md p-2">🗑️ Delete</button></div>
+                <div className="flex gap-4"><button className="border-2 border-red-300 rounded-md p-2">Cancel</button><button className="border-2 border-blue-300 rounded-md p-2">Save</button></div>
                 </div>
             </div>
-            <div className="collapse bg-white mt-4 mb-4 min-w-full">
-                <input type="checkbox" /> 
-                <div className="collapse-title text-xl font-medium">
-                Experience
-                </div>
-                <div className="collapse-content"> 
-                    <div><label htmlFor="">Company Name</label><input type="text" placeholder="Enter Company Name" className="input w-full h-full" /></div>
-                    <div><label htmlFor="">Position Title</label><input type="text" placeholder="Enter Position Title" className="input w-full h-full" /></div>
-                    <div><label htmlFor="">Start Date</label><input type="text" placeholder="Enter Start Date" className="input w-full h-full" /></div>
-                    <div><label htmlFor="">End Date</label><input type="text" placeholder="Enter End Date" className="input w-full h-full" /></div>
-                    <div><label htmlFor="">Location</label><input type="text" placeholder="Enter Location" className="input w-full h-full" /></div>
-                    <div><label htmlFor="">Description</label><input type="text" placeholder="Enter Description" className="input w-full h-full" /></div>
-                    <div className="flex justify-between mt-4">
-                        <div><button className="border-2 border-grey rounded-md p-2">🗑️ Delete</button></div>
-                        <div className="flex gap-4"><button className="border-2 border-red-300 rounded-md p-2">Cancel</button><button className="border-2 border-blue-300 rounded-md p-2">Save</button></div>
-                    </div>
-                </div>
-            </div>
-            <div className="collapse bg-white mt-4 mb-4 min-w-full">
-                <input type="checkbox" /> 
-                <div className="collapse-title text-xl font-medium">
-                Education
-                </div> 
-                 <div className="collapse-content"> 
-                    <div><label htmlFor="">School</label><input type="text" placeholder="Enter School / University" className="input w-full h-full" /></div>
-                    <div><label htmlFor="">Degree</label><input type="text" placeholder="Enter Degree / Field Of Study" className="input w-full h-full" /></div>
-                    <div><label htmlFor="">Start Date</label><input type="text" placeholder="Enter Start Date" className="input w-full h-full" /></div>
-                    <div><label htmlFor="">End Date</label><input type="text" placeholder="Enter End Date" className="input w-full h-full" /></div>
-                    <div><label htmlFor="">Location</label><input type="text" placeholder="Enter Location" className="input w-full h-full" /></div>
-                    <div className="flex justify-between mt-4">
-                        <div><button className="border-2 border-grey rounded-md p-2">🗑️ Delete</button></div>
-                        <div className="flex gap-4"><button className="border-2 border-red-300 rounded-md p-2">Cancel</button><button className="border-2 border-blue-300 rounded-md p-2">Save</button></div>
-                    </div>
-                </div>
-            </div>
-            <div className="collapse bg-white mt-4 mb-4 min-w-full">
-                <input type="checkbox" /> 
-                <div className="collapse-title text-xl font-medium">
-                Skills
-                </div>
-                 <div className="collapse-content"> 
-                    <div><label htmlFor="">Skills & Knowledge</label><input type="text" placeholder="Enter your Skills" className="input w-full h-full p-4" /></div>
-                </div>
+            
+        )
+    }
+
+    const AddSkills = () => {
+        return (
+            <div>
+                <label htmlFor="">Skills & Knowledge</label>
+                <input type="text" placeholder="Enter your Skills" className="input w-full h-full p-4" />
             </div> 
-        </section>
-    )
+        )
+    }
+
+    const CreateInfo = ({text}) => {
+        return (
+            <button className="buttonCreateInfo">+ {text}</button>
+        )
+    }
+
+    const EmptyList = () => {
+        return (
+            <CreateInfo text={'Experience'} />
+        )
+    }
+
+    
+
+    const [experience, setExperience] = useState(AddExperience);
+    const [education, setEducation] = useState(AddEducation);
+    const [skills, setSkills] = useState(AddSkills);
+
+
+    return (
+      <section className="h-full flex flex-col justify-evenly mb-24">
+        <div key={0} className={`collapse bg-white mt-4 mb-4 min-w-full ${openSection === 0 ? 'open' : ''}`}>
+          <input type="checkbox" onChange={() => handleToggle(0)} checked={openSection === 0} />
+          <div className="collapse-title text-xl font-medium" onClick={() => handleToggle(0)}>
+            Personal Details
+          </div>
+          <div className="collapse-content">
+            <div><label htmlFor="">Full Name</label><input type="text" placeholder="First and last name" className="input w-full h-full" /></div>
+            <div><label htmlFor="">Email</label><input type="text" placeholder="Enter email" className="input w-full h-full" /></div>
+            <div><label htmlFor="">Phone Number</label><input type="text" placeholder="Enter phone number" className="input w-full h-full" /></div>
+            <div><label htmlFor="">Address</label><input type="text" placeholder="City, Country" className="input w-full h-full" /></div>
+          </div>
+        </div>
+        
+        <div key={1} className={`collapse bg-white mt-4 mb-4 min-w-full ${openSection === 1 ? 'open' : ''}`}>
+          <input type="checkbox" onChange={() => handleToggle(1)} checked={openSection === 1} />
+          <div className="collapse-title text-xl font-medium" onClick={() => handleToggle(1)}>
+            Experience
+          </div>
+            <div className="collapse-content">
+            {listOfExperience.length === 0 
+            ?  {experience}
+            : 
+            <>
+            {listOfExperience.map((exp, index) => (
+              <div key={index} className="divEye">
+                <p>{exp.company}</p>
+                <img src="../src/assets/eye.png" alt=""  />
+              </div>
+            ))}
+            <CreateInfo text={'Experience'} />
+          </>  
+            }
+            </div>
+        </div>
+        
+        <div key={2} className={`collapse bg-white mt-4 mb-4 min-w-full ${openSection === 2 ? 'open' : ''}`}>
+          <input type="checkbox" onChange={() => handleToggle(2)} checked={openSection === 2} />
+          <div className="collapse-title text-xl font-medium" onClick={() => handleToggle(2)}>
+            Education
+          </div>
+          <div className="collapse-content">
+            {education}
+          </div>
+        </div>
+        
+        <div key={3} className={`collapse bg-white mt-4 mb-4 min-w-full ${openSection === 3 ? 'open' : ''}`}>
+          <input type="checkbox" onChange={() => handleToggle(3)} checked={openSection === 3} />
+          <div className="collapse-title text-xl font-medium" onClick={() => handleToggle(3)}>
+            Skills
+          </div>
+          <div className="collapse-content">
+            {skills}
+          </div>
+        </div>
+      </section>
+    );
 }
 
 function CustomizeLayout ({updateLayout, updateColor, updateFonts, color}) {
@@ -123,7 +210,6 @@ function CustomizeLayout ({updateLayout, updateColor, updateFonts, color}) {
     )
 }
 
-
 function Btn ({img, alt, text, btnClass, callback}) {
 
     return (
@@ -135,14 +221,14 @@ function Btn ({img, alt, text, btnClass, callback}) {
 }
 
 
-export default function CreateResume({updateLayout, updateColor, updateFonts, color}) {
+export default function CreateResume({updateLayout, updateColor, updateFonts, color, updateExample, details}) {
     const [info, changeInfo] = useState(<CompleteYourInfo />);
   
     function layout() {
       changeInfo(<CustomizeLayout updateLayout={updateLayout} updateColor={updateColor} updateFonts={updateFonts} color={color} />);
     }
     function content() {
-        changeInfo(<CompleteYourInfo />);
+        changeInfo(<CompleteYourInfo updateExample={updateExample} details={details}/>);
       }
   
     return (
@@ -185,4 +271,6 @@ export default function CreateResume({updateLayout, updateColor, updateFonts, co
       </div>
     );
   }
+
+  
   

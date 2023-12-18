@@ -173,3 +173,21 @@ label {
   height: 25px;
 }
 
+.buttonCreateInfo {
+  border: 4px solid lightgrey;
+  border-radius: 12px;
+  padding: .4rem;
+  margin-left: 33%;
+}
+
+.divEye {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-weight: 700;
+}
+
+.divEye img {
+  width: 30px;
+  height: 30px;
+}
