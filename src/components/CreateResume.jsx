@@ -1,44 +1,25 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
 import { useState } from "react"
-import { getContrastColor } from "./Resume"
 
-const listOfExperience = [
-    {
-        company: 'Ama Hogar',
-        position: 'Full Stack Developer',
-        start: '12/17/23',
-        end: 'present',
-        location: 'Cordoba, Argentina',
-        description: 'Full Stack Developer focus on Front End with HTML, CSS, JavaScript and React. Responsive and Mobile Device'
-      },
-      {
-        company: 'The Odin Project',
-        position: 'Full Stack Developer',
-        start: '12/17/23',
-        end: 'present',
-        location: 'Cordoba, Argentina',
-        description: 'Full Stack Developer focus on Front End with HTML, CSS, JavaScript and React. Responsive and Mobile Device'
-      }
-];
 
-function CompleteYourInfo({updateExample, example}) {
+function CompleteYourInfo({updateExample, details}) {
     const [openSection, setOpenSection] = useState(0);
-    const [firstDetails, setDetails] = useState(example);
-  
+    const [firstDetails, setDetails] = useState(details);
+
     const handleToggle = (index) => {
       setOpenSection((prevOpenSection) => (prevOpenSection === index ? null : index));
     };
 
-    const AddExperience = () => {
+    const AddExperience = (info) => {
         return (
             <div>
-                <div><label htmlFor="">Company Name</label><input type="text" placeholder="Enter Company Name" className="input w-full h-full" /></div>
-                <div><label htmlFor="">Position Title</label><input type="text" placeholder="Enter Position Title" className="input w-full h-full" /></div>
-                <div><label htmlFor="">Start Date</label><input type="text" placeholder="Enter Start Date" className="input w-full h-full" /></div>
-                <div><label htmlFor="">End Date</label><input type="text" placeholder="Enter End Date" className="input w-full h-full" /></div>
-                <div><label htmlFor="">Location</label><input type="text" placeholder="Enter Location" className="input w-full h-full" /></div>
-                <div><label htmlFor="">Description</label><input type="text" placeholder="Enter Description" className="input w-full h-full" /></div>
+                <div><label htmlFor="">Company Name</label><input value={info.company} type="text" placeholder="Enter Company Name" className="input w-full h-full" /></div>
+                <div><label htmlFor="">Position Title</label><input value={info.position} type="text" placeholder="Enter Position Title" className="input w-full h-full" /></div>
+                <div><label htmlFor="">Start Date</label><input value={info.start} type="text" placeholder="Enter Start Date" className="input w-full h-full" /></div>
+                <div><label htmlFor="">End Date</label><input value={info.end} type="text" placeholder="Enter End Date" className="input w-full h-full" /></div>
+                <div><label htmlFor="">Location</label><input value={info.location} type="text" placeholder="Enter Location" className="input w-full h-full" /></div>
+                <div><label htmlFor="">Description</label><input value={info.description} type="text" placeholder="Enter Description" className="input w-full h-full" /></div>
                 <div className="flex justify-between mt-4">
               <div><button className="border-2 border-grey rounded-md p-2">🗑️ Delete</button></div>
               <div className="flex gap-4"><button className="border-2 border-red-300 rounded-md p-2">Cancel</button><button className="border-2 border-blue-300 rounded-md p-2">Save</button></div>
@@ -86,13 +67,25 @@ function CompleteYourInfo({updateExample, example}) {
         )
     }
 
+    
+
+    
+
     const ContentList = () => {
+      const [eyeState, setEyeState] = useState("../src/assets/eye.png")
+      const showOrHide = ({index}) => {
+        // Toggle the eye state based on the current stat, hide resume info
+        setEyeState(prevState =>
+          prevState === "../src/assets/eye-closed.png"
+            ? "../src/assets/eye.png"
+            : "../src/assets/eye-closed.png"
+        );      };
         return (
             <>
-            {listOfExperience.map((exp, index) => (
+            {firstDetails.experience.map((exp, index) => (
               <div key={index} className="divEye">
-                <p style={{cursor: 'pointer'}} onClick={() => setExperience(AddExperience)}>{exp.company}</p>
-                <img src="../src/assets/eye.png" alt=""  />
+                <p style={{cursor: 'pointer'}} onClick={() => setExperience(AddExperience(exp))}>{exp.company}</p>
+                <img onClick={() => showOrHide(index)} style={{cursor: 'pointer'}} src={eyeState} alt=""  />
               </div>
             ))}
             <CreateInfo text={'Experience'} />
@@ -103,7 +96,7 @@ function CompleteYourInfo({updateExample, example}) {
 
     
     
-    let myState = listOfExperience.length === 0 
+    let myState = firstDetails.experience.length === 0 
        ? <EmptyList></EmptyList>
        : <ContentList></ContentList>
 
@@ -120,10 +113,10 @@ function CompleteYourInfo({updateExample, example}) {
             Personal Details
           </div>
           <div className="collapse-content">
-            <div><label htmlFor="">Full Name</label><input type="text" placeholder="First and last name" className="input w-full h-full" /></div>
-            <div><label htmlFor="">Email</label><input type="text" placeholder="Enter email" className="input w-full h-full" /></div>
-            <div><label htmlFor="">Phone Number</label><input type="text" placeholder="Enter phone number" className="input w-full h-full" /></div>
-            <div><label htmlFor="">Address</label><input type="text" placeholder="City, Country" className="input w-full h-full" /></div>
+            <div><label htmlFor="">Full Name</label><input value={firstDetails.personal.fullname} type="text" placeholder="First and last name" className="input w-full h-full" /></div>
+            <div><label htmlFor="">Email</label><input value={firstDetails.personal.email} type="text" placeholder="Enter email" className="input w-full h-full" /></div>
+            <div><label htmlFor="">Phone Number</label><input value={firstDetails.personal.phone} type="text" placeholder="Enter phone number" className="input w-full h-full" /></div>
+            <div><label htmlFor="">Address</label><input value={firstDetails.personal.address} type="text" placeholder="City, Country" className="input w-full h-full" /></div>
           </div>
         </div>
         
@@ -229,7 +222,7 @@ function Btn ({img, alt, text, btnClass, callback}) {
 
 
 export default function CreateResume({updateLayout, updateColor, updateFonts, color, updateExample, details}) {
-    const [info, changeInfo] = useState(<CompleteYourInfo />);
+    const [info, changeInfo] = useState(<CompleteYourInfo updateExample={updateExample} details={details}/>);
   
     function layout() {
       changeInfo(<CustomizeLayout updateLayout={updateLayout} updateColor={updateColor} updateFonts={updateFonts} color={color} />);
@@ -279,5 +272,4 @@ export default function CreateResume({updateLayout, updateColor, updateFonts, co
     );
   }
 
-  
   
