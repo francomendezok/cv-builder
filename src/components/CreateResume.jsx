@@ -1,6 +1,8 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
 import { useState } from "react"
+import { Page, Text, View, Document, StyleSheet, PDFDownloadLink } from '@react-pdf/renderer';
+
 
 
 function CompleteYourInfo({updateExample, details}) {
@@ -68,9 +70,6 @@ function CompleteYourInfo({updateExample, details}) {
     }
 
     
-
-    
-
     const ContentList = () => {
       const [eyeState, setEyeState] = useState("../src/assets/eye.png")
       const showOrHide = ({index}) => {
@@ -103,7 +102,7 @@ function CompleteYourInfo({updateExample, details}) {
     const [experience, setExperience] = useState(myState);
     const [education, setEducation] = useState(AddEducation);
     const [skills, setSkills] = useState(AddSkills);
-    
+
 
     return (
       <section className="h-full flex flex-col justify-evenly mb-24">
@@ -113,10 +112,10 @@ function CompleteYourInfo({updateExample, details}) {
             Personal Details
           </div>
           <div className="collapse-content">
-            <div><label htmlFor="">Full Name</label><input value={firstDetails.personal.fullname} type="text" placeholder="First and last name" className="input w-full h-full" /></div>
-            <div><label htmlFor="">Email</label><input value={firstDetails.personal.email} type="text" placeholder="Enter email" className="input w-full h-full" /></div>
-            <div><label htmlFor="">Phone Number</label><input value={firstDetails.personal.phone} type="text" placeholder="Enter phone number" className="input w-full h-full" /></div>
-            <div><label htmlFor="">Address</label><input value={firstDetails.personal.address} type="text" placeholder="City, Country" className="input w-full h-full" /></div>
+            <div><label htmlFor="">Full Name</label><input id="name" value={firstDetails.personal.fullname} type="text" placeholder="First and last name" className="input w-full h-full" /></div>
+            <div><label htmlFor="">Email</label><input id="email" value={firstDetails.personal.email} type="text" placeholder="Enter email" className="input w-full h-full" /></div>
+            <div><label htmlFor="">Phone Number</label><input id="phone" value={firstDetails.personal.phone} type="text" placeholder="Enter phone number" className="input w-full h-full" /></div>
+            <div><label htmlFor="">Address</label><input id="address" value={firstDetails.personal.address} type="text" placeholder="City, Country" className="input w-full h-full" /></div>
           </div>
         </div>
         
@@ -221,15 +220,24 @@ function Btn ({img, alt, text, btnClass, callback}) {
 }
 
 
-export default function CreateResume({updateLayout, updateColor, updateFonts, color, updateExample, details}) {
+export default function CreateResume({updateLayout, updateColor, updateFonts, color, updateExample, details, clear, clearResume}) {
     const [info, changeInfo] = useState(<CompleteYourInfo updateExample={updateExample} details={details}/>);
-  
+
+
     function layout() {
       changeInfo(<CustomizeLayout updateLayout={updateLayout} updateColor={updateColor} updateFonts={updateFonts} color={color} />);
     }
     function content() {
         changeInfo(<CompleteYourInfo updateExample={updateExample} details={details}/>);
       }
+
+    function hideResume () {
+        clearResume(false)
+    }
+
+    function showResume () {
+      clearResume(true)
+  }
   
     return (
       <div className="infoSection">
@@ -253,12 +261,14 @@ export default function CreateResume({updateLayout, updateColor, updateFonts, co
               alt={'Clear'}
               btnClass={'btnClear'}
               text={'Clear Resume'}
+              callback={hideResume}
             />
             <Btn
               img={'../src/assets/example.png'}
               alt={'Example'}
               btnClass={'btnExample'}
               text={'Load Example'}
+              callback={showResume}
             />
             <Btn
               img={'../src/assets/pdf.png'}

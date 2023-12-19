@@ -5,10 +5,13 @@ import CreateResume from './CreateResume';
 
 
 
+
 export default function App() {
   const [layout, updateLayout] = useState('resumeTop');
   const [color, updateColor] = useState('#5165F5');
   const [fonts, updateFonts] = useState('sans-serif');
+  const [visible, clearResume] = useState(true)
+
 
   const InfoExample = 
     {
@@ -59,8 +62,8 @@ export default function App() {
 
   return (
     <div className="container">
-      <CreateResume updateLayout={updateLayout} updateColor={updateColor} updateFonts={updateFonts} color={color} updateExample={updateExample} details={example}/>
-      <Resume layout={layout} color={color} fonts={fonts} info={example}/>
+      <CreateResume updateLayout={updateLayout} updateColor={updateColor} updateFonts={updateFonts} color={color} updateExample={updateExample} details={example} clear={visible} clearResume={clearResume}/>
+      <Resume layout={layout} color={color} fonts={fonts} info={example} visible={visible}/>
     </div>
   )
 }
