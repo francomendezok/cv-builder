@@ -5,9 +5,8 @@ import { Page, Text, View, Document, StyleSheet, PDFDownloadLink } from '@react-
 
 
 
-function CompleteYourInfo({updateExample, details}) {
+function CompleteYourInfo({example}) {
     const [openSection, setOpenSection] = useState(0);
-    const [firstDetails, setDetails] = useState(details);
 
     const handleToggle = (index) => {
       setOpenSection((prevOpenSection) => (prevOpenSection === index ? null : index));
@@ -30,15 +29,15 @@ function CompleteYourInfo({updateExample, details}) {
         )
     }
 
-    const AddEducation = () => {
+    const AddEducation = (info) => {
         return (
             <div>
-                <div><label htmlFor="">School</label><input type="text" placeholder="Enter School / University" className="input w-full h-full" /></div>
-                <div><label htmlFor="">Degree</label><input type="text" placeholder="Enter Degree / Field Of Study" className="input w-full h-full" /></div>
-                <div><label htmlFor="">Start Date</label><input type="text" placeholder="Enter Start Date" className="input w-full h-full" /></div>
-                <div><label htmlFor="">End Date</label><input type="text" placeholder="Enter End Date" className="input w-full h-full" /></div>
-                <div><label htmlFor="">Description</label><input type="text" placeholder="Enter Description" className="input w-full h-full" /></div>
-                <div><label htmlFor="">Location</label><input type="text" placeholder="Enter Location" className="input w-full h-full" /></div>
+                <div><label htmlFor="">School</label><input value={info.school} type="text" placeholder="Enter School / University" className="input w-full h-full" /></div>
+                <div><label htmlFor="">Degree</label><input value={info.degree} type="text" placeholder="Enter Degree / Field Of Study" className="input w-full h-full" /></div>
+                <div><label htmlFor="">Start Date</label><input value={info.start} type="text" placeholder="Enter Start Date" className="input w-full h-full" /></div>
+                <div><label htmlFor="">End Date</label><input value={info.end} type="text" placeholder="Enter End Date" className="input w-full h-full" /></div>
+                <div><label htmlFor="">Description</label><input value={info.description} type="text" placeholder="Enter Description" className="input w-full h-full" /></div>
+                <div><label htmlFor="">Location</label><input value={info.location} type="text" placeholder="Enter Location" className="input w-full h-full" /></div>
                 <div className="flex justify-between mt-4">
                 <div><button className="border-2 border-grey rounded-md p-2">🗑️ Delete</button></div>
                 <div className="flex gap-4"><button className="border-2 border-red-300 rounded-md p-2">Cancel</button><button className="border-2 border-blue-300 rounded-md p-2">Save</button></div>
@@ -48,18 +47,18 @@ function CompleteYourInfo({updateExample, details}) {
         )
     }
 
-    const AddSkills = () => {
+    const AddSkills = (info) => {
         return (
             <div>
                 <label htmlFor="">Skills & Knowledge</label>
-                <input type="text" placeholder="Enter your Skills" className="input w-full h-full p-4" />
+                <input value={info} type="text" placeholder="Enter your Skills" className="input w-full h-full p-4" />
             </div> 
         )
     }
 
-    const CreateInfo = ({text}) => {
+    const CreateInfo = ({text, callback}) => {
         return (
-            <button onClick={() => setExperience(AddExperience)} className="buttonCreateInfo">+ {text}</button>
+            <button onClick={callback} className="buttonCreateInfo">+ {text}</button>
         )
     }
 
@@ -68,10 +67,16 @@ function CompleteYourInfo({updateExample, details}) {
             <CreateInfo text={'Experience'} />
         )
     }
-
-    
-    const ContentList = () => {
+ 
+    const ContentList = ({categorie, text, callback}) => {
       const [eyeState, setEyeState] = useState("../src/assets/eye.png")
+      const updateState = 
+      text === 'Experience' 
+      ? setExperience
+      : text === 'Education' 
+      ? setEducation
+      : text === 'Skills'
+      ? setSkills : null
       const showOrHide = ({index}) => {
         // Toggle the eye state based on the current stat, hide resume info
         setEyeState(prevState =>
@@ -80,42 +85,48 @@ function CompleteYourInfo({updateExample, details}) {
             : "../src/assets/eye-closed.png"
         );      };
         return (
+            categorie.length 
+            ?
             <>
-            {firstDetails.experience.map((exp, index) => (
-              <div key={index} className="divEye">
-                <p style={{cursor: 'pointer'}} onClick={() => setExperience(AddExperience(exp))}>{exp.company}</p>
-                <img onClick={() => showOrHide(index)} style={{cursor: 'pointer'}} src={eyeState} alt=""  />
-              </div>
-            ))}
-            <CreateInfo text={'Experience'} />
-            
-          </>
+              {categorie.map((exp, index) => (
+                <div key={index} className="divEye">
+                  <p style={{cursor: 'pointer'}} onClick={() => updateState(callback(exp))}>{exp.company || exp.school || exp}</p>
+                  <img onClick={() => showOrHide(index)} style={{cursor: 'pointer'}} src={eyeState} alt=""  />
+                </div>
+              ))}
+              <CreateInfo text={text} callback={() => updateState(callback)} />
+            </>
+            : <CreateInfo text={text} callback={() => updateState(callback)} />
         )
     }
 
-    
-    
-    let myState = firstDetails.experience.length === 0 
-       ? <EmptyList></EmptyList>
-       : <ContentList></ContentList>
+    let expState = example.experience.length === 0 
+       ? <EmptyList text={'Experience'}></EmptyList>
+       : <ContentList categorie={example.experience} text={'Experience'} callback={AddExperience}></ContentList>
 
-    const [experience, setExperience] = useState(myState);
-    const [education, setEducation] = useState(AddEducation);
-    const [skills, setSkills] = useState(AddSkills);
+    let eduState = example.education.length === 0 
+       ? <EmptyList text={'Education'}></EmptyList>
+       : <ContentList categorie={example.education} text={'Education'} callback={AddEducation}></ContentList>
+    let skillState = example.skills.length === 0 
+       ? <EmptyList text={'Skills'}></EmptyList>
+       : <ContentList categorie={example.skills} text={'Skills'} callback={AddSkills}></ContentList>
 
+    const [experience, setExperience] = useState(expState);
+    const [education, setEducation] = useState(eduState);
+    const [skills, setSkills] = useState(skillState);
 
     return (
       <section className="h-full flex flex-col justify-evenly mb-24">
         <div key={0} className={`collapse bg-white mt-4 mb-4 min-w-full ${openSection === 0 ? 'open' : ''}`}>
           <input type="checkbox" onChange={() => handleToggle(0)} checked={openSection === 0} />
           <div className="collapse-title text-xl font-medium" onClick={() => handleToggle(0)}>
-            Personal Details
+            Personal example
           </div>
           <div className="collapse-content">
-            <div><label htmlFor="">Full Name</label><input id="name" value={firstDetails.personal.fullname} type="text" placeholder="First and last name" className="input w-full h-full" /></div>
-            <div><label htmlFor="">Email</label><input id="email" value={firstDetails.personal.email} type="text" placeholder="Enter email" className="input w-full h-full" /></div>
-            <div><label htmlFor="">Phone Number</label><input id="phone" value={firstDetails.personal.phone} type="text" placeholder="Enter phone number" className="input w-full h-full" /></div>
-            <div><label htmlFor="">Address</label><input id="address" value={firstDetails.personal.address} type="text" placeholder="City, Country" className="input w-full h-full" /></div>
+            <div><label htmlFor="">Full Name</label><input id="name" onChange={(e) => e.target.value} defaultValue={example.personal.fullname} type="text" placeholder="First and last name" className="input w-full h-full" /></div>
+            <div><label htmlFor="">Email</label><input id="email" onChange={(e) => e.target.value} defaultValue={example.personal.email} type="text" placeholder="Enter email" className="input w-full h-full" /></div>
+            <div><label htmlFor="">Phone Number</label><input id="phone" onChange={(e) => e.target.value} defaultValue={example.personal.phone} type="text" placeholder="Enter phone number" className="input w-full h-full" /></div>
+            <div><label htmlFor="">Address</label><input id="address" onChange={(e) => e.target.value} defaultValue={example.personal.address} type="text" placeholder="City, Country" className="input w-full h-full" /></div>
           </div>
         </div>
         
@@ -220,23 +231,71 @@ function Btn ({img, alt, text, btnClass, callback}) {
 }
 
 
-export default function CreateResume({updateLayout, updateColor, updateFonts, color, updateExample, details, clear, clearResume}) {
-    const [info, changeInfo] = useState(<CompleteYourInfo updateExample={updateExample} details={details}/>);
+export default function CreateResume({updateLayout, updateColor, updateFonts, color, updateExample, example, clearResume}) {
+    const [firstExample, setExample] = useState(example);
+    const [info, changeInfo] = useState(<CompleteYourInfo updateExample={updateExample} example={firstExample} />);
+    const empty = 
+    {
+      personal: {
+        fullname: '',
+        email: '',
+        phone: '',
+        address: '',
+      },
+      experience: [
+        {
+          company: '',
+          position: '',
+          start: '',
+          end: '',
+          location: '',
+          description: ''
+        }
+      
+      ],
+      education: [
+        {
+          school: '',
+          degree: '',
+          start: '',
+          end: '',
+          location: '',
+          description: ''
+        },
 
+        {
+          school: '',
+          degree: '',
+          start: '',
+          end: '',
+          location: '',
+          description: ''
+        }
+      ],
+      skills: [
+        ''
+      ]
+    }
 
     function layout() {
       changeInfo(<CustomizeLayout updateLayout={updateLayout} updateColor={updateColor} updateFonts={updateFonts} color={color} />);
     }
     function content() {
-        changeInfo(<CompleteYourInfo updateExample={updateExample} details={details}/>);
+        changeInfo(<CompleteYourInfo updateExample={updateExample} example={firstExample} />);
       }
 
     function hideResume () {
-        clearResume(false)
+      clearResume(false)
+      setExample(empty)
+      // updateExample(empty)
     }
 
     function showResume () {
       clearResume(true)
+      // updateExample(example)
+      // updateExample(example)
+
+
   }
   
     return (

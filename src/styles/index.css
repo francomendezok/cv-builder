@@ -176,8 +176,10 @@ label {
 .buttonCreateInfo {
   border: 4px solid lightgrey;
   border-radius: 12px;
-  padding: .4rem;
-  margin-left: 33%;
+  padding: .5rem;
+  margin-top: 1rem;
+  float: inline-end;
+  width: 30%;
 }
 
 .divEye {
