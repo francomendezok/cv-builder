@@ -7,6 +7,7 @@ import { Page, Text, View, Document, StyleSheet, PDFDownloadLink } from '@react-
 
 function CompleteYourInfo({example}) {
     const [openSection, setOpenSection] = useState(0);
+    const [details, setDetails] = useState(example === false ? false : example)
 
     const handleToggle = (index) => {
       setOpenSection((prevOpenSection) => (prevOpenSection === index ? null : index));
@@ -99,22 +100,26 @@ function CompleteYourInfo({example}) {
             : <CreateInfo text={text} callback={() => updateState(callback)} />
         )
     }
-
-    let expState = example.experience.length === 0 
+    
+    let expState = details.experience.length === 0 || !details 
        ? <EmptyList text={'Experience'}></EmptyList>
        : <ContentList categorie={example.experience} text={'Experience'} callback={AddExperience}></ContentList>
 
-    let eduState = example.education.length === 0 
+    let eduState = details.education.length === 0  || !details
        ? <EmptyList text={'Education'}></EmptyList>
        : <ContentList categorie={example.education} text={'Education'} callback={AddEducation}></ContentList>
-    let skillState = example.skills.length === 0 
-       ? <EmptyList text={'Skills'}></EmptyList>
+    let skillState = details.skills.length === 0 
+   || !details     ? <EmptyList text={'Skills'}></EmptyList>
        : <ContentList categorie={example.skills} text={'Skills'} callback={AddSkills}></ContentList>
 
     const [experience, setExperience] = useState(expState);
     const [education, setEducation] = useState(eduState);
     const [skills, setSkills] = useState(skillState);
 
+    function handleChange (e, state) {
+      state(e.target.value)
+      e.target.value
+    }
     return (
       <section className="h-full flex flex-col justify-evenly mb-24">
         <div key={0} className={`collapse bg-white mt-4 mb-4 min-w-full ${openSection === 0 ? 'open' : ''}`}>
@@ -123,10 +128,10 @@ function CompleteYourInfo({example}) {
             Personal example
           </div>
           <div className="collapse-content">
-            <div><label htmlFor="">Full Name</label><input id="name" onChange={(e) => e.target.value} defaultValue={example.personal.fullname} type="text" placeholder="First and last name" className="input w-full h-full" /></div>
-            <div><label htmlFor="">Email</label><input id="email" onChange={(e) => e.target.value} defaultValue={example.personal.email} type="text" placeholder="Enter email" className="input w-full h-full" /></div>
-            <div><label htmlFor="">Phone Number</label><input id="phone" onChange={(e) => e.target.value} defaultValue={example.personal.phone} type="text" placeholder="Enter phone number" className="input w-full h-full" /></div>
-            <div><label htmlFor="">Address</label><input id="address" onChange={(e) => e.target.value} defaultValue={example.personal.address} type="text" placeholder="City, Country" className="input w-full h-full" /></div>
+            <div><label htmlFor="">Full Name</label><input id="name" defaultValue={details.personal.fullname} type="text" placeholder="First and last name" className="input w-full h-full" /></div>
+            <div><label htmlFor="">Email</label><input id="email" defaultValue={details.personal.email} type="text" placeholder="Enter email" className="input w-full h-full" /></div>
+            <div><label htmlFor="">Phone Number</label><input id="phone" defaultValue={details.personal.phone} type="text" placeholder="Enter phone number" className="input w-full h-full" /></div>
+            <div><label htmlFor="">Address</label><input id="address" defaultValue={details.personal.address} type="text" placeholder="City, Country" className="input w-full h-full" /></div>
           </div>
         </div>
         
@@ -231,9 +236,93 @@ function Btn ({img, alt, text, btnClass, callback}) {
 }
 
 
-export default function CreateResume({updateLayout, updateColor, updateFonts, color, updateExample, example, clearResume}) {
-    const [firstExample, setExample] = useState(example);
-    const [info, changeInfo] = useState(<CompleteYourInfo updateExample={updateExample} example={firstExample} />);
+export default function CreateResume({updateLayout, updateColor, updateFonts, color, clear, clearResume}) {
+  const InfoExample = 
+  {
+    personal: {
+      fullname: 'Franco Nicolas Mendez',
+      email: 'francomendezok@gmail.com',
+      phone: '+5493513930405',
+      address: 'Cordoba, Argentina',
+    },
+    experience: [
+      {
+        company: 'Ama Hogar',
+        position: 'Full Stack Developer',
+        start: '12/17/23',
+        end: 'present',
+        location: 'Cordoba, Argentina',
+        description: 'Full Stack Developer focus on Front End with HTML, CSS, JavaScript and React. Responsive and Mobile Device'
+      }
+    
+    ],
+    education: [
+      {
+        school: 'The Odin Project',
+        degree: 'Full Stack Developer',
+        start: '04/10/23',
+        end: '02/01/24',
+        location: 'Remote',
+        description: 'Full Stack Developer focus on Front End with HTML, CSS, JavaScript and React. Responsive and Mobile Device'
+      },
+
+      {
+        school: 'Helsinsky University',
+        degree: 'Full Stack Open',
+        start: '04/10/23',
+        end: '02/01/24',
+        location: 'Remote',
+        description: 'React, MongoDB, GraphQl, Redux'
+      }
+    ],
+    skills: [
+      'HTML, CSS, JavaScript, TailwindCSS, React'
+    ]
+  }
+  const infoWS = 
+  {
+    personal: {
+      fullname: 'PEPE',
+      email: 'francomendezok@gmail.com',
+      phone: '+5493513930405',
+      address: 'Cordoba, Argentina',
+    },
+    experience: [
+      {
+        company: 'PEPE',
+        position: 'Full Stack Developer',
+        start: '12/17/23',
+        end: 'present',
+        location: 'Cordoba, Argentina',
+        description: 'Full Stack Developer focus on Front End with HTML, CSS, JavaScript and React. Responsive and Mobile Device'
+      }
+    
+    ],
+    education: [
+      {
+        school: 'Project',
+        degree: 'Full Stack Developer',
+        start: '04/10/23',
+        end: '02/01/24',
+        location: 'Remote',
+        description: 'Full Stack Developer focus on Front End with HTML, CSS, JavaScript and React. Responsive and Mobile Device'
+      },
+
+      {
+        school: 'Helsinsky University',
+        degree: 'Full Stack Open',
+        start: '04/10/23',
+        end: '02/01/24',
+        location: 'Remote',
+        description: 'React, MongoDB, GraphQl, Redux'
+      }
+    ],
+    skills: [
+      'HTML, CSS, JavaScript, TailwindCSS, React'
+    ]
+  }
+    const [example, updateExample] = useState(InfoExample)
+    const [info, changeInfo] = useState(<CompleteYourInfo example={example} />);
     const empty = 
     {
       personal: {
@@ -277,25 +366,31 @@ export default function CreateResume({updateLayout, updateColor, updateFonts, co
       ]
     }
 
+
     function layout() {
       changeInfo(<CustomizeLayout updateLayout={updateLayout} updateColor={updateColor} updateFonts={updateFonts} color={color} />);
     }
     function content() {
-        changeInfo(<CompleteYourInfo updateExample={updateExample} example={firstExample} />);
+        changeInfo(<CompleteYourInfo example={example} />);
       }
 
     function hideResume () {
-      clearResume(false)
-      setExample(empty)
-      // updateExample(empty)
+      updateExample(infoWS)
+      // clearResume(false)
+      // setFullName('')
+      // setEmail('')
+      // setPhone('')
+      // setAddress('')
     }
 
     function showResume () {
-      clearResume(true)
-      // updateExample(example)
-      // updateExample(example)
-
-
+      updateExample(InfoExample)
+      // clearResume(true)
+      // setFullName(example.personal.fullname)
+      // setEmail(example.personal.email)
+      // setPhone(example.personal.phone)
+      // setAddress(example.personal.address)
+      content()
   }
   
     return (
