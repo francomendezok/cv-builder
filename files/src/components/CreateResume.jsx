@@ -5,9 +5,10 @@ import { Page, Text, View, Document, StyleSheet, PDFDownloadLink } from '@react-
 
 
 
-function CompleteYourInfo({example}) {
-    const [openSection, setOpenSection] = useState(0);
-    const [details, setDetails] = useState(example === false ? false : example)
+function CompleteYourInfo({example, hasInfo, hideContent, fullName, setFullName, email, setEmail, phone, setPhone, address, setAddress}) {
+    const [openSection, setOpenSection] = useState({});
+    const [details, setDetails] = useState(example);
+    
 
     const handleToggle = (index) => {
       setOpenSection((prevOpenSection) => (prevOpenSection === index ? null : index));
@@ -101,40 +102,39 @@ function CompleteYourInfo({example}) {
         )
     }
     
-    let expState = details.experience.length === 0 || !details 
-       ? <EmptyList text={'Experience'}></EmptyList>
-       : <ContentList categorie={example.experience} text={'Experience'} callback={AddExperience}></ContentList>
-
-    let eduState = details.education.length === 0  || !details
-       ? <EmptyList text={'Education'}></EmptyList>
-       : <ContentList categorie={example.education} text={'Education'} callback={AddEducation}></ContentList>
-    let skillState = details.skills.length === 0 
-   || !details     ? <EmptyList text={'Skills'}></EmptyList>
-       : <ContentList categorie={example.skills} text={'Skills'} callback={AddSkills}></ContentList>
+      let expState = details.experience.length === 0 || !hasInfo 
+         ? <EmptyList text={'Experience'}></EmptyList>
+         : <ContentList categorie={example.experience} text={'Experience'} callback={AddExperience}></ContentList>
+  
+      let eduState = details.education.length === 0 || !hasInfo 
+         ? <EmptyList text={'Education'}></EmptyList>
+         : <ContentList categorie={example.education} text={'Education'} callback={AddEducation}></ContentList>
+      let skillState = details.skills.length === 0 || !hasInfo 
+         ? <EmptyList text={'Skills'}></EmptyList>
+         : <ContentList categorie={example.skills} text={'Skills'} callback={AddSkills}></ContentList>
+    
 
     const [experience, setExperience] = useState(expState);
     const [education, setEducation] = useState(eduState);
     const [skills, setSkills] = useState(skillState);
 
-    function handleChange (e, state) {
-      state(e.target.value)
-      e.target.value
-    }
+
+
+    const myClass = hideContent ? "hidden" : '';
     return (
-      <section className="h-full flex flex-col justify-evenly mb-24">
+      <section className={`h-full flex flex-col justify-evenly mb-24 ${myClass}`}>
         <div key={0} className={`collapse bg-white mt-4 mb-4 min-w-full ${openSection === 0 ? 'open' : ''}`}>
           <input type="checkbox" onChange={() => handleToggle(0)} checked={openSection === 0} />
           <div className="collapse-title text-xl font-medium" onClick={() => handleToggle(0)}>
             Personal example
           </div>
           <div className="collapse-content">
-            <div><label htmlFor="">Full Name</label><input id="name" defaultValue={details.personal.fullname} type="text" placeholder="First and last name" className="input w-full h-full" /></div>
-            <div><label htmlFor="">Email</label><input id="email" defaultValue={details.personal.email} type="text" placeholder="Enter email" className="input w-full h-full" /></div>
-            <div><label htmlFor="">Phone Number</label><input id="phone" defaultValue={details.personal.phone} type="text" placeholder="Enter phone number" className="input w-full h-full" /></div>
-            <div><label htmlFor="">Address</label><input id="address" defaultValue={details.personal.address} type="text" placeholder="City, Country" className="input w-full h-full" /></div>
+            <div><label htmlFor="">Full Name</label><input id="name" onChange={(e) => setFullName(e.target.value)} value={fullName} type="text" placeholder="First and last name" className="input w-full h-full" /></div>
+            <div><label htmlFor="">Email</label><input id="email" onChange={(e) => setEmail(e.target.value)} value={email} type="text" placeholder="Enter email" className="input w-full h-full" /></div>
+            <div><label htmlFor="">Phone Number</label><input id="phone" onChange={(e) => setPhone(e.target.value)} value={phone} type="text" placeholder="Enter phone number" className="input w-full h-full" /></div>
+            <div><label htmlFor="">Address</label><input id="address" onChange={(e) => setAddress(e.target.value)} value={address} type="text" placeholder="City, Country" className="input w-full h-full" /></div>
           </div>
         </div>
-        
         <div key={1} className={`collapse bg-white mt-4 mb-4 min-w-full ${openSection === 1 ? 'open' : ''}`}>
           <input type="checkbox" onChange={() => handleToggle(1)} checked={openSection === 1} />
           <div className="collapse-title text-xl font-medium" onClick={() => handleToggle(1)}>
@@ -168,15 +168,16 @@ function CompleteYourInfo({example}) {
     );
 }
 
-function CustomizeLayout ({updateLayout, updateColor, updateFonts, color}) {
+function CustomizeLayout ({updateLayout, updateColor, updateFonts, color, hideLayout}) {
     const [newColor, setColor] = useState(color);
 
     function handler (e) {
         updateColor(e.target.value);
         setColor(e.target.value);
     }
+    const myClass = hideLayout ? "hidden" : '';
     return (
-        <section className="flex flex-col items-center justify-around rounded-xl h-4/5 mb-16">
+        <section className={`flex flex-col items-center justify-around rounded-xl h-4/5 mb-16 ${myClass}`}>
             <div className="bg-slate-100 w-full h-1/4 pl-8 flex flex-col justify-evenly border-2 border-grey rounded-xl">
                 <h2 className="text-3xl font-bold mb-2">Layout</h2>
                 <div className="flex justify-start gap-4">
@@ -279,120 +280,41 @@ export default function CreateResume({updateLayout, updateColor, updateFonts, co
       'HTML, CSS, JavaScript, TailwindCSS, React'
     ]
   }
-  const infoWS = 
-  {
-    personal: {
-      fullname: 'PEPE',
-      email: 'francomendezok@gmail.com',
-      phone: '+5493513930405',
-      address: 'Cordoba, Argentina',
-    },
-    experience: [
-      {
-        company: 'PEPE',
-        position: 'Full Stack Developer',
-        start: '12/17/23',
-        end: 'present',
-        location: 'Cordoba, Argentina',
-        description: 'Full Stack Developer focus on Front End with HTML, CSS, JavaScript and React. Responsive and Mobile Device'
-      }
-    
-    ],
-    education: [
-      {
-        school: 'Project',
-        degree: 'Full Stack Developer',
-        start: '04/10/23',
-        end: '02/01/24',
-        location: 'Remote',
-        description: 'Full Stack Developer focus on Front End with HTML, CSS, JavaScript and React. Responsive and Mobile Device'
-      },
 
-      {
-        school: 'Helsinsky University',
-        degree: 'Full Stack Open',
-        start: '04/10/23',
-        end: '02/01/24',
-        location: 'Remote',
-        description: 'React, MongoDB, GraphQl, Redux'
-      }
-    ],
-    skills: [
-      'HTML, CSS, JavaScript, TailwindCSS, React'
-    ]
-  }
     const [example, updateExample] = useState(InfoExample)
-    const [info, changeInfo] = useState(<CompleteYourInfo example={example} />);
-    const empty = 
-    {
-      personal: {
-        fullname: '',
-        email: '',
-        phone: '',
-        address: '',
-      },
-      experience: [
-        {
-          company: '',
-          position: '',
-          start: '',
-          end: '',
-          location: '',
-          description: ''
-        }
-      
-      ],
-      education: [
-        {
-          school: '',
-          degree: '',
-          start: '',
-          end: '',
-          location: '',
-          description: ''
-        },
+    const [hideContent, setHideContent] = useState(false)
+    const [hideLayout, setHideLayout] = useState(true)
+    const [hasInfo, setNewInfo] = useState(true)
+    const [fullName, setFullName] = useState(InfoExample.personal.fullname);
+    const [email, setEmail] = useState(InfoExample.personal.email);
+    const [phone, setPhone] = useState(InfoExample.personal.phone);
+    const [address, setAddress] = useState(InfoExample.personal.address);
 
-        {
-          school: '',
-          degree: '',
-          start: '',
-          end: '',
-          location: '',
-          description: ''
-        }
-      ],
-      skills: [
-        ''
-      ]
+
+    function Layout() {
+      setHideLayout(false)
+      setHideContent(true)
     }
-
-
-    function layout() {
-      changeInfo(<CustomizeLayout updateLayout={updateLayout} updateColor={updateColor} updateFonts={updateFonts} color={color} />);
-    }
-    function content() {
-        changeInfo(<CompleteYourInfo example={example} />);
+    function Content() {
+        setHideLayout(true)
+        setHideContent(false)
       }
 
     function hideResume () {
-      updateExample(infoWS)
-      // clearResume(false)
-      // setFullName('')
-      // setEmail('')
-      // setPhone('')
-      // setAddress('')
+      setNewInfo(false)  
+      setFullName('')  
+      setEmail('')
+      setPhone('')
+      setAddress('')
     }
 
     function showResume () {
-      updateExample(InfoExample)
-      // clearResume(true)
-      // setFullName(example.personal.fullname)
-      // setEmail(example.personal.email)
-      // setPhone(example.personal.phone)
-      // setAddress(example.personal.address)
-      content()
+      setNewInfo(true)
+      setFullName(InfoExample.personal.fullname)
+      setEmail(InfoExample.personal.email)
+      setPhone(InfoExample.personal.phone)
+      setAddress(InfoExample.personal.address)
   }
-  
     return (
       <div className="infoSection">
         <div className="flex mb-8 rounded-2xl">
@@ -401,14 +323,14 @@ export default function CreateResume({updateLayout, updateColor, updateFonts, co
               alt={'Content'}
               btnClass={'btnContent rounded-l-xl'}
               text={'Personal Info'}
-              callback={content}
+              callback={Content}
             />
             <Btn
               img={'../src/assets/edit.png'}
               alt={'Edit'}
               btnClass={'btnCustomize'}
               text={'Customize Layout'}
-              callback={layout}
+              callback={Layout}
             />
             <Btn
               img={'../src/assets/clear.png'}
@@ -431,7 +353,26 @@ export default function CreateResume({updateLayout, updateColor, updateFonts, co
               text={'Download PDF'}
             />
           </div>
-        {info}
+          <CompleteYourInfo 
+            hideContent={hideContent} 
+            example={example} 
+            hasInfo={hasInfo} 
+            fullName={fullName} 
+            setFullName={setFullName} 
+            email={email} 
+            setEmail={setEmail} 
+            phone={phone}
+            setPhone={setPhone}
+            address={address}
+            setAddress={setAddress}
+          />
+          <CustomizeLayout 
+            hideLayout={hideLayout} 
+            updateLayout={updateLayout} 
+            updateColor={updateColor} 
+            updateFonts={updateFonts} 
+            color={color} 
+          />
       </div>
     );
   }
