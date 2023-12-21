@@ -12,7 +12,7 @@ export default function App() {
   const [color, updateColor] = useState('#5165F5');
   const [fonts, updateFonts] = useState('sans-serif');
   const [visible, clearResume] = useState(true);
- 
+
 
   
 
@@ -25,6 +25,7 @@ export default function App() {
         color={color} 
         clear={visible} 
         clearResume={clearResume}
+
         />
 
       {/* <Resume 
