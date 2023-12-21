@@ -5,24 +5,24 @@ import { Page, Text, View, Document, StyleSheet, PDFDownloadLink } from '@react-
 
 
 
-function CompleteYourInfo({example, hasInfo, hideContent, fullName, setFullName, email, setEmail, phone, setPhone, address, setAddress}) {
-    const [openSection, setOpenSection] = useState({});
+function CompleteYourInfo({example, hasInfo, hideContent, fullName, setFullName, email, setEmail, phone, setPhone, address, setAddress, experience, education, skills}) {
+    const [openSection, setOpenSection] = useState(0);
     const [details, setDetails] = useState(example);
-    
 
     const handleToggle = (index) => {
       setOpenSection((prevOpenSection) => (prevOpenSection === index ? null : index));
     };
 
-    const AddExperience = (info) => {
+    const AddExperience = ({info, show}) => {
+      console.log(show, info);
         return (
             <div>
-                <div><label htmlFor="">Company Name</label><input value={info.company} type="text" placeholder="Enter Company Name" className="input w-full h-full" /></div>
-                <div><label htmlFor="">Position Title</label><input value={info.position} type="text" placeholder="Enter Position Title" className="input w-full h-full" /></div>
-                <div><label htmlFor="">Start Date</label><input value={info.start} type="text" placeholder="Enter Start Date" className="input w-full h-full" /></div>
-                <div><label htmlFor="">End Date</label><input value={info.end} type="text" placeholder="Enter End Date" className="input w-full h-full" /></div>
-                <div><label htmlFor="">Location</label><input value={info.location} type="text" placeholder="Enter Location" className="input w-full h-full" /></div>
-                <div><label htmlFor="">Description</label><input value={info.description} type="text" placeholder="Enter Description" className="input w-full h-full" /></div>
+                <div><label htmlFor="">Company Name</label><input value={show ? info.company : ''} type="text" placeholder="Enter Company Name" className="input w-full h-full" /></div>
+                <div><label htmlFor="">Position Title</label><input value={show ? info.position : ''} type="text" placeholder="Enter Position Title" className="input w-full h-full" /></div>
+                <div><label htmlFor="">Start Date</label><input value={show ? info.start : ''} type="text" placeholder="Enter Start Date" className="input w-full h-full" /></div>
+                <div><label htmlFor="">End Date</label><input value={show ? info.end : ''} type="text" placeholder="Enter End Date" className="input w-full h-full" /></div>
+                <div><label htmlFor="">Location</label><input value={show ? info.location : ''} type="text" placeholder="Enter Location" className="input w-full h-full" /></div>
+                <div><label htmlFor="">Description</label><input value={show ? info.description : ''} type="text" placeholder="Enter Description" className="input w-full h-full" /></div>
                 <div className="flex justify-between mt-4">
               <div><button className="border-2 border-grey rounded-md p-2">🗑️ Delete</button></div>
               <div className="flex gap-4"><button className="border-2 border-red-300 rounded-md p-2">Cancel</button><button className="border-2 border-blue-300 rounded-md p-2">Save</button></div>
@@ -101,22 +101,61 @@ function CompleteYourInfo({example, hasInfo, hideContent, fullName, setFullName,
             : <CreateInfo text={text} callback={() => updateState(callback)} />
         )
     }
-    
-      let expState = details.experience.length === 0 || !hasInfo 
-         ? <EmptyList text={'Experience'}></EmptyList>
-         : <ContentList categorie={example.experience} text={'Experience'} callback={AddExperience}></ContentList>
-  
-      let eduState = details.education.length === 0 || !hasInfo 
-         ? <EmptyList text={'Education'}></EmptyList>
-         : <ContentList categorie={example.education} text={'Education'} callback={AddEducation}></ContentList>
-      let skillState = details.skills.length === 0 || !hasInfo 
-         ? <EmptyList text={'Skills'}></EmptyList>
-         : <ContentList categorie={example.skills} text={'Skills'} callback={AddSkills}></ContentList>
+
+    function ExperienceList ({hasExperience, setExperience, showAddExperience, setShowAddExperience}) {
+      let experience = details.experience 
+      const [info, setInfo] = useState(experience[0])
+      const [show, showInfo] = useState(true)
+      const [eyeState, setEyeState] = useState("../src/assets/eye.png")
+      const showOrHide = (index) => {
+        // Toggle the eye state based on the current stat, hide resume info
+        setEyeState(prevState =>
+          prevState === "../src/assets/eye-closed.png"
+            ? "../src/assets/eye.png"
+            : "../src/assets/eye-closed.png"
+      )};
+          function updateStates () {
+            showInfo(true)
+            setShowAddExperience(true)
+          }
+
+          function updateButtonStates () {
+            showInfo(false)
+            setInfo(false)
+            setShowAddExperience(true)
+          }
+      return (
+          showAddExperience 
+        ? <AddExperience info={info} show={show}/> 
+        : hasExperience 
+        ?
+        <>
+          {experience.map((exp, index) => (
+            <div key={index} className="divEye">
+              <p onClick={() => updateStates()} style={{cursor: 'pointer'}}>{exp.company}</p>
+              <img onClick={() => showOrHide(index)} style={{cursor: 'pointer'}} src={eyeState} alt=""  />
+            </div>
+          ))}
+          <CreateInfo text={'Experience'} callback={() => updateButtonStates()} />
+        </>
+        : <CreateInfo text={'Experience'} callback={() => updateButtonStates()} />
+    )
+    }
+
+    function EducationList () {
+
+    }
+
+    function SkillsList () {
+
+    }
     
 
-    const [experience, setExperience] = useState(expState);
-    const [education, setEducation] = useState(eduState);
-    const [skills, setSkills] = useState(skillState);
+  
+    const [hasExperience, setExperience] = useState(true);
+    const [showAddExperience, setShowAddExperience] = useState(false);
+    const [hasEducation, setEducation] = useState(true);
+    const [hasSkills, setSkills] = useState(true);
 
 
 
@@ -126,7 +165,7 @@ function CompleteYourInfo({example, hasInfo, hideContent, fullName, setFullName,
         <div key={0} className={`collapse bg-white mt-4 mb-4 min-w-full ${openSection === 0 ? 'open' : ''}`}>
           <input type="checkbox" onChange={() => handleToggle(0)} checked={openSection === 0} />
           <div className="collapse-title text-xl font-medium" onClick={() => handleToggle(0)}>
-            Personal example
+            Personal information
           </div>
           <div className="collapse-content">
             <div><label htmlFor="">Full Name</label><input id="name" onChange={(e) => setFullName(e.target.value)} value={fullName} type="text" placeholder="First and last name" className="input w-full h-full" /></div>
@@ -141,7 +180,7 @@ function CompleteYourInfo({example, hasInfo, hideContent, fullName, setFullName,
             Experience
           </div>
             <div className="collapse-content">
-                {experience}
+                <ExperienceList hasExperience={hasExperience} setExperience={setExperience} showAddExperience={showAddExperience} setShowAddExperience={setShowAddExperience} />
             </div>
         </div>
         
@@ -151,7 +190,7 @@ function CompleteYourInfo({example, hasInfo, hideContent, fullName, setFullName,
             Education
           </div>
           <div className="collapse-content">
-            {education}
+            <EducationList />
           </div>
         </div>
         
@@ -161,7 +200,7 @@ function CompleteYourInfo({example, hasInfo, hideContent, fullName, setFullName,
             Skills
           </div>
           <div className="collapse-content">
-            {skills}
+            <SkillsList />
           </div>
         </div>
       </section>
@@ -289,6 +328,9 @@ export default function CreateResume({updateLayout, updateColor, updateFonts, co
     const [email, setEmail] = useState(InfoExample.personal.email);
     const [phone, setPhone] = useState(InfoExample.personal.phone);
     const [address, setAddress] = useState(InfoExample.personal.address);
+    const [experience, setExperience] = useState(true)
+    const [education, setEducation] = useState(true)
+    const [skills, setSkills] = useState(true)
 
 
     function Layout() {
@@ -306,6 +348,9 @@ export default function CreateResume({updateLayout, updateColor, updateFonts, co
       setEmail('')
       setPhone('')
       setAddress('')
+      setExperience(false)
+      setEducation(false)
+      setSkills(false)
     }
 
     function showResume () {
@@ -314,6 +359,9 @@ export default function CreateResume({updateLayout, updateColor, updateFonts, co
       setEmail(InfoExample.personal.email)
       setPhone(InfoExample.personal.phone)
       setAddress(InfoExample.personal.address)
+      setExperience(true)
+      setEducation(true)
+      setSkills(true)
   }
     return (
       <div className="infoSection">
@@ -365,6 +413,9 @@ export default function CreateResume({updateLayout, updateColor, updateFonts, co
             setPhone={setPhone}
             address={address}
             setAddress={setAddress}
+            experience={experience}
+            education={education}
+            skills={skills}
           />
           <CustomizeLayout 
             hideLayout={hideLayout} 
