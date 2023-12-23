@@ -53,14 +53,7 @@ function CompleteYourInfo({example, updateExample, hasInfo, hideContent, hasExpe
         )
     }
 
-    const AddSkills = (info) => {
-        return (
-            <div>
-                <label htmlFor="">Skills & Knowledge</label>
-                <input value={info} type="text" placeholder="Enter your Skills" className="input w-full h-full p-4" />
-            </div> 
-        )
-    }
+
 
     const CreateInfo = ({text, callback}) => {
         return (
@@ -119,14 +112,10 @@ function CompleteYourInfo({example, updateExample, hasInfo, hideContent, hasExpe
 
     }
 
-    function SkillsList () {
 
-    }
-
-    function setDetails (e, section) {
+    function setDetails (e, categorie, section) {
       const newInfo = JSON.parse(JSON.stringify(example));
-      newInfo.personal[section] = e.target.value
-      newInfo.personal[section] = e.target.value
+      newInfo[categorie][section] = e.target.value
       updateExample(newInfo)
     }
     
@@ -140,10 +129,10 @@ function CompleteYourInfo({example, updateExample, hasInfo, hideContent, hasExpe
             Personal information
           </div>
           <div className="collapse-content">
-            <div><label htmlFor="">Full Name</label><input id="name" onChange={(e) => setDetails(e, 'fullname')} value={example.personal.fullname} type="text" placeholder="First and last name" className="input w-full h-full" /></div>
-            <div><label htmlFor="">Email</label><input id="email" onChange={(e) => setDetails(e, 'email')} value={example.personal.email} type="text" placeholder="Enter email" className="input w-full h-full" /></div>
-            <div><label htmlFor="">Phone Number</label><input id="phone" onChange={(e) => setDetails(e, 'phone')} value={example.personal.phone} type="text" placeholder="Enter phone number" className="input w-full h-full" /></div>
-            <div><label htmlFor="">Address</label><input id="address" onChange={(e) => setDetails(e, 'address')} value={example.personal.address} type="text" placeholder="City, Country" className="input w-full h-full" /></div>
+            <div><label htmlFor="">Full Name</label><input id="name" onChange={(e) => setDetails(e, 'personal', 'fullname')} value={example.personal.fullname} type="text" placeholder="First and last name" className="input w-full h-full" /></div>
+            <div><label htmlFor="">Email</label><input id="email" onChange={(e) => setDetails(e, 'personal', 'email')} value={example.personal.email} type="text" placeholder="Enter email" className="input w-full h-full" /></div>
+            <div><label htmlFor="">Phone Number</label><input id="phone" onChange={(e) => setDetails(e, 'personal', 'phone')} value={example.personal.phone} type="text" placeholder="Enter phone number" className="input w-full h-full" /></div>
+            <div><label htmlFor="">Address</label><input id="address" onChange={(e) => setDetails(e, 'personal', 'address')} value={example.personal.address} type="text" placeholder="City, Country" className="input w-full h-full" /></div>
           </div>
         </div>
         <div key={1} className={`collapse bg-white mt-4 mb-4 min-w-full ${openSection === 1 ? 'open' : ''}`}>
@@ -172,7 +161,10 @@ function CompleteYourInfo({example, updateExample, hasInfo, hideContent, hasExpe
             Skills
           </div>
           <div className="collapse-content">
-            <SkillsList />
+          <div>
+                <label htmlFor="">Skills & Knowledge</label>
+                <input onChange={(e) => setDetails(e, 'skills', 0)} value={example.skills} type="text" placeholder="Enter your Skills" className="input w-full h-full p-4" />
+            </div> 
           </div>
         </div>
       </section>
