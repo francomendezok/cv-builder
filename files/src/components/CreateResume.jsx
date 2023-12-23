@@ -4,173 +4,6 @@ import { useState } from "react"
 import { Page, Text, View, Document, StyleSheet, PDFDownloadLink } from '@react-pdf/renderer';
 
 
-
-function CompleteYourInfo({example, updateExample, hasInfo, hideContent, hasExperience, showAddExperience, setShowAddExperience, hasEducation, hasSkills, empty}) {
-    const [openSection, setOpenSection] = useState(0);
-
-
-    const handleToggle = (index) => {
-      setOpenSection((prevOpenSection) => (prevOpenSection === index ? null : index));
-    };
-
-    const AddExperience = ({info}) => {
-        return (
-            <div>
-                <div><label htmlFor="">Company Name</label><input value={info.company} type="text" placeholder="Enter Company Name" className="input w-full h-full" /></div>
-                <div><label htmlFor="">Position Title</label><input value={info.position} type="text" placeholder="Enter Position Title" className="input w-full h-full" /></div>
-                <div><label htmlFor="">Start Date</label><input value={info.start} type="text" placeholder="Enter Start Date" className="input w-full h-full" /></div>
-                <div><label htmlFor="">End Date</label><input value={info.end} type="text" placeholder="Enter End Date" className="input w-full h-full" /></div>
-                <div><label htmlFor="">Location</label><input value={info.location} type="text" placeholder="Enter Location" className="input w-full h-full" /></div>
-                <div><label htmlFor="">Description</label><input value={info.description} type="text" placeholder="Enter Description" className="input w-full h-full" /></div>
-                <div className="flex justify-between mt-4">
-              <div><button className="border-2 border-grey rounded-md p-2">🗑️ Delete</button></div>
-              <div className="flex gap-4"><button onClick={cancel} className="border-2 border-red-300 rounded-md p-2">Cancel</button><button className="border-2 border-blue-300 rounded-md p-2">Save</button></div>
-                </div>
-          </div>
-        )
-    }
-
-    function cancel () {
-      updateExample(example)
-      setShowAddExperience(false)
-    }
-
-    const AddEducation = (info) => {
-        return (
-            <div>
-                <div><label htmlFor="">School</label><input value={info.school} type="text" placeholder="Enter School / University" className="input w-full h-full" /></div>
-                <div><label htmlFor="">Degree</label><input value={info.degree} type="text" placeholder="Enter Degree / Field Of Study" className="input w-full h-full" /></div>
-                <div><label htmlFor="">Start Date</label><input value={info.start} type="text" placeholder="Enter Start Date" className="input w-full h-full" /></div>
-                <div><label htmlFor="">End Date</label><input value={info.end} type="text" placeholder="Enter End Date" className="input w-full h-full" /></div>
-                <div><label htmlFor="">Description</label><input value={info.description} type="text" placeholder="Enter Description" className="input w-full h-full" /></div>
-                <div><label htmlFor="">Location</label><input value={info.location} type="text" placeholder="Enter Location" className="input w-full h-full" /></div>
-                <div className="flex justify-between mt-4">
-                <div><button className="border-2 border-grey rounded-md p-2">🗑️ Delete</button></div>
-                <div className="flex gap-4"><button className="border-2 border-red-300 rounded-md p-2">Cancel</button><button className="border-2 border-blue-300 rounded-md p-2">Save</button></div>
-                </div>
-            </div>
-            
-        )
-    }
-
-
-
-    const CreateInfo = ({text, callback}) => {
-        return (
-            <button onClick={callback} className="buttonCreateInfo">+ {text}</button>
-        )
-    }
-
-    const EmptyList = () => {
-        return (
-            <CreateInfo text={'Experience'} />
-        )
-    }
- 
-
-    function changeInfoState (button) {
-      if (button) {
-        updateExample(empty)
-      }   
-      else updateExample(example)
-      setShowAddExperience(true)
-    }
-
-    function ExperienceList ({hasExperience, showAddExperience, setShowAddExperience}) {
-      const [info, setInfo] = useState(example.experience[0])
-      let experience = example.experience 
-      const [eyeState, setEyeState] = useState("../src/assets/eye.png")
-      const showOrHide = (index) => {
-        // Toggle the eye state based on the current stat, hide resume info
-        setEyeState(prevState =>
-          prevState === "../src/assets/eye-closed.png"
-            ? "../src/assets/eye.png"
-            : "../src/assets/eye-closed.png"
-      )};
-
-
-
-      return (
-          showAddExperience 
-        ? <AddExperience info={info} /> 
-        : hasExperience 
-        ?
-        <>
-          {experience.map((exp, index) => (
-            <div key={index} className="divEye">
-              <p onClick={() => changeInfoState(false)} style={{cursor: 'pointer'}}>{exp.company}</p>
-              <img onClick={() => showOrHide(index)} style={{cursor: 'pointer'}} src={eyeState} alt=""  />
-            </div>
-          ))}
-          <CreateInfo text={'Experience'} callback={() => changeInfoState(true)} />
-        </>
-        : <CreateInfo text={'Experience'} callback={() => changeInfoState(true)} />
-    )
-    }
-
-    function EducationList () {
-
-    }
-
-
-    function setDetails (e, categorie, section) {
-      const newInfo = JSON.parse(JSON.stringify(example));
-      newInfo[categorie][section] = e.target.value
-      updateExample(newInfo)
-    }
-    
-
-    const myClass = hideContent ? "hidden" : '';
-    return (
-      <section className={`h-full flex flex-col justify-evenly mb-24 ${myClass}`}>
-        <div key={0} className={`collapse bg-white mt-4 mb-4 min-w-full ${openSection === 0 ? 'open' : ''}`}>
-          <input type="checkbox" onChange={() => handleToggle(0)} checked={openSection === 0} />
-          <div className="collapse-title text-xl font-medium" onClick={() => handleToggle(0)}>
-            Personal information
-          </div>
-          <div className="collapse-content">
-            <div><label htmlFor="">Full Name</label><input id="name" onChange={(e) => setDetails(e, 'personal', 'fullname')} value={example.personal.fullname} type="text" placeholder="First and last name" className="input w-full h-full" /></div>
-            <div><label htmlFor="">Email</label><input id="email" onChange={(e) => setDetails(e, 'personal', 'email')} value={example.personal.email} type="text" placeholder="Enter email" className="input w-full h-full" /></div>
-            <div><label htmlFor="">Phone Number</label><input id="phone" onChange={(e) => setDetails(e, 'personal', 'phone')} value={example.personal.phone} type="text" placeholder="Enter phone number" className="input w-full h-full" /></div>
-            <div><label htmlFor="">Address</label><input id="address" onChange={(e) => setDetails(e, 'personal', 'address')} value={example.personal.address} type="text" placeholder="City, Country" className="input w-full h-full" /></div>
-          </div>
-        </div>
-        <div key={1} className={`collapse bg-white mt-4 mb-4 min-w-full ${openSection === 1 ? 'open' : ''}`}>
-          <input type="checkbox" onChange={() => handleToggle(1)} checked={openSection === 1} />
-          <div className="collapse-title text-xl font-medium" onClick={() => handleToggle(1)}>
-            Experience
-          </div>
-            <div className="collapse-content">
-                <ExperienceList hasExperience={hasExperience} showAddExperience={showAddExperience} setShowAddExperience={setShowAddExperience} />
-            </div>
-        </div>
-        
-        <div key={2} className={`collapse bg-white mt-4 mb-4 min-w-full ${openSection === 2 ? 'open' : ''}`}>
-          <input type="checkbox" onChange={() => handleToggle(2)} checked={openSection === 2} />
-          <div className="collapse-title text-xl font-medium" onClick={() => handleToggle(2)}>
-            Education
-          </div>
-          <div className="collapse-content">
-            <EducationList />
-          </div>
-        </div>
-        
-        <div key={3} className={`collapse bg-white mt-4 mb-4 min-w-full ${openSection === 3 ? 'open' : ''}`}>
-          <input type="checkbox" onChange={() => handleToggle(3)} checked={openSection === 3} />
-          <div className="collapse-title text-xl font-medium" onClick={() => handleToggle(3)}>
-            Skills
-          </div>
-          <div className="collapse-content">
-          <div>
-                <label htmlFor="">Skills & Knowledge</label>
-                <input onChange={(e) => setDetails(e, 'skills', 0)} value={example.skills} type="text" placeholder="Enter your Skills" className="input w-full h-full p-4" />
-            </div> 
-          </div>
-        </div>
-      </section>
-    );
-}
-
 function CustomizeLayout ({updateLayout, updateColor, updateFonts, color, hideLayout}) {
     const [newColor, setColor] = useState(color);
 
@@ -238,6 +71,176 @@ function Btn ({img, alt, text, btnClass, callback}) {
         </button>
     )
 }
+
+
+
+
+
+
+
+
+
+
+
+function CompleteYourInfo({example, updateExample, hideContent, hasExperience, showAddExperience, setShowAddExperience, hasEducation, empty}) {
+  const [openSection, setOpenSection] = useState(0);
+
+
+  const handleToggle = (index) => {
+    setOpenSection((prevOpenSection) => (prevOpenSection === index ? null : index));
+  };
+
+  const AddExperience = ({info}) => {
+      return (
+          <div>
+              <div><label htmlFor="">Company Name</label><input value={info.company} type="text" placeholder="Enter Company Name" className="input w-full h-full" /></div>
+              <div><label htmlFor="">Position Title</label><input value={info.position} type="text" placeholder="Enter Position Title" className="input w-full h-full" /></div>
+              <div><label htmlFor="">Start Date</label><input value={info.start} type="text" placeholder="Enter Start Date" className="input w-full h-full" /></div>
+              <div><label htmlFor="">End Date</label><input value={info.end} type="text" placeholder="Enter End Date" className="input w-full h-full" /></div>
+              <div><label htmlFor="">Location</label><input value={info.location} type="text" placeholder="Enter Location" className="input w-full h-full" /></div>
+              <div><label htmlFor="">Description</label><input value={info.description} type="text" placeholder="Enter Description" className="input w-full h-full" /></div>
+              <div className="flex justify-between mt-4">
+            <div><button className="border-2 border-grey rounded-md p-2">🗑️ Delete</button></div>
+            <div className="flex gap-4"><button onClick={cancel} className="border-2 border-red-300 rounded-md p-2">Cancel</button><button className="border-2 border-blue-300 rounded-md p-2">Save</button></div>
+              </div>
+        </div>
+      )
+  }
+
+
+  const AddEducation = (info) => {
+      return (
+          <div>
+              <div><label htmlFor="">School</label><input value={info.school} type="text" placeholder="Enter School / University" className="input w-full h-full" /></div>
+              <div><label htmlFor="">Degree</label><input value={info.degree} type="text" placeholder="Enter Degree / Field Of Study" className="input w-full h-full" /></div>
+              <div><label htmlFor="">Start Date</label><input value={info.start} type="text" placeholder="Enter Start Date" className="input w-full h-full" /></div>
+              <div><label htmlFor="">End Date</label><input value={info.end} type="text" placeholder="Enter End Date" className="input w-full h-full" /></div>
+              <div><label htmlFor="">Description</label><input value={info.description} type="text" placeholder="Enter Description" className="input w-full h-full" /></div>
+              <div><label htmlFor="">Location</label><input value={info.location} type="text" placeholder="Enter Location" className="input w-full h-full" /></div>
+              <div className="flex justify-between mt-4">
+              <div><button className="border-2 border-grey rounded-md p-2">🗑️ Delete</button></div>
+              <div className="flex gap-4"><button className="border-2 border-red-300 rounded-md p-2">Cancel</button><button className="border-2 border-blue-300 rounded-md p-2">Save</button></div>
+              </div>
+          </div>
+          
+      )
+  }
+
+  const CreateInfo = ({text, callback}) => {
+      return (
+          <button onClick={callback} className="buttonCreateInfo">+ {text}</button>
+      )
+  }
+  const [info, setInfo] = useState(example.experience)
+
+  function changeInfoState (index) {
+    setInfo(example.experience[index])
+    setShowAddExperience(true)
+  }
+
+  function pushExperience () {
+    setInfo(empty.experience[0])
+    setShowAddExperience(true)
+  }
+
+  function cancel () {
+    setShowAddExperience(false)
+  }
+
+  function ExperienceList ({hasExperience, showAddExperience, setShowAddExperience}) {
+    let experience = example.experience; 
+
+    const [eyeState, setEyeState] = useState("../src/assets/eye.png")
+    const showOrHide = (index) => {
+      setEyeState(prevState =>
+        prevState === "../src/assets/eye-closed.png"
+          ? "../src/assets/eye.png"
+          : "../src/assets/eye-closed.png"
+    )};
+
+
+
+    return (
+        showAddExperience 
+      ? <AddExperience info={info} /> 
+      : hasExperience 
+      ?
+      <>
+        {experience.map((exp, index) => (
+          <div key={index} className="divEye">
+            <p onClick={() => changeInfoState(index)} style={{cursor: 'pointer'}}>{exp.company}</p>
+            <img onClick={() => showOrHide(index)} style={{cursor: 'pointer'}} src={eyeState} alt=""  />
+          </div>
+        ))}
+        <CreateInfo text={'Experience'} callback={() => pushExperience()} />
+      </>
+      : <CreateInfo text={'Experience'} callback={() => pushExperience()} />
+  )
+  }
+
+  function EducationList () {
+
+  }
+
+
+  function setDetails (e, categorie, section) {
+    const newInfo = JSON.parse(JSON.stringify(example));
+    newInfo[categorie][section] = e.target.value
+    updateExample(newInfo)
+  }
+  
+
+  const myClass = hideContent ? "hidden" : '';
+  return (
+    <section className={`h-full flex flex-col justify-evenly mb-24 ${myClass}`}>
+      <div key={0} className={`collapse bg-white mt-4 mb-4 min-w-full ${openSection === 0 ? 'open' : ''}`}>
+        <input type="checkbox" onChange={() => handleToggle(0)} checked={openSection === 0} />
+        <div className="collapse-title text-xl font-medium" onClick={() => handleToggle(0)}>
+          Personal information
+        </div>
+        <div className="collapse-content">
+          <div><label htmlFor="">Full Name</label><input id="name" onChange={(e) => setDetails(e, 'personal', 'fullname')} value={example.personal.fullname} type="text" placeholder="First and last name" className="input w-full h-full" /></div>
+          <div><label htmlFor="">Email</label><input id="email" onChange={(e) => setDetails(e, 'personal', 'email')} value={example.personal.email} type="text" placeholder="Enter email" className="input w-full h-full" /></div>
+          <div><label htmlFor="">Phone Number</label><input id="phone" onChange={(e) => setDetails(e, 'personal', 'phone')} value={example.personal.phone} type="text" placeholder="Enter phone number" className="input w-full h-full" /></div>
+          <div><label htmlFor="">Address</label><input id="address" onChange={(e) => setDetails(e, 'personal', 'address')} value={example.personal.address} type="text" placeholder="City, Country" className="input w-full h-full" /></div>
+        </div>
+      </div>
+
+      <div key={1} className={`collapse bg-white mt-4 mb-4 min-w-full ${openSection === 1 ? 'open' : ''}`}>
+        <input type="checkbox" onChange={() => handleToggle(1)} checked={openSection === 1} />
+        <div className="collapse-title text-xl font-medium" onClick={() => handleToggle(1)}>
+          Experience
+        </div>
+          <div className="collapse-content">
+              <ExperienceList hasExperience={hasExperience} showAddExperience={showAddExperience} setShowAddExperience={setShowAddExperience} />
+          </div>
+      </div>
+      
+      <div key={2} className={`collapse bg-white mt-4 mb-4 min-w-full ${openSection === 2 ? 'open' : ''}`}>
+        <input type="checkbox" onChange={() => handleToggle(2)} checked={openSection === 2} />
+        <div className="collapse-title text-xl font-medium" onClick={() => handleToggle(2)}>
+          Education
+        </div>
+        <div className="collapse-content">
+          <EducationList />
+        </div>
+      </div>
+      
+      <div key={3} className={`collapse bg-white mt-4 mb-4 min-w-full ${openSection === 3 ? 'open' : ''}`}>
+        <input type="checkbox" onChange={() => handleToggle(3)} checked={openSection === 3} />
+        <div className="collapse-title text-xl font-medium" onClick={() => handleToggle(3)}>
+          Skills
+        </div>
+        <div className="collapse-content">
+        <div>
+              <label htmlFor="">Skills & Knowledge</label>
+              <input onChange={(e) => setDetails(e, 'skills', 0)} value={example.skills} type="text" placeholder="Enter your Skills" className="input w-full h-full p-4" />
+          </div> 
+        </div>
+      </div>
+    </section>
+  );
+  }
 
 
 export default function CreateResume({updateLayout, updateColor, updateFonts, color, example, updateExample}) {
@@ -328,11 +331,9 @@ export default function CreateResume({updateLayout, updateColor, updateFonts, co
 
     const [hideContent, setHideContent] = useState(false)
     const [hideLayout, setHideLayout] = useState(true)
-    const [hasInfo, setNewInfo] = useState(true)
     const [hasExperience, setExperience] = useState(true)
     const [showAddExperience, setShowAddExperience] = useState(false);
     const [hasEducation, setEducation] = useState(true)
-    const [hasSkills, setSkills] = useState(true)
 
 
     function Layout() {
@@ -403,12 +404,10 @@ export default function CreateResume({updateLayout, updateColor, updateFonts, co
             hideContent={hideContent} 
             example={example}
             updateExample={updateExample} 
-            hasInfo={hasInfo} 
             hasExperience={hasExperience}
             showAddExperience={showAddExperience}
             setShowAddExperience={setShowAddExperience}
             hasEducation={hasEducation}
-            hasSkills={hasSkills}
             empty={empty}
           />
           <CustomizeLayout 

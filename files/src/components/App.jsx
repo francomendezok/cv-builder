@@ -28,6 +28,14 @@ export default function App() {
         end: 'present',
         location: 'Cordoba, Argentina',
         description: 'Full Stack Developer focus on Front End with HTML, CSS, JavaScript and React. Responsive and Mobile Device'
+      },
+      {
+        company: 'Castelldefels',
+        position: 'Waiter',
+        start: '12/17/23',
+        end: 'past',
+        location: 'Barcelona, Spain',
+        description: 'Waiter, Street Publicity'
       }
     
     ],
