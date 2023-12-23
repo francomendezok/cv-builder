@@ -38,7 +38,9 @@ function ResumeInfo({ info }) {
 
 function Skills({skills}) {
     return (
-      <p className="text-center">{skills}</p>
+      <div className="w-4/5 m-auto">
+        <p className="text-center w-full max-w-full overflow-auto break-words">{skills}</p>
+      </div>
     );
   }
 
