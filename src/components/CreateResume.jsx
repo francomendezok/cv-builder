@@ -93,12 +93,12 @@ function CompleteYourInfo({example, updateExample, hideContent, hasExperience, s
   const AddExperience = ({info}) => {
       return (
           <div>
-              <div><label htmlFor="">Company Name</label><input value={info.company} type="text" placeholder="Enter Company Name" className="input w-full h-full" /></div>
-              <div><label htmlFor="">Position Title</label><input value={info.position} type="text" placeholder="Enter Position Title" className="input w-full h-full" /></div>
-              <div><label htmlFor="">Start Date</label><input value={info.start} type="text" placeholder="Enter Start Date" className="input w-full h-full" /></div>
-              <div><label htmlFor="">End Date</label><input value={info.end} type="text" placeholder="Enter End Date" className="input w-full h-full" /></div>
-              <div><label htmlFor="">Location</label><input value={info.location} type="text" placeholder="Enter Location" className="input w-full h-full" /></div>
-              <div><label htmlFor="">Description</label><input value={info.description} type="text" placeholder="Enter Description" className="input w-full h-full" /></div>
+              <div><label htmlFor="">Company Name</label><input onChange={(e) => updateBoxDetails(e, 'experience', 'company')} value={info.company} type="text" placeholder="Enter Company Name" className="input w-full h-full" /></div>
+              <div><label htmlFor="">Position Title</label><input onChange={(e) => updateBoxDetails(e)} value={info.position} type="text" placeholder="Enter Position Title" className="input w-full h-full" /></div>
+              <div><label htmlFor="">Start Date</label><input onChange={(e) => updateBoxDetails(e)} value={info.start} type="text" placeholder="Enter Start Date" className="input w-full h-full" /></div>
+              <div><label htmlFor="">End Date</label><input onChange={(e) => updateBoxDetails(e)} value={info.end} type="text" placeholder="Enter End Date" className="input w-full h-full" /></div>
+              <div><label htmlFor="">Location</label><input onChange={(e) => updateBoxDetails(e)} value={info.location} type="text" placeholder="Enter Location" className="input w-full h-full" /></div>
+              <div><label htmlFor="">Description</label><input onChange={(e) => updateBoxDetails(e)} value={info.description} type="text" placeholder="Enter Description" className="input w-full h-full" /></div>
               <div className="flex justify-between mt-4">
             <div><button className="border-2 border-grey rounded-md p-2">🗑️ Delete</button></div>
             <div className="flex gap-4"><button onClick={cancel} className="border-2 border-red-300 rounded-md p-2">Cancel</button><button className="border-2 border-blue-300 rounded-md p-2">Save</button></div>
@@ -150,13 +150,17 @@ function CompleteYourInfo({example, updateExample, hideContent, hasExperience, s
   function ExperienceList ({hasExperience, showAddExperience, setShowAddExperience}) {
     let experience = example.experience; 
 
-    const [eyeState, setEyeState] = useState("../src/assets/eye.png")
-    const showOrHide = (index) => {
-      setEyeState(prevState =>
-        prevState === "../src/assets/eye-closed.png"
-          ? "../src/assets/eye.png"
-          : "../src/assets/eye-closed.png"
-    )};
+  const [eyeStates, setEyeStates] = useState(experience.map(() => "../src/assets/eye.png"));
+
+  const showOrHide = (index) => {
+  setEyeStates(prevStates => {
+    const newStates = [...prevStates];
+    newStates[index] = newStates[index] === "../src/assets/eye-closed.png"
+      ? "../src/assets/eye.png"
+      : "../src/assets/eye-closed.png";
+    return newStates;
+  });
+};
 
 
 
@@ -169,7 +173,7 @@ function CompleteYourInfo({example, updateExample, hideContent, hasExperience, s
         {experience.map((exp, index) => (
           <div key={index} className="divEye">
             <p onClick={() => changeInfoState(index)} style={{cursor: 'pointer'}}>{exp.company}</p>
-            <img onClick={() => showOrHide(index)} style={{cursor: 'pointer'}} src={eyeState} alt=""  />
+            <img onClick={() => showOrHide(index)} style={{cursor: 'pointer'}} src={eyeStates[index]} alt=""  />
           </div>
         ))}
         <CreateInfo text={'Experience'} callback={() => pushExperience()} />
@@ -182,11 +186,17 @@ function CompleteYourInfo({example, updateExample, hideContent, hasExperience, s
 
   }
 
+  function updateBoxDetails (e, categorie, section) {
+      const newInfo = JSON.parse(JSON.stringify(example));
+      newInfo[categorie][0][section] = e.target.value
+      updateExample(newInfo)
+  }
+
 
   function setDetails (e, categorie, section) {
-    const newInfo = JSON.parse(JSON.stringify(example));
-    newInfo[categorie][section] = e.target.value
-    updateExample(newInfo)
+      const newInfo = JSON.parse(JSON.stringify(example));
+      newInfo[categorie][section] = e.target.value
+      updateExample(newInfo)
   }
   
 
@@ -260,6 +270,14 @@ export default function CreateResume({updateLayout, updateColor, updateFonts, co
         end: 'present',
         location: 'Cordoba, Argentina',
         description: 'Full Stack Developer focus on Front End with HTML, CSS, JavaScript and React. Responsive and Mobile Device'
+      },
+      {
+        company: 'Castelldefels',
+        position: 'Waiter',
+        start: '12/17/23',
+        end: 'past',
+        location: 'Barcelona, Spain',
+        description: 'Waiter, Street Publicity'
       }
     
     ],
