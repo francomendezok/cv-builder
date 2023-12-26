@@ -91,14 +91,16 @@ function CompleteYourInfo({example, updateExample, hideContent, hasExperience, s
   };
 
   const AddExperience = ({info}) => {
+    console.log(info);
+    let position = example.experience.indexOf(info)
       return (
           <div>
-              <div><label htmlFor="">Company Name</label><input onChange={(e) => updateBoxDetails(e, 'experience', 'company')} value={info.company} type="text" placeholder="Enter Company Name" className="input w-full h-full" /></div>
-              <div><label htmlFor="">Position Title</label><input onChange={(e) => updateBoxDetails(e)} value={info.position} type="text" placeholder="Enter Position Title" className="input w-full h-full" /></div>
-              <div><label htmlFor="">Start Date</label><input onChange={(e) => updateBoxDetails(e)} value={info.start} type="text" placeholder="Enter Start Date" className="input w-full h-full" /></div>
-              <div><label htmlFor="">End Date</label><input onChange={(e) => updateBoxDetails(e)} value={info.end} type="text" placeholder="Enter End Date" className="input w-full h-full" /></div>
-              <div><label htmlFor="">Location</label><input onChange={(e) => updateBoxDetails(e)} value={info.location} type="text" placeholder="Enter Location" className="input w-full h-full" /></div>
-              <div><label htmlFor="">Description</label><input onChange={(e) => updateBoxDetails(e)} value={info.description} type="text" placeholder="Enter Description" className="input w-full h-full" /></div>
+              <div><label htmlFor="">Company Name</label><input onChange={(e) => setDetails(e, 'experience','company')} value={example.experience[position].company} type="text" placeholder="Enter Company Name" className="input w-full h-full" /></div>
+              <div><label htmlFor="">Position Title</label><input onChange={(e) => setDetails(e, 'experience','position')} value={example.experience[position].position} type="text" placeholder="Enter Position Title" className="input w-full h-full" /></div>
+              <div><label htmlFor="">Start Date</label><input onChange={(e) => setDetails(e, 'experience','start')} value={example.experience[position].start} type="text" placeholder="Enter Start Date" className="input w-full h-full" /></div>
+              <div><label htmlFor="">End Date</label><input onChange={(e) => setDetails(e, 'experience','end')} value={example.experience[position].end} type="text" placeholder="Enter End Date" className="input w-full h-full" /></div>
+              <div><label htmlFor="">Location</label><input onChange={(e) => setDetails(e, 'experience','location')} value={example.experience[position].location} type="text" placeholder="Enter Location" className="input w-full h-full" /></div>
+              <div><label htmlFor="">Description</label><input onChange={(e) => setDetails(e, 'experience','description')} value={example.experience[position].description} type="text" placeholder="Enter Description" className="input w-full h-full" /></div>
               <div className="flex justify-between mt-4">
             <div><button className="border-2 border-grey rounded-md p-2">🗑️ Delete</button></div>
             <div className="flex gap-4"><button onClick={cancel} className="border-2 border-red-300 rounded-md p-2">Cancel</button><button className="border-2 border-blue-300 rounded-md p-2">Save</button></div>
@@ -131,27 +133,18 @@ function CompleteYourInfo({example, updateExample, hideContent, hasExperience, s
           <button onClick={callback} className="buttonCreateInfo">+ {text}</button>
       )
   }
-  const [info, setInfo] = useState(example.experience)
 
-  function changeInfoState (index) {
-    setInfo(example.experience[index])
-    setShowAddExperience(true)
-  }
 
-  function pushExperience () {
-    setInfo(empty.experience[0])
-    setShowAddExperience(true)
-  }
+
 
   function cancel () {
     setShowAddExperience(false)
   }
 
-  function ExperienceList ({hasExperience, showAddExperience, setShowAddExperience}) {
+  function ExperienceList ({hasExperience, showAddExperience}) {
+    const [info, setInfo] = useState(example.experience[0])
     let experience = example.experience; 
-
   const [eyeStates, setEyeStates] = useState(experience.map(() => "../src/assets/eye.png"));
-
   const showOrHide = (index) => {
   setEyeStates(prevStates => {
     const newStates = [...prevStates];
@@ -162,17 +155,27 @@ function CompleteYourInfo({example, updateExample, hideContent, hasExperience, s
   });
 };
 
+function changeInfoState (exp) {
+  setShowAddExperience(true)
+  setInfo(exp)
+}
+
+function pushExperience () {
+  setInfo(empty.experience[0])
+  setShowAddExperience(true)
+}
+
 
 
     return (
         showAddExperience 
-      ? <AddExperience info={info} /> 
+      ? <AddExperience info={info}/> 
       : hasExperience 
       ?
       <>
         {experience.map((exp, index) => (
           <div key={index} className="divEye">
-            <p onClick={() => changeInfoState(index)} style={{cursor: 'pointer'}}>{exp.company}</p>
+            <p onClick={(exp) => changeInfoState(exp)} style={{cursor: 'pointer'}}>{exp.company}</p>
             <img onClick={() => showOrHide(index)} style={{cursor: 'pointer'}} src={eyeStates[index]} alt=""  />
           </div>
         ))}
@@ -186,16 +189,11 @@ function CompleteYourInfo({example, updateExample, hideContent, hasExperience, s
 
   }
 
-  function updateBoxDetails (e, categorie, section) {
-      const newInfo = JSON.parse(JSON.stringify(example));
-      newInfo[categorie][0][section] = e.target.value
-      updateExample(newInfo)
-  }
-
 
   function setDetails (e, categorie, section) {
       const newInfo = JSON.parse(JSON.stringify(example));
-      newInfo[categorie][section] = e.target.value
+      console.log(newInfo[categorie][0][section]);
+      newInfo[categorie][0][section] = e.target.value
       updateExample(newInfo)
   }
   
@@ -253,7 +251,7 @@ function CompleteYourInfo({example, updateExample, hideContent, hasExperience, s
   }
 
 
-export default function CreateResume({updateLayout, updateColor, updateFonts, color, example, updateExample}) {
+export default function CreateResume({updateLayout, updateColor, updateFonts, color, example, updateExample, updateVisible}) {
   const InfoExample = 
   {
     personal: {
@@ -364,21 +362,16 @@ export default function CreateResume({updateLayout, updateColor, updateFonts, co
       }
 
     function hideResume () {
-      // setNewInfo(false)  
       setExperience(false)
-      // setShowAddExperience(false)
-      // setEducation(false)
-      // setSkills(false)
+      setShowAddExperience(false)
       updateExample(empty)
+      updateVisible(false)
     }
 
     function showResume () {
-      // setNewInfo(true)
       setExperience(true)
-      // setEducation(true)
-      // setSkills(true)
-      // setExperience(true)
       updateExample(InfoExample)
+      updateVisible(true)
   }
     return (
       <div className="infoSection">
@@ -440,3 +433,8 @@ export default function CreateResume({updateLayout, updateColor, updateFonts, co
   }
 
   
+
+  // Eye show or hide resume info // 
+  // Create Experience // 
+  // Edit Experience Info (update two states, example and info) Button Save //
+  // Delete Experience //  

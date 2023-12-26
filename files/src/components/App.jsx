@@ -11,7 +11,7 @@ export default function App() {
   const [layout, updateLayout] = useState('resumeTop');
   const [color, updateColor] = useState('#5165F5');
   const [fonts, updateFonts] = useState('sans-serif');
-  const [visible, clearResume] = useState(true);
+  const [visible, updateVisible] = useState(true);
   const InfoExample = 
   {
     personal: {
@@ -75,6 +75,7 @@ export default function App() {
         color={color} 
         example={example}
         updateExample={newExample}
+        updateVisible={updateVisible}
         />
 
       <Resume 
