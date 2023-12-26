@@ -91,19 +91,25 @@ function CompleteYourInfo({example, updateExample, hideContent, hasExperience, s
   };
 
   const AddExperience = ({info}) => {
-    console.log(info);
+    let myExample = example.experience
     let position = example.experience.indexOf(info)
+    let last;
+
+    if (myExample[myExample.length - 1] === info && info.company === '') {
+      last = true;
+    }
+    else last = false
       return (
           <div>
-              <div><label htmlFor="">Company Name</label><input onChange={(e) => setDetails(e, 'experience','company')} value={example.experience[position].company} type="text" placeholder="Enter Company Name" className="input w-full h-full" /></div>
-              <div><label htmlFor="">Position Title</label><input onChange={(e) => setDetails(e, 'experience','position')} value={example.experience[position].position} type="text" placeholder="Enter Position Title" className="input w-full h-full" /></div>
-              <div><label htmlFor="">Start Date</label><input onChange={(e) => setDetails(e, 'experience','start')} value={example.experience[position].start} type="text" placeholder="Enter Start Date" className="input w-full h-full" /></div>
-              <div><label htmlFor="">End Date</label><input onChange={(e) => setDetails(e, 'experience','end')} value={example.experience[position].end} type="text" placeholder="Enter End Date" className="input w-full h-full" /></div>
-              <div><label htmlFor="">Location</label><input onChange={(e) => setDetails(e, 'experience','location')} value={example.experience[position].location} type="text" placeholder="Enter Location" className="input w-full h-full" /></div>
-              <div><label htmlFor="">Description</label><input onChange={(e) => setDetails(e, 'experience','description')} value={example.experience[position].description} type="text" placeholder="Enter Description" className="input w-full h-full" /></div>
+              <div><label htmlFor="">Company Name</label><input onChange={(e) => setValues(e, info, 'company')} value={info.company} type="text" placeholder="Enter Company Name" className="input w-full h-full" /></div>
+              <div><label htmlFor="">Position Title</label><input onChange={(e) => setValues(e, info, 'position')} value={info.position} type="text" placeholder="Enter Position Title" className="input w-full h-full" /></div>
+              <div><label htmlFor="">Start Date</label><input onChange={(e) => setValues(e, info, 'start')} value={info.start} type="text" placeholder="Enter Start Date" className="input w-full h-full" /></div>
+              <div><label htmlFor="">End Date</label><input onChange={(e) => setValues(e, info, 'end')} value={info.end} type="text" placeholder="Enter End Date" className="input w-full h-full" /></div>
+              <div><label htmlFor="">Location</label><input onChange={(e) => setValues(e, info, 'location')} value={info.location} type="text" placeholder="Enter Location" className="input w-full h-full" /></div>
+              <div><label htmlFor="">Description</label><input onChange={(e) => setValues(e, info, 'description')} value={info.description} type="text" placeholder="Enter Description" className="input w-full h-full" /></div>
               <div className="flex justify-between mt-4">
             <div><button className="border-2 border-grey rounded-md p-2">🗑️ Delete</button></div>
-            <div className="flex gap-4"><button onClick={cancel} className="border-2 border-red-300 rounded-md p-2">Cancel</button><button className="border-2 border-blue-300 rounded-md p-2">Save</button></div>
+            <div className="flex gap-4"><button onClick={last ? remove : cancel} className="border-2 border-red-300 rounded-md p-2">Cancel</button><button onClick={() => save(position)} className="border-2 border-blue-300 rounded-md p-2">Save</button></div>
               </div>
         </div>
       )
@@ -134,15 +140,34 @@ function CompleteYourInfo({example, updateExample, hideContent, hasExperience, s
       )
   }
 
-
+  function save (position) {
+    setShowAddExperience(false)
+    const newInfo = [...example];
+    newInfo.experience = info
+    updateExample(newInfo)
+  }
 
 
   function cancel () {
-    setShowAddExperience(false)
-  }
+      setShowAddExperience(false)
+    }
+
+    function remove () {
+      example.experience.pop()
+      setShowAddExperience(false)
+    }
+  
+
+  const [info, setInfo] = useState(example.experience)
+
+  function setValues (e, info, section) {
+    const newInfo = JSON.parse(JSON.stringify(info));
+    info[section] = e.target.value
+    setInfo(newInfo)
+}
+
 
   function ExperienceList ({hasExperience, showAddExperience}) {
-    const [info, setInfo] = useState(example.experience[0])
     let experience = example.experience; 
   const [eyeStates, setEyeStates] = useState(experience.map(() => "../src/assets/eye.png"));
   const showOrHide = (index) => {
@@ -161,6 +186,7 @@ function changeInfoState (exp) {
 }
 
 function pushExperience () {
+  example.experience.push(empty.experience[0])
   setInfo(empty.experience[0])
   setShowAddExperience(true)
 }
@@ -175,7 +201,7 @@ function pushExperience () {
       <>
         {experience.map((exp, index) => (
           <div key={index} className="divEye">
-            <p onClick={(exp) => changeInfoState(exp)} style={{cursor: 'pointer'}}>{exp.company}</p>
+            <p onClick={() => changeInfoState(exp)} style={{cursor: 'pointer'}}>{exp.company}</p>
             <img onClick={() => showOrHide(index)} style={{cursor: 'pointer'}} src={eyeStates[index]} alt=""  />
           </div>
         ))}
@@ -192,10 +218,11 @@ function pushExperience () {
 
   function setDetails (e, categorie, section) {
       const newInfo = JSON.parse(JSON.stringify(example));
-      console.log(newInfo[categorie][0][section]);
-      newInfo[categorie][0][section] = e.target.value
+      newInfo[categorie][section] = e.target.value
       updateExample(newInfo)
   }
+
+
   
 
   const myClass = hideContent ? "hidden" : '';
