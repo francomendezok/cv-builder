@@ -155,7 +155,7 @@ input[type=color]::-webkit-color-swatch-wrapper {
 input[type=text] {
   overflow: hidden;
   background-color: #fefefe;
-  border-radius: 6px !important;
+  border-radius: 6px;
   color: black;
   box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1); /* Subtle black box shadow */
 }
