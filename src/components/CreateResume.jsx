@@ -2,6 +2,8 @@
 /* eslint-disable react/prop-types */
 import { useState } from "react"
 import { Page, Text, View, Document, StyleSheet, PDFDownloadLink } from '@react-pdf/renderer';
+import Pagination from '@mui/material/Pagination';
+import Stack from '@mui/material/Stack';
 
 
 function CustomizeLayout ({updateLayout, updateColor, updateFonts, color, hideLayout}) {
@@ -82,7 +84,7 @@ function Btn ({img, alt, text, btnClass, callback}) {
 
 
 
-function CompleteYourInfo({example, updateExample, hideContent, hasExperience, showAddExperience, setShowAddExperience, hasEducation, empty}) {
+function CompleteYourInfo({example, updateExample, hideContent, hasExperience, showAddExperience, setShowAddExperience, hasEducation, empty, updateVisible}) {
   const [openSection, setOpenSection] = useState(0);
 
 
@@ -211,18 +213,25 @@ function pushExperience () {
   )
   }
 
-  function EducationList () {
-
-  }
-
 
   function setDetails (e, categorie, section) {
       const newInfo = JSON.parse(JSON.stringify(example));
       newInfo[categorie][section] = e.target.value
       updateExample(newInfo)
+      updateVisible(true)
   }
 
+const [eduIndex, setEduIndex] = useState(0)
 
+function goNext () {
+  if (eduIndex + 1 > example.education.length - 1) return;
+  setEduIndex(eduIndex + 1)
+}
+
+function goBackwards () {
+  if (eduIndex -1 < 0 ) return;
+  setEduIndex(eduIndex - 1)
+}
   
 
   const myClass = hideContent ? "hidden" : '';
@@ -257,7 +266,35 @@ function pushExperience () {
           Education
         </div>
         <div className="collapse-content">
-          <EducationList />
+        <div key={0} className={eduIndex === 0 ? '' : 'hidden'}>
+              <div><label htmlFor="">School</label><input value={example.education[0].school} type="text" placeholder="Enter School / University" className="input w-full h-full" /></div>
+              <div><label htmlFor="">Degree</label><input value={example.education[0].degree} type="text" placeholder="Enter Degree / Field Of Study" className="input w-full h-full" /></div>
+              <div><label htmlFor="">Start Date</label><input value={example.education[0].start} type="text" placeholder="Enter Start Date" className="input w-full h-full" /></div>
+              <div><label htmlFor="">End Date</label><input value={example.education[0].end} type="text" placeholder="Enter End Date" className="input w-full h-full" /></div>
+              <div><label htmlFor="">Description</label><input value={example.education[0].description} type="text" placeholder="Enter Description" className="input w-full h-full" /></div>
+              <div className="mb-4"><label htmlFor="">Location</label><input value={example.education[0].location} type="text" placeholder="Enter Location" className="input w-full h-full" /></div>
+        </div>
+        
+        <div key={1} className={eduIndex === 1 ? '' : 'hidden'}>
+              <div><label htmlFor="">School</label><input value={example.education[1].school} type="text" placeholder="Enter School / University" className="input w-full h-full" /></div>
+              <div><label htmlFor="">Degree</label><input value={example.education[1].degree} type="text" placeholder="Enter Degree / Field Of Study" className="input w-full h-full" /></div>
+              <div><label htmlFor="">Start Date</label><input value={example.education[1].start} type="text" placeholder="Enter Start Date" className="input w-full h-full" /></div>
+              <div><label htmlFor="">End Date</label><input value={example.education[1].end} type="text" placeholder="Enter End Date" className="input w-full h-full" /></div>
+              <div><label htmlFor="">Description</label><input value={example.education[1].description} type="text" placeholder="Enter Description" className="input w-full h-full" /></div>
+              <div className="mb-4"><label htmlFor="">Location</label><input value={example.education[1].location} type="text" placeholder="Enter Location" className="input w-full h-full" /></div>
+        </div>
+
+        <div className="flex justify-between w-full">
+                <button className="border-2 border-grey rounded-md p-2">🗑️ Delete</button>
+                <div className="w-44">
+                  <div className="flex w-full justify-evenly">
+                    <button onClick={() => goBackwards()}>Previous</button>
+                    <button onClick={() => goNext() }>Next</button>
+                  </div>
+                  <p className="text-center font-semibold">Page {eduIndex + 1} / {example.education.length}</p>
+                </div>
+                <button className="border-2 border-grey rounded-md p-2">+ Education</button>
+        </div>
         </div>
       </div>
       
@@ -447,6 +484,7 @@ export default function CreateResume({updateLayout, updateColor, updateFonts, co
             setShowAddExperience={setShowAddExperience}
             hasEducation={hasEducation}
             empty={empty}
+            updateVisible={updateVisible}
           />
           <CustomizeLayout 
             hideLayout={hideLayout} 
