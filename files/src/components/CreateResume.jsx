@@ -154,19 +154,7 @@ function CompleteYourInfo({example, updateExample, hideContent, hasExperience, s
       setShowAddExperience(false)
     }
 
-    function remove () {
-      example.experience.pop()
-      setShowAddExperience(false)
-    }
   
-
-  const [info, setInfo] = useState(example.experience)
-
-  function setValues (e, info, section) {
-    const newInfo = JSON.parse(JSON.stringify(info));
-    info[section] = e.target.value
-    setInfo(newInfo)
-}
 
 
   function ExperienceList ({hasExperience, showAddExperience}) {
@@ -184,12 +172,10 @@ function CompleteYourInfo({example, updateExample, hideContent, hasExperience, s
 
 function changeInfoState (exp) {
   setShowAddExperience(true)
-  setInfo(exp)
 }
 
 function pushExperience () {
   example.experience.push(empty.experience[0])
-  setInfo(empty.experience[0])
   setShowAddExperience(true)
 }
 
@@ -197,7 +183,7 @@ function pushExperience () {
 
     return (
         showAddExperience 
-      ? <AddExperience info={info}/> 
+      ? <AddExperience /> 
       : hasExperience 
       ?
       <>
@@ -221,6 +207,13 @@ function pushExperience () {
       updateVisible(true)
   }
 
+  function setInfo (e, categorie, index, section) {
+    const newInfo = JSON.parse(JSON.stringify(example));
+    newInfo[categorie][index][section] = e.target.value
+    updateExample(newInfo)
+    updateVisible(true)
+}
+
 const [eduIndex, setEduIndex] = useState(0)
 
 function goNext () {
@@ -233,6 +226,36 @@ function goBackwards () {
   setEduIndex(eduIndex - 1)
 }
   
+function remove (index) {
+  const newInfo = JSON.parse(JSON.stringify(example));
+  newInfo.education.splice(index, 1); 
+  console.log(newInfo.education);
+  updateExample(newInfo);
+}
+
+const [educations, setEducations] = useState(false)
+
+function changeEducation (index) {
+  const newInfo = {...example};
+  newInfo.education.push(empty)
+  updateExample(newInfo)
+  console.log(example);
+  setEduIndex(index)
+  setEducations(<Education index={index}/>)
+}
+
+function Education (index) {
+  return (
+  <div key={index} className={eduIndex === 2 ? '' : 'hidden'}>
+    <div><label htmlFor="">School</label><input onChange={(e) => setInfo(e, 'education', eduIndex, 'school')} value={example.education[2].school} type="text" placeholder="Enter School / University" className="input w-full h-full" /></div>
+    <div><label htmlFor="">Degree</label><input onChange={(e) => setInfo(e, 'education', eduIndex, 'degree')} value={example.education[2].degree} type="text" placeholder="Enter Degree / Field Of Study" className="input w-full h-full" /></div>
+    <div><label htmlFor="">Start Date</label><input onChange={(e) => setInfo(e, 'education', eduIndex, 'start')} value={example.education[2].start} type="text" placeholder="Enter Start Date" className="input w-full h-full" /></div>
+    <div><label htmlFor="">End Date</label><input onChange={(e) => setInfo(e, 'education', eduIndex, 'end')} value={example.education[2].end} type="text" placeholder="Enter End Date" className="input w-full h-full" /></div>
+    <div><label htmlFor="">Description</label><input onChange={(e) => setInfo(e, 'education', eduIndex, 'description')} value={example.education[2].description} type="text" placeholder="Enter Description" className="input w-full h-full" /></div>
+    <div className="mb-4"><label htmlFor="">Location</label><input onChange={(e) => setInfo(e, 'education', eduIndex, 'location')} value={example.education[2].location} type="text" placeholder="Enter Location" className="input w-full h-full" /></div>
+</div>
+  )
+}
 
   const myClass = hideContent ? "hidden" : '';
   return (
@@ -267,25 +290,27 @@ function goBackwards () {
         </div>
         <div className="collapse-content">
         <div key={0} className={eduIndex === 0 ? '' : 'hidden'}>
-              <div><label htmlFor="">School</label><input value={example.education[0].school} type="text" placeholder="Enter School / University" className="input w-full h-full" /></div>
-              <div><label htmlFor="">Degree</label><input value={example.education[0].degree} type="text" placeholder="Enter Degree / Field Of Study" className="input w-full h-full" /></div>
-              <div><label htmlFor="">Start Date</label><input value={example.education[0].start} type="text" placeholder="Enter Start Date" className="input w-full h-full" /></div>
-              <div><label htmlFor="">End Date</label><input value={example.education[0].end} type="text" placeholder="Enter End Date" className="input w-full h-full" /></div>
-              <div><label htmlFor="">Description</label><input value={example.education[0].description} type="text" placeholder="Enter Description" className="input w-full h-full" /></div>
-              <div className="mb-4"><label htmlFor="">Location</label><input value={example.education[0].location} type="text" placeholder="Enter Location" className="input w-full h-full" /></div>
+              <div><label htmlFor="">School</label><input onChange={(e) => setInfo(e, 'education', eduIndex, 'school')} value={example.education[0].school} type="text" placeholder="Enter School / University" className="input w-full h-full" /></div>
+              <div><label htmlFor="">Degree</label><input onChange={(e) => setInfo(e, 'education', eduIndex, 'degree')} value={example.education[0].degree} type="text" placeholder="Enter Degree / Field Of Study" className="input w-full h-full" /></div>
+              <div><label htmlFor="">Start Date</label><input onChange={(e) => setInfo(e, 'education', eduIndex, 'start')} value={example.education[0].start} type="text" placeholder="Enter Start Date" className="input w-full h-full" /></div>
+              <div><label htmlFor="">End Date</label><input onChange={(e) => setInfo(e, 'education', eduIndex, 'end')} value={example.education[0].end} type="text" placeholder="Enter End Date" className="input w-full h-full" /></div>
+              <div><label htmlFor="">Description</label><input onChange={(e) => setInfo(e, 'education', eduIndex, 'description')} value={example.education[0].description} type="text" placeholder="Enter Description" className="input w-full h-full" /></div>
+              <div className="mb-4"><label htmlFor="">Location</label><input onChange={(e) => setInfo(e, 'education', eduIndex, 'location')} value={example.education[0].location} type="text" placeholder="Enter Location" className="input w-full h-full" /></div>
         </div>
         
         <div key={1} className={eduIndex === 1 ? '' : 'hidden'}>
-              <div><label htmlFor="">School</label><input value={example.education[1].school} type="text" placeholder="Enter School / University" className="input w-full h-full" /></div>
-              <div><label htmlFor="">Degree</label><input value={example.education[1].degree} type="text" placeholder="Enter Degree / Field Of Study" className="input w-full h-full" /></div>
-              <div><label htmlFor="">Start Date</label><input value={example.education[1].start} type="text" placeholder="Enter Start Date" className="input w-full h-full" /></div>
-              <div><label htmlFor="">End Date</label><input value={example.education[1].end} type="text" placeholder="Enter End Date" className="input w-full h-full" /></div>
-              <div><label htmlFor="">Description</label><input value={example.education[1].description} type="text" placeholder="Enter Description" className="input w-full h-full" /></div>
-              <div className="mb-4"><label htmlFor="">Location</label><input value={example.education[1].location} type="text" placeholder="Enter Location" className="input w-full h-full" /></div>
+              <div><label htmlFor="">School</label><input onChange={(e) => setInfo(e, 'education', eduIndex, 'school')} value={example.education[1].school} type="text" placeholder="Enter School / University" className="input w-full h-full" /></div>
+              <div><label htmlFor="">Degree</label><input onChange={(e) => setInfo(e, 'education', eduIndex, 'degree')} value={example.education[1].degree} type="text" placeholder="Enter Degree / Field Of Study" className="input w-full h-full" /></div>
+              <div><label htmlFor="">Start Date</label><input onChange={(e) => setInfo(e, 'education', eduIndex, 'start')} value={example.education[1].start} type="text" placeholder="Enter Start Date" className="input w-full h-full" /></div>
+              <div><label htmlFor="">End Date</label><input onChange={(e) => setInfo(e, 'education', eduIndex, 'end')} value={example.education[1].end} type="text" placeholder="Enter End Date" className="input w-full h-full" /></div>
+              <div><label htmlFor="">Description</label><input onChange={(e) => setInfo(e, 'education', eduIndex, 'description')} value={example.education[1].description} type="text" placeholder="Enter Description" className="input w-full h-full" /></div>
+              <div className="mb-4"><label htmlFor="">Location</label><input onChange={(e) => setInfo(e, 'education', eduIndex, 'location')} value={example.education[1].location} type="text" placeholder="Enter Location" className="input w-full h-full" /></div>
         </div>
 
+        {educations}
+
         <div className="flex justify-between w-full">
-                <button className="border-2 border-grey rounded-md p-2">🗑️ Delete</button>
+                <button onClick={() => remove(eduIndex)} className="border-2 border-grey rounded-md p-2">🗑️ Delete</button>
                 <div className="w-44">
                   <div className="flex w-full justify-evenly">
                     <button onClick={() => goBackwards()}>Previous</button>
@@ -293,7 +318,7 @@ function goBackwards () {
                   </div>
                   <p className="text-center font-semibold">Page {eduIndex + 1} / {example.education.length}</p>
                 </div>
-                <button className="border-2 border-grey rounded-md p-2">+ Education</button>
+                <button onClick={() => changeEducation(example.education.length)} className="border-2 border-grey rounded-md p-2">+ Education</button>
         </div>
         </div>
       </div>
@@ -386,15 +411,6 @@ export default function CreateResume({updateLayout, updateColor, updateFonts, co
     
     ],
     education: [
-      {
-        school: '',
-        degree: '',
-        start: '',
-        end: '',
-        location: '',
-        description: ''
-      },
-
       {
         school: '',
         degree: '',
