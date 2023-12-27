@@ -62,6 +62,7 @@ export default function App() {
       'HTML, CSS, JavaScript, TailwindCSS, React'
     ]
   }
+  
   const [example, newExample] = useState(InfoExample)
 
   
