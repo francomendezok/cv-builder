@@ -14,7 +14,7 @@ body {
   display: flex;
   align-items: start;
   justify-content: space-evenly;
-  background-color: #d2e2e6;
+  background: linear-gradient(to left, #53A3DC, rgb(23, 23, 23));
   padding-top: 2rem;
   padding-bottom: 2rem;
   color: black;
@@ -42,7 +42,7 @@ body {
   flex-direction: column;
   justify-content: start;
   min-height: 100%;
-  width: 33.3%;
+  width: 30%;
 }
 
 
@@ -155,9 +155,9 @@ input[type=color]::-webkit-color-swatch-wrapper {
 input[type=text] {
   overflow: hidden;
   background-color: #fefefe;
-  border-radius: 6px;
+  border-bottom: 1px solid lightgrey;
   color: black;
-  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1); /* Subtle black box shadow */
+  border-radius: 0px;
 }
 
 input[type=text]:focus {
@@ -173,23 +173,8 @@ label {
   height: 25px;
 }
 
-.buttonCreateInfo {
-  border: 4px solid lightgrey;
+
+.collapse {
   border-radius: 12px;
-  padding: .5rem;
-  margin-top: 1rem;
-  float: inline-end;
-  width: 30%;
 }
 
-.divEye {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  font-weight: 700;
-}
-
-.divEye img {
-  width: 30px;
-  height: 30px;
-}

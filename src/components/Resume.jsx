@@ -2,20 +2,16 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
 
-import { useState } from "react";
 
 function getContrastColor(hexColor) {
-  // Convertir el color hexadecimal a RGB
   const hex = hexColor.replace(/^#/, '');
   const bigint = parseInt(hex, 16);
   const r = (bigint >> 16) & 255;
   const g = (bigint >> 8) & 255;
   const b = bigint & 255;
 
-  // Calcular la luminancia
   const luminance = (0.299 * r + 0.587 * g + 0.114 * b) / 255;
 
-  // Devolver blanco si el color es oscuro, o negro si el color es claro
   return luminance > 0.5 ? '#000000' : '#ffffff';
 }
 
@@ -69,15 +65,23 @@ function Info ({info, isSkill, visible}) {
   
 export default function Resume ({layout, color, fonts, info, visible}) {
   const invertedColor = getContrastColor(color);
-  const show = visible ? '' : 'hidden';
+
   const email = visible && info.personal.email !== '' ? '' : 'hidden'
   const phone = visible && info.personal.phone !== '' ? '' : 'hidden'
   const address = visible && info.personal.address !== '' ? '' : 'hidden'
 
+  const allEmptyEducation0 = Object.values(info.education[0]).every(value => typeof value === 'string' && value.trim() === '');
+  const allEmptyEducation1 = Object.values(info.education[1]).every(value => typeof value === 'string' && value.trim() === '');
+  const allEmptyExperience0 = Object.values(info.experience[0]).every(value => typeof value === 'string' && value.trim() === '');
+  const allEmptyExperience1 = Object.values(info.experience[1]).every(value => typeof value === 'string' && value.trim() === '');
+  const allEmptySkills = Object.values(info.skills).every(value => typeof value === 'string' && value.trim() === '');
+
+  const education = allEmptyEducation0 && allEmptyEducation1 ? 'hidden' : ''
+  const experience = allEmptyExperience0 && allEmptyExperience1 ? 'hidden' : ''
+  const skills = allEmptySkills ? 'hidden' : ''
 
 
     return (
-      
          <aside id={layout} style={{ fontFamily: fonts, fontSize: '1rem' }} className="bg-slate-100 shadow-xl">
             <div className="personalInfo p-6" style={{ background: color, color: invertedColor }}>
                 <h1 className="text-center text-4xl mb-2">{info.personal.fullname}</h1>
@@ -98,15 +102,15 @@ export default function Resume ({layout, color, fonts, info, visible}) {
             </div>
             <div className="infoContainer">
               <div className="experienceBox">
-                <div className={`cv-categories ${show}`} style={{ background: invertedColor, color: color, borderStyle: "solid", borderColor: color, borderWidth: '2px', fontSize: '1.2rem'  }}>Profesional Experience</div>
+                <div className={`cv-categories ${experience}`} style={{ background: invertedColor, color: color, borderStyle: "solid", borderColor: color, borderWidth: '2px', fontSize: '1.2rem'  }}>Professional Experience</div>
                   <Info info={info.experience} isSkill={false} visible={visible}/>
               </div>
               <div className="educationBox">
-                <div className={`cv-categories ${show}`} style={{ background: invertedColor, color: color, borderStyle: "solid", borderColor: color, borderWidth: '2px', fontSize: '1.2rem'  }}>Education</div>
+                <div className={`cv-categories ${education}`} style={{ background: invertedColor, color: color, borderStyle: "solid", borderColor: color, borderWidth: '2px', fontSize: '1.2rem'  }}>Education</div>
                   <Info info={info.education} isSkill={false} visible={visible}/>
               </div>
               <div className="skillsBox">
-                <div className={`cv-categories ${show}`} style={{ background: invertedColor, color: color, borderStyle: "solid", borderColor: color, borderWidth: '2px', fontSize: '1.2rem'  }}>Skills</div>
+                <div className={`cv-categories ${skills}`} style={{ background: invertedColor, color: color, borderStyle: "solid", borderColor: color, borderWidth: '2px', fontSize: '1.2rem'  }}>Skills</div>
                 <Info info={info.skills} isSkill={true} visible={visible} />
               </div>
               </div>
