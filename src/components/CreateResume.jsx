@@ -2,8 +2,7 @@
 /* eslint-disable react/prop-types */
 import { useState } from "react"
 import { Page, Text, View, Document, StyleSheet, PDFDownloadLink } from '@react-pdf/renderer';
-import Pagination from '@mui/material/Pagination';
-import Stack from '@mui/material/Stack';
+
 
 
 function CustomizeLayout ({updateLayout, updateColor, updateFonts, color, hideLayout}) {
@@ -79,126 +78,12 @@ function Btn ({img, alt, text, btnClass, callback}) {
 
 
 
-
-
-
-
-
 function CompleteYourInfo({example, updateExample, hideContent, hasExperience, showAddExperience, setShowAddExperience, hasEducation, empty, updateVisible}) {
   const [openSection, setOpenSection] = useState(0);
 
-
-  const handleToggle = (index) => {
+  function handleToggle (index) {
     setOpenSection((prevOpenSection) => (prevOpenSection === index ? null : index));
-  };
-
-  const AddExperience = ({info}) => {
-    let myExample = example.experience
-    let position = example.experience.indexOf(info)
-    let last;
-
-    if (myExample[myExample.length - 1] === info && info.company === '') {
-      last = true;
-    }
-    else last = false
-      return (
-          <div>
-              <div><label htmlFor="">Company Name</label><input onChange={(e) => setValues(e, info, 'company')} value={info.company} type="text" placeholder="Enter Company Name" className="input w-full h-full" /></div>
-              <div><label htmlFor="">Position Title</label><input onChange={(e) => setValues(e, info, 'position')} value={info.position} type="text" placeholder="Enter Position Title" className="input w-full h-full" /></div>
-              <div><label htmlFor="">Start Date</label><input onChange={(e) => setValues(e, info, 'start')} value={info.start} type="text" placeholder="Enter Start Date" className="input w-full h-full" /></div>
-              <div><label htmlFor="">End Date</label><input onChange={(e) => setValues(e, info, 'end')} value={info.end} type="text" placeholder="Enter End Date" className="input w-full h-full" /></div>
-              <div><label htmlFor="">Location</label><input onChange={(e) => setValues(e, info, 'location')} value={info.location} type="text" placeholder="Enter Location" className="input w-full h-full" /></div>
-              <div><label htmlFor="">Description</label><input onChange={(e) => setValues(e, info, 'description')} value={info.description} type="text" placeholder="Enter Description" className="input w-full h-full" /></div>
-              <div className="flex justify-between mt-4">
-            <div><button className="border-2 border-grey rounded-md p-2">🗑️ Delete</button></div>
-            <div className="flex gap-4"><button onClick={last ? remove : cancel} className="border-2 border-red-300 rounded-md p-2">Cancel</button><button onClick={() => save(position)} className="border-2 border-blue-300 rounded-md p-2">Save</button></div>
-              </div>
-        </div>
-      )
   }
-
-
-  const AddEducation = (info) => {
-      return (
-          <div>
-              <div><label htmlFor="">School</label><input value={info.school} type="text" placeholder="Enter School / University" className="input w-full h-full" /></div>
-              <div><label htmlFor="">Degree</label><input value={info.degree} type="text" placeholder="Enter Degree / Field Of Study" className="input w-full h-full" /></div>
-              <div><label htmlFor="">Start Date</label><input value={info.start} type="text" placeholder="Enter Start Date" className="input w-full h-full" /></div>
-              <div><label htmlFor="">End Date</label><input value={info.end} type="text" placeholder="Enter End Date" className="input w-full h-full" /></div>
-              <div><label htmlFor="">Description</label><input value={info.description} type="text" placeholder="Enter Description" className="input w-full h-full" /></div>
-              <div><label htmlFor="">Location</label><input value={info.location} type="text" placeholder="Enter Location" className="input w-full h-full" /></div>
-              <div className="flex justify-between mt-4">
-              <div><button className="border-2 border-grey rounded-md p-2">🗑️ Delete</button></div>
-              <div className="flex gap-4"><button className="border-2 border-red-300 rounded-md p-2">Cancel</button><button className="border-2 border-blue-300 rounded-md p-2">Save</button></div>
-              </div>
-          </div>
-          
-      )
-  }
-
-  const CreateInfo = ({text, callback}) => {
-      return (
-          <button onClick={callback} className="buttonCreateInfo">+ {text}</button>
-      )
-  }
-
-  function save (position) {
-    setShowAddExperience(false)
-    const newInfo = [...example];
-    newInfo.experience = info
-    updateExample(newInfo)
-  }
-
-
-  function cancel () {
-      setShowAddExperience(false)
-    }
-
-  
-
-
-  function ExperienceList ({hasExperience, showAddExperience}) {
-    let experience = example.experience; 
-  const [eyeStates, setEyeStates] = useState(experience.map(() => "../src/assets/eye.png"));
-  const showOrHide = (index) => {
-  setEyeStates(prevStates => {
-    const newStates = [...prevStates];
-    newStates[index] = newStates[index] === "../src/assets/eye-closed.png"
-      ? "../src/assets/eye.png"
-      : "../src/assets/eye-closed.png";
-    return newStates;
-  });
-};
-
-function changeInfoState (exp) {
-  setShowAddExperience(true)
-}
-
-function pushExperience () {
-  example.experience.push(empty.experience[0])
-  setShowAddExperience(true)
-}
-
-
-
-    return (
-        showAddExperience 
-      ? <AddExperience /> 
-      : hasExperience 
-      ?
-      <>
-        {experience.map((exp, index) => (
-          <div key={index} className="divEye">
-            <p onClick={() => changeInfoState(exp)} style={{cursor: 'pointer'}}>{exp.company}</p>
-            <img onClick={() => showOrHide(index)} style={{cursor: 'pointer'}} src={eyeStates[index]} alt=""  />
-          </div>
-        ))}
-        <CreateInfo text={'Experience'} callback={() => pushExperience()} />
-      </>
-      : <CreateInfo text={'Experience'} callback={() => pushExperience()} />
-  )
-  }
-
 
   function setDetails (e, categorie, section) {
       const newInfo = JSON.parse(JSON.stringify(example));
@@ -212,47 +97,50 @@ function pushExperience () {
     newInfo[categorie][index][section] = e.target.value
     updateExample(newInfo)
     updateVisible(true)
-}
+  }
 
-const [eduIndex, setEduIndex] = useState(0)
+  const [eduIndex, setEduIndex] = useState(0)
+  const [index, setIndex] = useState(0)
 
-function goNext () {
-  if (eduIndex + 1 > example.education.length - 1) return;
-  setEduIndex(eduIndex + 1)
-}
+  function goNext () {
+    if (eduIndex + 1 > example.education.length - 1) return;
+    setEduIndex(eduIndex + 1)
+    console.log(eduIndex);
+  }
 
-function goBackwards () {
-  if (eduIndex -1 < 0 ) return;
-  setEduIndex(eduIndex - 1)
-}
+  function goBackwards () {
+    if (eduIndex -1 < 0 ) return;
+    setEduIndex(eduIndex - 1)
+    console.log(eduIndex);
+  }
   
-function remove (index) {
-  const newInfo = JSON.parse(JSON.stringify(example));
-  newInfo.education.splice(index, 1); 
-  console.log(newInfo.education);
-  updateExample(newInfo);
-}
+  function remove (index) {
+    const newInfo = JSON.parse(JSON.stringify(example));
+    newInfo.education.splice(index, 1); 
+    updateExample(newInfo);
+  }
 
-const [educations, setEducations] = useState(false)
+  const [educations, setEducations] = useState(false)
 
-function changeEducation (index) {
+function createEducation () {
   const newInfo = {...example};
-  newInfo.education.push(empty)
+  newInfo.education.push(empty.education[0])
   updateExample(newInfo)
-  console.log(example);
-  setEduIndex(index)
-  setEducations(<Education index={index}/>)
+  setEduIndex(newInfo.education.length - 1)
+  setIndex(newInfo.education.length - 1)
+  setEducations(<Education index={index} eduIndex={eduIndex}/>)
 }
 
-function Education (index) {
+function Education ({index, eduIndex}) {
+  console.log(index, eduIndex);
   return (
-  <div key={index} className={eduIndex === 2 ? '' : 'hidden'}>
-    <div><label htmlFor="">School</label><input onChange={(e) => setInfo(e, 'education', eduIndex, 'school')} value={example.education[2].school} type="text" placeholder="Enter School / University" className="input w-full h-full" /></div>
-    <div><label htmlFor="">Degree</label><input onChange={(e) => setInfo(e, 'education', eduIndex, 'degree')} value={example.education[2].degree} type="text" placeholder="Enter Degree / Field Of Study" className="input w-full h-full" /></div>
-    <div><label htmlFor="">Start Date</label><input onChange={(e) => setInfo(e, 'education', eduIndex, 'start')} value={example.education[2].start} type="text" placeholder="Enter Start Date" className="input w-full h-full" /></div>
-    <div><label htmlFor="">End Date</label><input onChange={(e) => setInfo(e, 'education', eduIndex, 'end')} value={example.education[2].end} type="text" placeholder="Enter End Date" className="input w-full h-full" /></div>
-    <div><label htmlFor="">Description</label><input onChange={(e) => setInfo(e, 'education', eduIndex, 'description')} value={example.education[2].description} type="text" placeholder="Enter Description" className="input w-full h-full" /></div>
-    <div className="mb-4"><label htmlFor="">Location</label><input onChange={(e) => setInfo(e, 'education', eduIndex, 'location')} value={example.education[2].location} type="text" placeholder="Enter Location" className="input w-full h-full" /></div>
+  <div key={index} className={index === eduIndex ? '' : 'hidden'}>
+    <div><label htmlFor="">School</label><input onChange={(e) => setInfo(e, 'education', index, 'school')} value={example.education[example.education.length -1].school} type="text" placeholder="Enter School / University" className="input w-full h-full" /></div>
+    <div><label htmlFor="">Degree</label><input onChange={(e) => setInfo(e, 'education', index, 'degree')} value={example.education[example.education.length -1].degree} type="text" placeholder="Enter Degree / Field Of Study" className="input w-full h-full" /></div>
+    <div><label htmlFor="">Start Date</label><input onChange={(e) => setInfo(e, 'education', index, 'start')} value={example.education[example.education.length -1].start} type="text" placeholder="Enter Start Date" className="input w-full h-full" /></div>
+    <div><label htmlFor="">End Date</label><input onChange={(e) => setInfo(e, 'education', index, 'end')} value={example.education[example.education.length -1].end} type="text" placeholder="Enter End Date" className="input w-full h-full" /></div>
+    <div><label htmlFor="">Description</label><input onChange={(e) => setInfo(e, 'education', index, 'description')} value={example.education[example.education.length -1].description} type="text" placeholder="Enter Description" className="input w-full h-full" /></div>
+    <div className="mb-4"><label htmlFor="">Location</label><input onChange={(e) => setInfo(e, 'education', index, 'location')} value={example.education[example.education.length -1].location} type="text" placeholder="Enter Location" className="input w-full h-full" /></div>
 </div>
   )
 }
@@ -279,7 +167,6 @@ function Education (index) {
           Experience
         </div>
           <div className="collapse-content">
-              <ExperienceList hasExperience={hasExperience} showAddExperience={showAddExperience} setShowAddExperience={setShowAddExperience} />
           </div>
       </div>
       
@@ -299,12 +186,12 @@ function Education (index) {
         </div>
         
         <div key={1} className={eduIndex === 1 ? '' : 'hidden'}>
-              <div><label htmlFor="">School</label><input onChange={(e) => setInfo(e, 'education', eduIndex, 'school')} value={example.education[1].school} type="text" placeholder="Enter School / University" className="input w-full h-full" /></div>
-              <div><label htmlFor="">Degree</label><input onChange={(e) => setInfo(e, 'education', eduIndex, 'degree')} value={example.education[1].degree} type="text" placeholder="Enter Degree / Field Of Study" className="input w-full h-full" /></div>
-              <div><label htmlFor="">Start Date</label><input onChange={(e) => setInfo(e, 'education', eduIndex, 'start')} value={example.education[1].start} type="text" placeholder="Enter Start Date" className="input w-full h-full" /></div>
-              <div><label htmlFor="">End Date</label><input onChange={(e) => setInfo(e, 'education', eduIndex, 'end')} value={example.education[1].end} type="text" placeholder="Enter End Date" className="input w-full h-full" /></div>
-              <div><label htmlFor="">Description</label><input onChange={(e) => setInfo(e, 'education', eduIndex, 'description')} value={example.education[1].description} type="text" placeholder="Enter Description" className="input w-full h-full" /></div>
-              <div className="mb-4"><label htmlFor="">Location</label><input onChange={(e) => setInfo(e, 'education', eduIndex, 'location')} value={example.education[1].location} type="text" placeholder="Enter Location" className="input w-full h-full" /></div>
+              <div><label htmlFor="">School</label><input onChange={(e) => setInfo(e, 'education', eduIndex, 'school')} value={example.education[1].school ||''} type="text" placeholder="Enter School / University" className="input w-full h-full" /></div>
+              <div><label htmlFor="">Degree</label><input onChange={(e) => setInfo(e, 'education', eduIndex, 'degree')} value={example.education[1].degree ||''} type="text" placeholder="Enter Degree / Field Of Study" className="input w-full h-full" /></div>
+              <div><label htmlFor="">Start Date</label><input onChange={(e) => setInfo(e, 'education', eduIndex, 'start')} value={example.education[1].start ||''} type="text" placeholder="Enter Start Date" className="input w-full h-full" /></div>
+              <div><label htmlFor="">End Date</label><input onChange={(e) => setInfo(e, 'education', eduIndex, 'end')} value={example.education[1].end ||''} type="text" placeholder="Enter End Date" className="input w-full h-full" /></div>
+              <div><label htmlFor="">Description</label><input onChange={(e) => setInfo(e, 'education', eduIndex, 'description')} value={example.education[1].description ||''} type="text" placeholder="Enter Description" className="input w-full h-full" /></div>
+              <div className="mb-4"><label htmlFor="">Location</label><input onChange={(e) => setInfo(e, 'education', eduIndex, 'location')} value={example.education[1].location ||''} type="text" placeholder="Enter Location" className="input w-full h-full" /></div>
         </div>
 
         {educations}
@@ -318,7 +205,7 @@ function Education (index) {
                   </div>
                   <p className="text-center font-semibold">Page {eduIndex + 1} / {example.education.length}</p>
                 </div>
-                <button onClick={() => changeEducation(example.education.length)} className="border-2 border-grey rounded-md p-2">+ Education</button>
+                <button onClick={() => createEducation()} className="border-2 border-grey rounded-md p-2">+ Education</button>
         </div>
         </div>
       </div>
@@ -427,32 +314,46 @@ export default function CreateResume({updateLayout, updateColor, updateFonts, co
 
     const [hideContent, setHideContent] = useState(false)
     const [hideLayout, setHideLayout] = useState(true)
-    const [hasExperience, setExperience] = useState(true)
-    const [showAddExperience, setShowAddExperience] = useState(false);
-    const [hasEducation, setEducation] = useState(true)
-
+    
+    function emptyExample (obj) {
+    obj.skills = []
+    for (const prop in obj.personal) {
+      obj.personal[prop] = ''
+    }
+    obj.experience.forEach(exp => {
+      for (const prop in exp) {
+        exp[prop] = ''
+      }
+    })
+    obj.education.forEach(exp => {
+      for (const prop in exp) {
+        exp[prop] = ''
+      }
+    })
+    }
 
     function Layout() {
       setHideLayout(false)
       setHideContent(true)
     }
+
     function Content() {
         setHideLayout(true)
         setHideContent(false)
-      }
+    }
 
     function hideResume () {
-      setExperience(false)
-      setShowAddExperience(false)
-      updateExample(empty)
+      const newInfo = {...example};
+      emptyExample(newInfo)
+      updateExample(newInfo)
       updateVisible(false)
     }
 
     function showResume () {
-      setExperience(true)
       updateExample(InfoExample)
       updateVisible(true)
-  }
+    }
+
     return (
       <div className="infoSection">
         <div className="flex mb-8 rounded-2xl">
@@ -495,10 +396,6 @@ export default function CreateResume({updateLayout, updateColor, updateFonts, co
             hideContent={hideContent} 
             example={example}
             updateExample={updateExample} 
-            hasExperience={hasExperience}
-            showAddExperience={showAddExperience}
-            setShowAddExperience={setShowAddExperience}
-            hasEducation={hasEducation}
             empty={empty}
             updateVisible={updateVisible}
           />
@@ -514,8 +411,4 @@ export default function CreateResume({updateLayout, updateColor, updateFonts, co
   }
 
   
-
-  // Eye show or hide resume info // 
-  // Create Experience // 
-  // Edit Experience Info (update two states, example and info) Button Save //
-  // Delete Experience //  
+  // Add Education, Delete Education. Add Education check if is the same index as the array. Maybe use a state to render//  
