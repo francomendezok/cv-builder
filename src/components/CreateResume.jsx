@@ -1,8 +1,6 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
 import { useState } from "react"
-import { Page, Text, View, Document, StyleSheet, PDFDownloadLink } from '@react-pdf/renderer';
-
 
 
 function CustomizeLayout ({updateLayout, updateColor, updateFonts, color, hideLayout}) {
@@ -72,10 +70,6 @@ function Btn ({img, alt, text, btnClass, callback}) {
         </button>
     )
 }
-
-
-
-
 
 
 function CompleteYourInfo({example, updateExample, hideContent, updateVisible}) {
@@ -377,3 +371,5 @@ export default function CreateResume({updateLayout, updateColor, updateFonts, co
       </div>
     );
   }
+
+  
