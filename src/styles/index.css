@@ -178,3 +178,183 @@ label {
   border-radius: 12px;
 }
 
+@media (max-width: 320px) {
+  body {
+    width: 100vw;
+    height: 100vh;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+  }
+
+  .container {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+  }
+  
+  .infoSection {
+    display: flex;
+    flex-direction: column;
+    height: 150vh;
+    width: 100vw;
+  }
+  
+  #resumeTop {
+    margin: 0 auto;
+    width: 90%;
+    height: 250vh;
+  }
+  
+  .parragraph {
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    gap: 10px;
+    min-height: 100%;
+    width: 50%;
+  }
+  
+  #resumeLeft {
+    margin: 0 auto;
+    width: 90%;
+    height: 250vh;
+    display: flex;
+  }
+  #resumeLeft .personalInfo {
+    width: 40%;
+    height: 100%;
+  }
+
+  #resumeLeft .personalInfo h1 {
+    text-wrap: wrap;
+    text-align: left;
+  }
+  
+  #resumeLeft .personalInfo div {
+    flex-direction: column;
+    align-items: start;
+    margin-top: 2rem;
+    gap: 2rem;
+  }
+  
+  #resumeLeft .infoContainer {
+    width: 60%;
+    height: 100%;
+    margin-top: 0rem;
+  }
+  
+  #resumeRight {
+    margin: 0 auto;
+    width: 90%;
+    height: 250vh;
+    display: flex;
+    flex-direction: row-reverse;
+  }
+  
+  #resumeRight .personalInfo {
+    width: 40%;
+    height: 100%;
+  }
+  
+  #resumeRight .personalInfo h1 {
+    text-wrap: wrap;
+    text-align: left;
+  }
+  
+  #resumeRight .personalInfo div {
+    flex-direction: column;
+    align-items: start;
+    margin-top: 2rem;
+    gap: 2rem;
+  }
+  
+  #resumeRight .infoContainer {
+    width: 60%;
+    height: 100%;
+    margin-top: 0rem;
+  }
+  
+  .cv-categories {
+    margin: 1rem auto;
+    text-align: center;
+    width: 90%;
+    height: 75%;
+    padding: .2rem;
+  }
+  
+  
+  .div-position {
+    width: 3rem; 
+    height: 3rem; 
+    border: 1px solid black;
+  }
+
+  .buttonContainer {
+    margin: 0 auto;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-evenly;
+    width: 80%;
+  }
+  .btnEdit {
+    font-size: 12px;
+    border-radius: 20%;
+    border: 1px solid black;
+    width: 5rem;
+    height: 5rem;
+    background-color: #fff;
+    text-align: center;
+    margin-bottom: 12px;
+    color: black !important;
+  }
+  
+  .btnEdit img {
+    width: 15px;
+    height: 15px;
+  } 
+  
+  input[type=color] {
+    border-radius: 50%;
+    border: 1px solid black;
+    overflow: hidden;
+    cursor: pointer;
+  }
+  
+  input[type=color]::-webkit-color-swatch {
+  border: none;
+  border-radius: 50%;
+  padding: 0;
+  }
+  
+  input[type=color]::-webkit-color-swatch-wrapper {
+    border: none;
+    border-radius: 50%;
+    padding: 0;
+  }
+  
+  input[type=text] {
+    overflow: hidden;
+    background-color: #fefefe;
+    border-bottom: 1px solid lightgrey;
+    color: black;
+    border-radius: 0px;
+  }
+  
+  input[type=text]:focus {
+    border: 2px solid rgb(75, 103, 239);
+  }
+  
+  label {
+    font-weight: bold;
+  }
+
+  .contentSection {
+    margin: 0 auto;
+    width: 90%;
+    height: 80%;
+    justify-content: space-evenly;
+  }
+}
