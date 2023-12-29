@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-key */
 /* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
 import { useState } from "react"
@@ -64,7 +65,7 @@ function CustomizeLayout ({updateLayout, updateColor, updateFonts, color, hideLa
 function Btn ({img, alt, text, btnClass, callback}) {
 
     return (
-        <button className={`btnEdit ${btnClass}`} onClick={callback}>
+        <button className={`btnEdit ${btnClass} `} onClick={callback}>
             <img className="m-auto h-1/2 mb-2" src={img} alt={alt} />
             {text}
         </button>
@@ -120,7 +121,7 @@ function CompleteYourInfo({example, updateExample, hideContent, updateVisible}) 
 
   const myClass = hideContent ? "hidden" : '';
   return (
-    <section className={`h-full flex flex-col justify-evenly mb-24 ${myClass}`}>
+    <section className={`contentSection h-full flex flex-col justify-evenly mb-24 ${myClass}`}>
       <div key={0} className={`collapse bg-white mt-4 mb-4 min-w-full ${openSection === 0 ? 'open' : ''}`}>
         <input type="checkbox" onChange={() => handleToggle(0)} checked={openSection === 0} />
         <div className="collapse-title text-xl font-medium" onClick={() => handleToggle(0)}>
@@ -319,7 +320,7 @@ export default function CreateResume({updateLayout, updateColor, updateFonts, co
 
     return (
       <div className="infoSection">
-        <div className="flex mb-8 rounded-2xl">
+        <div className="buttonContainer flex mb-8 rounded-2xl">
             <Btn
               img={'../src/assets/file.png'}
               alt={'Content'}
