@@ -206,14 +206,39 @@ label {
     width: 90%;
     height: 250vh;
   }
-  
-  .parragraph {
+
+  #resumeTop .personalInfo {
     display: flex;
     flex-direction: column;
-    justify-content: start;
-    gap: 10px;
-    min-height: 100%;
-    width: 50%;
+  }
+
+  #resumeTop .personalInfo {
+    display: flex;
+    flex-direction: column;
+  }
+
+  #resumeTop .personalInfo h1 {
+    font-size: 1.4rem;
+  }
+
+  #resumeTop .personalInfo span {
+    font-size: .8rem;
+  }
+
+  #resumeTop .personalDiv {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+  }
+
+  #resumeTop .personalDiv span {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: left;
+    width: 100%;
   }
   
   #resumeLeft {
@@ -222,25 +247,35 @@ label {
     height: 250vh;
     display: flex;
   }
+  
+  #resumeLeft h1{
+   font-size: 1.5rem;
+   text-align: center;
+  }
+  
+  #resumeLeft .personalDiv {
+    width: 100%;
+    flex-direction: column;
+    justify-content: space-around;
+  }
+  
+  #resumeLeft .personalInfoDetails {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    font-size: 10px;
+    text-align: left;
+    gap: 5px;
+  }
+
   #resumeLeft .personalInfo {
-    width: 40%;
+    width: 50%;
     height: 100%;
   }
 
-  #resumeLeft .personalInfo h1 {
-    text-wrap: wrap;
-    text-align: left;
-  }
-  
-  #resumeLeft .personalInfo div {
-    flex-direction: column;
-    align-items: start;
-    margin-top: 2rem;
-    gap: 2rem;
-  }
-  
   #resumeLeft .infoContainer {
-    width: 60%;
+    width: 50%;
     height: 100%;
     margin-top: 0rem;
   }
@@ -254,35 +289,107 @@ label {
   }
   
   #resumeRight .personalInfo {
-    width: 40%;
+    width: 50%;
     height: 100%;
   }
   
   #resumeRight .personalInfo h1 {
-    text-wrap: wrap;
-    text-align: left;
+    font-size: 1.5rem;
   }
   
-  #resumeRight .personalInfo div {
-    flex-direction: column;
-    align-items: start;
-    margin-top: 2rem;
-    gap: 2rem;
-  }
-  
+
   #resumeRight .infoContainer {
-    width: 60%;
+    width: 50%;
     height: 100%;
-    margin-top: 0rem;
+    margin-top: 1rem;
+  }
+
+  #resumeRight .personalInfoDetails {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    font-size: 10px;
+    text-align: left;
+    gap: 5px;
+  }
+
+  #resumeTop .infoContainer {
+    height: 85%;
   }
   
-  .cv-categories {
-    margin: 1rem auto;
+  #resumeTop .cv-categories {
+    margin: 2rem auto;
     text-align: center;
     width: 90%;
     height: 75%;
     padding: .2rem;
   }
+
+  #resumeLeft .infoContainer {
+    height: 100%;
+  }
+  
+  #resumeLeft .cv-categories {
+    margin: 1.5rem auto;
+    text-align: center;
+    width: 90%;
+    height: 75%;
+    padding: .1rem;
+    font-size: 1rem !important;
+  }
+
+  #resumeLeft .parragraph {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 1rem;
+    font-size: .7rem;
+    max-width: 30%;
+    min-height: 10%;
+    writing-mode: vertical-lr; 
+    text-orientation: sideways; 
+    white-space: nowrap; 
+    border-bottom: 1px solid lightgrey ;
+    padding-bottom: .5rem;
+  }
+
+  #resumeTop .parragraph {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 1rem;
+    max-width: 30%;
+    min-height: 10%;
+    writing-mode: vertical-lr; 
+    text-orientation: sideways; 
+    white-space: nowrap; 
+    border-bottom: 1px solid lightgrey ;
+    padding-bottom: .5rem;
+  }
+
+  #resumeTop .mainInfoCV {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    border-bottom: 1px solid lightgrey ;
+    padding-bottom: .5rem;
+  }
+  #resumeLeft .mainInfoCV {
+    width: 100% !important;
+    font-size: .8rem;
+    min-width: 70%;
+    display: flex;
+    flex-direction: column;
+    gap: .5rem;
+    border-bottom: 1px solid lightgrey ;
+    padding-bottom: .5rem;
+  }
+
+  #resumeLeft .skillsDiv {
+    font-size: .8rem;
+  }
+
   
   
   .div-position {
@@ -357,4 +464,5 @@ label {
     height: 80%;
     justify-content: space-evenly;
   }
+
 }

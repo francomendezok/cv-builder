@@ -13,7 +13,7 @@ function CustomizeLayout ({updateLayout, updateColor, updateFonts, color, hideLa
     }
     const myClass = hideLayout ? "hidden" : '';
     return (
-        <section className={`flex flex-col items-center justify-around h-4/5 mb-16 ${myClass}`}>
+        <section className={`contentSection flex flex-col items-center justify-around h-4/5 mb-16 ${myClass}`}>
             <div className="bg-slate-100 w-full h-1/4 pl-8 flex flex-col justify-evenly border-2 border-grey rounded-xl">
                 <h2 className="text-3xl font-bold mb-2">Layout</h2>
                 <div className="flex justify-start gap-4">
