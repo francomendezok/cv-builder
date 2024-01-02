@@ -1208,7 +1208,7 @@ label {
   #resumeTop {
     margin: 0 auto;
     width: 90%;
-    height: 200vh;
+    height: 250vh;
   }
 
   #resumeTop .personalInfo {
@@ -1222,11 +1222,11 @@ label {
   }
 
   #resumeTop .personalInfo h1 {
-    font-size: 1.8rem;
+    font-size: 2.5rem;
   }
 
   #resumeTop .personalInfo span {
-    font-size: 1.2rem;
+    font-size: 1.4rem;
   }
 
   #resumeTop .personalDiv {
@@ -1241,7 +1241,7 @@ label {
     display: flex;
     flex-direction: row;
     align-items: center;
-    justify-content: left;
+    justify-content: center;
     width: 100%;
   }
 
@@ -1255,6 +1255,7 @@ label {
     width: 90%;
     height: 75%;
     padding: .6rem;
+    font-size: 1.3rem !important;
   }
   
   #resumeTop .parragraph {
@@ -1268,8 +1269,8 @@ label {
     text-orientation: sideways; 
     white-space: nowrap; 
     border-bottom: 1px solid lightgrey ;
-    padding-bottom: .8rem;
-    font-size: 1rem;
+    padding-bottom: 1rem;
+    font-size: 1.2rem;
   }
 
   #resumeTop .mainInfoCV {
@@ -1277,23 +1278,23 @@ label {
     flex-direction: column;
     justify-content: space-between;
     border-bottom: 1px solid lightgrey ;
-    padding-bottom: .8rem;
-    font-size: 1.3rem;
+    padding-bottom: 1rem;
+    font-size: 1.5rem;
   }
   
   #resumeTop .skillsDiv {
-    font-size: 1.3rem;
+    font-size: 1.5rem;
   }
 
   #resumeLeft {
     margin: 0 auto;
     width: 90%;
-    height: 200vh;
+    height: 250vh;
     display: flex;
   }
   
   #resumeLeft h1{
-   font-size: 2rem;
+   font-size: 2.5rem;
    text-align: center;
   }
   
@@ -1308,7 +1309,7 @@ label {
     flex-direction: column;
     align-items: center;
     width: 100%;
-    font-size: 14px;
+    font-size: 1.2rem;
     text-align: left;
     gap: 0px;
   }
@@ -1330,12 +1331,12 @@ label {
   }
   
   #resumeLeft .cv-categories {
-    margin: 1.8rem auto;
+    margin: 1.5rem auto;
     text-align: center;
     width: 90%;
     height: 75%;
     padding: .1rem;
-    font-size: 1.2rem !important;
+    font-size: 1.3rem !important;
   }
 
   #resumeLeft .parragraph {
@@ -1343,35 +1344,35 @@ label {
     flex-direction: row;
     justify-content: space-between;
     gap: 1rem;
-    font-size: 1rem;
+    font-size: 1.2rem;
     max-width: 30%;
     min-height: 10%;
     writing-mode: vertical-lr; 
     text-orientation: sideways; 
     white-space: nowrap; 
     border-bottom: 1px solid lightgrey ;
-    padding-bottom: .8rem;
+    padding-bottom: 1rem;
   }
 
   #resumeLeft .mainInfoCV {
     width: 100% !important;
-    font-size: 1.1rem;
+    font-size: 1.3rem;
     min-width: 70%;
     display: flex;
     flex-direction: column;
     gap: .5rem;
     border-bottom: 1px solid lightgrey ;
-    padding-bottom: .8rem;
+    padding-bottom: 1rem;
   }
 
   #resumeLeft .skillsDiv {
-    font-size: 1.1rem;
+    font-size: 1.3rem;
   }
 
   #resumeRight {
     margin: 0 auto;
     width: 90%;
-    height: 200vh;
+    height: 250vh;
     display: flex;
     flex-direction: row-reverse;
   }
@@ -1382,7 +1383,7 @@ label {
   }
   
   #resumeRight .personalInfo h1 {
-    font-size: 2rem;
+    font-size: 2.5rem;
   }
   
 
@@ -1397,20 +1398,20 @@ label {
     flex-direction: column;
     align-items: center;
     width: 100%;
-    font-size: 14px;
+    font-size: 1.2rem;
     text-align: left;
     gap: 0px;
   }
 
   #resumeRight .mainInfoCV {
     width: 100% !important;
-    font-size: 1.1rem;
+    font-size: 1.3rem;
     min-width: 70%;
     display: flex;
     flex-direction: column;
     gap: .5rem;
     border-bottom: 1px solid lightgrey ;
-    padding-bottom: .8rem;
+    padding-bottom: 1rem;
   }
 
   #resumeRight .parragraph {
@@ -1418,27 +1419,27 @@ label {
     flex-direction: row;
     justify-content: space-between;
     gap: 1rem;
-    font-size: 1rem;
+    font-size: 1.2rem;
     max-width: 30%;
     min-height: 10%;
     writing-mode: vertical-lr; 
     text-orientation: sideways; 
     white-space: nowrap; 
     border-bottom: 1px solid lightgrey ;
-    padding-bottom: .8rem;
+    padding-bottom: 1rem;
   }
 
   #resumeRight .cv-categories {
-    margin: 1.8rem auto;
+    margin: 1.5rem auto;
     text-align: center;
     width: 90%;
     height: 75%;
     padding: .1rem;
-    font-size: 1.2rem !important;
+    font-size: 1.3rem !important;
   }
 
   #resumeRight .skillsDiv {
-    font-size: 1.1rem;
+    font-size: 1.3rem;
   }
 
 
@@ -1460,11 +1461,11 @@ label {
     width: 100%;
   }
   .btnEdit {
-    font-size: 12px;
+    font-size: 15px;
     border-radius: 20%;
     border: 1px solid black;
-    width: 5rem;
-    height: 5rem;
+    width: 6rem;
+    height: 6rem;
     background-color: #fff;
     text-align: center;
     margin-bottom: 12px;
@@ -1472,8 +1473,8 @@ label {
   }
   
   .btnEdit img {
-    width: 18px;
-    height: 18px;
+    width: 25px;
+    height: 25px;
   } 
   
   input[type=color] {
