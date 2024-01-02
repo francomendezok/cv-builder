@@ -509,3 +509,1013 @@ label {
   }
 
 }
+
+@media (min-width: 320px) and (max-width: 376px) {
+  body {
+    width: 100vw;
+    height: 100vh;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+  }
+  
+  .container {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+    overflow-x: hidden;
+  }
+  
+  .infoSection {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    width: 100vw;
+  }
+  
+  #resumeTop {
+    margin: 0 auto;
+    width: 90%;
+    height: 200vh;
+  }
+
+  #resumeTop .personalInfo {
+    display: flex;
+    flex-direction: column;
+  }
+
+  #resumeTop .personalInfo {
+    display: flex;
+    flex-direction: column;
+  }
+
+  #resumeTop .personalInfo h1 {
+    font-size: 1.5rem;
+  }
+
+  #resumeTop .personalInfo span {
+    font-size: 1rem;
+  }
+
+  #resumeTop .personalDiv {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+  }
+
+  #resumeTop .personalDiv span {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: left;
+    width: 100%;
+  }
+  
+  #resumeLeft {
+    margin: 0 auto;
+    width: 90%;
+    height: 150vh;
+    display: flex;
+  }
+  
+  #resumeLeft h1{
+   font-size: 1.8rem;
+   text-align: center;
+  }
+  
+  #resumeLeft .personalDiv {
+    width: 100%;
+    flex-direction: column;
+    justify-content: space-around;
+  }
+  
+  #resumeLeft .personalInfoDetails {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    font-size: 12px;
+    text-align: left;
+    gap: 0px;
+  }
+
+  #resumeLeft .personalInfo {
+    width: 50%;
+    height: 100%;
+  }
+
+  #resumeLeft .infoContainer {
+    width: 50%;
+    height: 100%;
+    margin-top: 0rem;
+  }
+  
+  #resumeRight {
+    margin: 0 auto;
+    width: 90%;
+    height: 150vh;
+    display: flex;
+    flex-direction: row-reverse;
+  }
+  
+  #resumeRight .personalInfo {
+    width: 50%;
+    height: 100%;
+  }
+  
+  #resumeRight .personalInfo h1 {
+    font-size: 1.8rem;
+  }
+  
+
+  #resumeRight .infoContainer {
+    width: 50%;
+    height: 100%;
+    margin-top: 0rem;
+  }
+
+  #resumeRight .personalInfoDetails {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    font-size: 12px;
+    text-align: left;
+    gap: 0px;
+  }
+
+  #resumeTop .infoContainer {
+    height: 85%;
+  }
+  
+  #resumeTop .cv-categories {
+    margin: 2rem auto;
+    text-align: center;
+    width: 90%;
+    height: 75%;
+    padding: .4rem;
+  }
+
+  #resumeLeft .infoContainer {
+    height: 100%;
+  }
+  
+  #resumeLeft .cv-categories {
+    margin: 1.5rem auto;
+    text-align: center;
+    width: 90%;
+    height: 75%;
+    padding: .1rem;
+    font-size: 1rem !important;
+  }
+
+  #resumeLeft .parragraph {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 1rem;
+    font-size: .8rem;
+    max-width: 30%;
+    min-height: 10%;
+    writing-mode: vertical-lr; 
+    text-orientation: sideways; 
+    white-space: nowrap; 
+    border-bottom: 1px solid lightgrey ;
+    padding-bottom: .5rem;
+  }
+
+  #resumeTop .parragraph {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 1rem;
+    max-width: 30%;
+    min-height: 10%;
+    writing-mode: vertical-lr; 
+    text-orientation: sideways; 
+    white-space: nowrap; 
+    border-bottom: 1px solid lightgrey ;
+    padding-bottom: .5rem;
+  }
+
+  #resumeTop .mainInfoCV {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    border-bottom: 1px solid lightgrey ;
+    padding-bottom: .8rem;
+  }
+
+  #resumeLeft .mainInfoCV {
+    width: 100% !important;
+    font-size: .9rem;
+    min-width: 70%;
+    display: flex;
+    flex-direction: column;
+    gap: .5rem;
+    border-bottom: 1px solid lightgrey ;
+    padding-bottom: .5rem;
+  }
+
+  #resumeLeft .skillsDiv {
+    font-size: .9rem;
+  }
+
+  #resumeRight .mainInfoCV {
+    width: 100% !important;
+    font-size: .9rem;
+    min-width: 70%;
+    display: flex;
+    flex-direction: column;
+    gap: .5rem;
+    border-bottom: 1px solid lightgrey ;
+    padding-bottom: .5rem;
+  }
+
+  #resumeRight .parragraph {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 1rem;
+    font-size: .8rem;
+    max-width: 30%;
+    min-height: 10%;
+    writing-mode: vertical-lr; 
+    text-orientation: sideways; 
+    white-space: nowrap; 
+    border-bottom: 1px solid lightgrey ;
+    padding-bottom: .5rem;
+  }
+
+  #resumeRight .cv-categories {
+    margin: 1.5rem auto;
+    text-align: center;
+    width: 90%;
+    height: 75%;
+    padding: .1rem;
+    font-size: 1rem !important;
+  }
+
+  #resumeRight .skillsDiv {
+    font-size: .9rem;
+  }
+
+
+
+  
+  
+  .div-position {
+    width: 3rem; 
+    height: 3rem; 
+    border: 1px solid black;
+  }
+
+  .buttonContainer {
+    margin: 0 auto;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-evenly;
+    width: 80%;
+  }
+  .btnEdit {
+    font-size: 12px;
+    border-radius: 20%;
+    border: 1px solid black;
+    width: 5rem;
+    height: 5rem;
+    background-color: #fff;
+    text-align: center;
+    margin-bottom: 12px;
+    color: black !important;
+  }
+  
+  .btnEdit img {
+    width: 18px;
+    height: 18px;
+  } 
+  
+  input[type=color] {
+    border-radius: 50%;
+    border: 1px solid black;
+    overflow: hidden;
+    cursor: pointer;
+  }
+  
+  input[type=color]::-webkit-color-swatch {
+  border: none;
+  border-radius: 50%;
+  padding: 0;
+  }
+  
+  input[type=color]::-webkit-color-swatch-wrapper {
+    border: none;
+    border-radius: 50%;
+    padding: 0;
+  }
+  
+  input[type=text] {
+    overflow: hidden;
+    background-color: #fefefe;
+    border-bottom: 1px solid lightgrey;
+    color: black;
+    border-radius: 0px;
+  }
+  
+  input[type=text]:focus {
+    border: 2px solid rgb(75, 103, 239);
+  }
+  
+  label {
+    font-weight: bold;
+  }
+
+  .contentSection {
+    margin: 0 auto;
+    width: 90%;
+    height: 80%;
+    justify-content: space-evenly;
+  }
+
+}
+
+@media (min-width: 377px) and (max-width: 426px) {
+  body {
+    width: 100vw;
+    height: 100vh;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+  }
+  
+  .container {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+    overflow-x: hidden;
+  }
+  
+  .infoSection {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    width: 100vw;
+  }
+  
+  #resumeTop {
+    margin: 0 auto;
+    width: 90%;
+    height: 200vh;
+  }
+
+  #resumeTop .personalInfo {
+    display: flex;
+    flex-direction: column;
+  }
+
+  #resumeTop .personalInfo {
+    display: flex;
+    flex-direction: column;
+  }
+
+  #resumeTop .personalInfo h1 {
+    font-size: 1.8rem;
+  }
+
+  #resumeTop .personalInfo span {
+    font-size: 1.2rem;
+  }
+
+  #resumeTop .personalDiv {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+  }
+
+  #resumeTop .personalDiv span {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: left;
+    width: 100%;
+  }
+
+  #resumeTop .infoContainer {
+    height: 85%;
+  }
+  
+  #resumeTop .cv-categories {
+    margin: 2rem auto;
+    text-align: center;
+    width: 90%;
+    height: 75%;
+    padding: .6rem;
+  }
+  
+  #resumeTop .parragraph {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 1rem;
+    max-width: 30%;
+    min-height: 10%;
+    writing-mode: vertical-lr; 
+    text-orientation: sideways; 
+    white-space: nowrap; 
+    border-bottom: 1px solid lightgrey ;
+    padding-bottom: .8rem;
+    font-size: 1rem;
+  }
+
+  #resumeTop .mainInfoCV {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    border-bottom: 1px solid lightgrey ;
+    padding-bottom: .8rem;
+    font-size: 1.3rem;
+  }
+  
+  #resumeTop .skillsDiv {
+    font-size: 1.3rem;
+  }
+
+  #resumeLeft {
+    margin: 0 auto;
+    width: 90%;
+    height: 200vh;
+    display: flex;
+  }
+  
+  #resumeLeft h1{
+   font-size: 2rem;
+   text-align: center;
+  }
+  
+  #resumeLeft .personalDiv {
+    width: 100%;
+    flex-direction: column;
+    justify-content: space-around;
+  }
+  
+  #resumeLeft .personalInfoDetails {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    font-size: 14px;
+    text-align: left;
+    gap: 0px;
+  }
+
+  #resumeLeft .personalInfo {
+    width: 50%;
+    height: 100%;
+  }
+
+  #resumeLeft .infoContainer {
+    width: 50%;
+    height: 100%;
+    margin-top: 0rem;
+  }
+
+  
+  #resumeLeft .infoContainer {
+    height: 100%;
+  }
+  
+  #resumeLeft .cv-categories {
+    margin: 1.8rem auto;
+    text-align: center;
+    width: 90%;
+    height: 75%;
+    padding: .1rem;
+    font-size: 1.2rem !important;
+  }
+
+  #resumeLeft .parragraph {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 1rem;
+    font-size: 1rem;
+    max-width: 30%;
+    min-height: 10%;
+    writing-mode: vertical-lr; 
+    text-orientation: sideways; 
+    white-space: nowrap; 
+    border-bottom: 1px solid lightgrey ;
+    padding-bottom: .8rem;
+  }
+
+  #resumeLeft .mainInfoCV {
+    width: 100% !important;
+    font-size: 1.1rem;
+    min-width: 70%;
+    display: flex;
+    flex-direction: column;
+    gap: .5rem;
+    border-bottom: 1px solid lightgrey ;
+    padding-bottom: .8rem;
+  }
+
+  #resumeLeft .skillsDiv {
+    font-size: 1.1rem;
+  }
+
+  #resumeRight {
+    margin: 0 auto;
+    width: 90%;
+    height: 200vh;
+    display: flex;
+    flex-direction: row-reverse;
+  }
+  
+  #resumeRight .personalInfo {
+    width: 50%;
+    height: 100%;
+  }
+  
+  #resumeRight .personalInfo h1 {
+    font-size: 2rem;
+  }
+  
+
+  #resumeRight .infoContainer {
+    width: 50%;
+    height: 100%;
+    margin-top: 0rem;
+  }
+
+  #resumeRight .personalInfoDetails {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    font-size: 14px;
+    text-align: left;
+    gap: 0px;
+  }
+
+  #resumeRight .mainInfoCV {
+    width: 100% !important;
+    font-size: 1.1rem;
+    min-width: 70%;
+    display: flex;
+    flex-direction: column;
+    gap: .5rem;
+    border-bottom: 1px solid lightgrey ;
+    padding-bottom: .8rem;
+  }
+
+  #resumeRight .parragraph {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 1rem;
+    font-size: 1rem;
+    max-width: 30%;
+    min-height: 10%;
+    writing-mode: vertical-lr; 
+    text-orientation: sideways; 
+    white-space: nowrap; 
+    border-bottom: 1px solid lightgrey ;
+    padding-bottom: .8rem;
+  }
+
+  #resumeRight .cv-categories {
+    margin: 1.8rem auto;
+    text-align: center;
+    width: 90%;
+    height: 75%;
+    padding: .1rem;
+    font-size: 1.2rem !important;
+  }
+
+  #resumeRight .skillsDiv {
+    font-size: 1.1rem;
+  }
+
+
+
+  
+  
+  .div-position {
+    width: 3rem; 
+    height: 3rem; 
+    border: 1px solid black;
+  }
+
+  .buttonContainer {
+    margin: 0 auto;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-evenly;
+    width: 100%;
+  }
+  .btnEdit {
+    font-size: 12px;
+    border-radius: 20%;
+    border: 1px solid black;
+    width: 5rem;
+    height: 5rem;
+    background-color: #fff;
+    text-align: center;
+    margin-bottom: 12px;
+    color: black !important;
+  }
+  
+  .btnEdit img {
+    width: 18px;
+    height: 18px;
+  } 
+  
+  input[type=color] {
+    border-radius: 50%;
+    border: 1px solid black;
+    overflow: hidden;
+    cursor: pointer;
+  }
+  
+  input[type=color]::-webkit-color-swatch {
+  border: none;
+  border-radius: 50%;
+  padding: 0;
+  }
+  
+  input[type=color]::-webkit-color-swatch-wrapper {
+    border: none;
+    border-radius: 50%;
+    padding: 0;
+  }
+  
+  input[type=text] {
+    overflow: hidden;
+    background-color: #fefefe;
+    border-bottom: 1px solid lightgrey;
+    color: black;
+    border-radius: 0px;
+  }
+  
+  input[type=text]:focus {
+    border: 2px solid rgb(75, 103, 239);
+  }
+  
+  label {
+    font-weight: bold;
+  }
+
+  .contentSection {
+    margin: 0 auto;
+    width: 90%;
+    height: 100%;
+    justify-content: space-evenly;
+  }
+
+}
+
+@media (min-width: 427px) and (max-width: 769px) {
+  body {
+    width: 100vw;
+    height: 100vh;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+  }
+  
+  .container {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+    overflow-x: hidden;
+  }
+  
+  .infoSection {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    width: 100vw;
+  }
+  
+  #resumeTop {
+    margin: 0 auto;
+    width: 90%;
+    height: 200vh;
+  }
+
+  #resumeTop .personalInfo {
+    display: flex;
+    flex-direction: column;
+  }
+
+  #resumeTop .personalInfo {
+    display: flex;
+    flex-direction: column;
+  }
+
+  #resumeTop .personalInfo h1 {
+    font-size: 1.8rem;
+  }
+
+  #resumeTop .personalInfo span {
+    font-size: 1.2rem;
+  }
+
+  #resumeTop .personalDiv {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+  }
+
+  #resumeTop .personalDiv span {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: left;
+    width: 100%;
+  }
+
+  #resumeTop .infoContainer {
+    height: 85%;
+  }
+  
+  #resumeTop .cv-categories {
+    margin: 2rem auto;
+    text-align: center;
+    width: 90%;
+    height: 75%;
+    padding: .6rem;
+  }
+  
+  #resumeTop .parragraph {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 1rem;
+    max-width: 30%;
+    min-height: 10%;
+    writing-mode: vertical-lr; 
+    text-orientation: sideways; 
+    white-space: nowrap; 
+    border-bottom: 1px solid lightgrey ;
+    padding-bottom: .8rem;
+    font-size: 1rem;
+  }
+
+  #resumeTop .mainInfoCV {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    border-bottom: 1px solid lightgrey ;
+    padding-bottom: .8rem;
+    font-size: 1.3rem;
+  }
+  
+  #resumeTop .skillsDiv {
+    font-size: 1.3rem;
+  }
+
+  #resumeLeft {
+    margin: 0 auto;
+    width: 90%;
+    height: 200vh;
+    display: flex;
+  }
+  
+  #resumeLeft h1{
+   font-size: 2rem;
+   text-align: center;
+  }
+  
+  #resumeLeft .personalDiv {
+    width: 100%;
+    flex-direction: column;
+    justify-content: space-around;
+  }
+  
+  #resumeLeft .personalInfoDetails {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    font-size: 14px;
+    text-align: left;
+    gap: 0px;
+  }
+
+  #resumeLeft .personalInfo {
+    width: 50%;
+    height: 100%;
+  }
+
+  #resumeLeft .infoContainer {
+    width: 50%;
+    height: 100%;
+    margin-top: 0rem;
+  }
+
+  
+  #resumeLeft .infoContainer {
+    height: 100%;
+  }
+  
+  #resumeLeft .cv-categories {
+    margin: 1.8rem auto;
+    text-align: center;
+    width: 90%;
+    height: 75%;
+    padding: .1rem;
+    font-size: 1.2rem !important;
+  }
+
+  #resumeLeft .parragraph {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 1rem;
+    font-size: 1rem;
+    max-width: 30%;
+    min-height: 10%;
+    writing-mode: vertical-lr; 
+    text-orientation: sideways; 
+    white-space: nowrap; 
+    border-bottom: 1px solid lightgrey ;
+    padding-bottom: .8rem;
+  }
+
+  #resumeLeft .mainInfoCV {
+    width: 100% !important;
+    font-size: 1.1rem;
+    min-width: 70%;
+    display: flex;
+    flex-direction: column;
+    gap: .5rem;
+    border-bottom: 1px solid lightgrey ;
+    padding-bottom: .8rem;
+  }
+
+  #resumeLeft .skillsDiv {
+    font-size: 1.1rem;
+  }
+
+  #resumeRight {
+    margin: 0 auto;
+    width: 90%;
+    height: 200vh;
+    display: flex;
+    flex-direction: row-reverse;
+  }
+  
+  #resumeRight .personalInfo {
+    width: 50%;
+    height: 100%;
+  }
+  
+  #resumeRight .personalInfo h1 {
+    font-size: 2rem;
+  }
+  
+
+  #resumeRight .infoContainer {
+    width: 50%;
+    height: 100%;
+    margin-top: 0rem;
+  }
+
+  #resumeRight .personalInfoDetails {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    font-size: 14px;
+    text-align: left;
+    gap: 0px;
+  }
+
+  #resumeRight .mainInfoCV {
+    width: 100% !important;
+    font-size: 1.1rem;
+    min-width: 70%;
+    display: flex;
+    flex-direction: column;
+    gap: .5rem;
+    border-bottom: 1px solid lightgrey ;
+    padding-bottom: .8rem;
+  }
+
+  #resumeRight .parragraph {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 1rem;
+    font-size: 1rem;
+    max-width: 30%;
+    min-height: 10%;
+    writing-mode: vertical-lr; 
+    text-orientation: sideways; 
+    white-space: nowrap; 
+    border-bottom: 1px solid lightgrey ;
+    padding-bottom: .8rem;
+  }
+
+  #resumeRight .cv-categories {
+    margin: 1.8rem auto;
+    text-align: center;
+    width: 90%;
+    height: 75%;
+    padding: .1rem;
+    font-size: 1.2rem !important;
+  }
+
+  #resumeRight .skillsDiv {
+    font-size: 1.1rem;
+  }
+
+
+
+  
+  
+  .div-position {
+    width: 3rem; 
+    height: 3rem; 
+    border: 1px solid black;
+  }
+
+  .buttonContainer {
+    margin: 0 auto;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-evenly;
+    width: 100%;
+  }
+  .btnEdit {
+    font-size: 12px;
+    border-radius: 20%;
+    border: 1px solid black;
+    width: 5rem;
+    height: 5rem;
+    background-color: #fff;
+    text-align: center;
+    margin-bottom: 12px;
+    color: black !important;
+  }
+  
+  .btnEdit img {
+    width: 18px;
+    height: 18px;
+  } 
+  
+  input[type=color] {
+    border-radius: 50%;
+    border: 1px solid black;
+    overflow: hidden;
+    cursor: pointer;
+  }
+  
+  input[type=color]::-webkit-color-swatch {
+  border: none;
+  border-radius: 50%;
+  padding: 0;
+  }
+  
+  input[type=color]::-webkit-color-swatch-wrapper {
+    border: none;
+    border-radius: 50%;
+    padding: 0;
+  }
+  
+  input[type=text] {
+    overflow: hidden;
+    background-color: #fefefe;
+    border-bottom: 1px solid lightgrey;
+    color: black;
+    border-radius: 0px;
+  }
+  
+  input[type=text]:focus {
+    border: 2px solid rgb(75, 103, 239);
+  }
+  
+  label {
+    font-weight: bold;
+  }
+
+  .contentSection {
+    margin: 0 auto;
+    width: 90%;
+    height: 100%;
+    justify-content: space-evenly;
+  }
+
+}
