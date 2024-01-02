@@ -186,12 +186,13 @@ label {
     padding: 0;
     overflow-x: hidden;
   }
-
+  
   .container {
     display: flex;
     flex-direction: column;
     width: 100%;
     height: 100%;
+    overflow-x: hidden;
   }
   
   .infoSection {
@@ -375,6 +376,7 @@ label {
     border-bottom: 1px solid lightgrey ;
     padding-bottom: .5rem;
   }
+
   #resumeLeft .mainInfoCV {
     width: 100% !important;
     font-size: .8rem;
@@ -389,6 +391,47 @@ label {
   #resumeLeft .skillsDiv {
     font-size: .8rem;
   }
+
+  #resumeRight .mainInfoCV {
+    width: 100% !important;
+    font-size: .8rem;
+    min-width: 70%;
+    display: flex;
+    flex-direction: column;
+    gap: .5rem;
+    border-bottom: 1px solid lightgrey ;
+    padding-bottom: .5rem;
+  }
+
+  #resumeRight .parragraph {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 1rem;
+    font-size: .7rem;
+    max-width: 30%;
+    min-height: 10%;
+    writing-mode: vertical-lr; 
+    text-orientation: sideways; 
+    white-space: nowrap; 
+    border-bottom: 1px solid lightgrey ;
+    padding-bottom: .5rem;
+  }
+
+  #resumeRight .cv-categories {
+    margin: 1.5rem auto;
+    text-align: center;
+    width: 90%;
+    height: 75%;
+    padding: .1rem;
+    font-size: 1rem !important;
+  }
+
+  #resumeRight .skillsDiv {
+    font-size: .8rem;
+  }
+
+
 
   
   
