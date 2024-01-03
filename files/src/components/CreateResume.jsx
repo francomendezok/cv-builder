@@ -11,10 +11,10 @@ function CustomizeLayout ({updateLayout, updateColor, updateFonts, color, hideLa
         updateColor(e.target.value);
         setColor(e.target.value);
     }
-    const myClass = hideLayout ? "hidden" : '';
+    const myClass = hideLayout ? "hidden" : 'layout';
     return (
         <section className={`contentSection flex flex-col items-center justify-around h-4/5 mb-16 ${myClass}`}>
-            <div className="bg-slate-100 w-full h-1/4 pl-8 flex flex-col justify-evenly border-2 border-grey rounded-xl">
+            <div className="layoutDivs bg-slate-100 w-full h-1/4 pl-8 flex flex-col justify-evenly border-2 border-grey rounded-xl">
                 <h2 className="text-3xl font-bold mb-2">Layout</h2>
                 <div className="flex justify-start gap-4">
                     <button onClick={() => updateLayout('resumeTop')}>
@@ -34,14 +34,14 @@ function CustomizeLayout ({updateLayout, updateColor, updateFonts, color, hideLa
                     </button>
                 </div>
             </div>
-            <div className="bg-slate-100 w-full h-1/4 pl-8 flex flex-col justify-evenly border-2 border-grey rounded-xl">
+            <div className="layoutDivs bg-slate-100 w-full h-1/4 pl-8 flex flex-col justify-evenly border-2 border-grey rounded-xl">
                 <h2 className="text-3xl font-bold">Color</h2>
                 <span className="flex items-center">
                     Select Color
                     <input value={newColor} onChange={handler} className="colorPicker ml-2 mb-2 w-16 h-16" type="color" />
                 </span>
             </div>
-            <div className="bg-slate-100 w-full h-1/4 pl-8 flex flex-col justify-evenly border-2 border-grey rounded-xl">
+            <div className="layoutDivs bg-slate-100 w-full h-1/4 pl-8 flex flex-col justify-evenly border-2 border-grey rounded-xl">
                 <h2 className="text-3xl font-bold mb-2">Fonts</h2>
                 <div className="flex justify-start gap-4">
                     <div onClick={() => updateFonts('serif')} className="cursor-pointer transform hover:scale-95 hover:bg-blue-300 border-2 border-black rounded-md p-1 fontsDiv">
