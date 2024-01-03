@@ -322,35 +322,35 @@ export default function CreateResume({updateLayout, updateColor, updateFonts, co
       <div className="infoSection">
         <div className="buttonContainer flex mb-8 rounded-2xl">
             <Btn
-              img={'./assets/file.png'}
+              img={'../assets/file.png'}
               alt={'Content'}
               btnClass={'btnContent rounded-l-xl'}
               text={'Personal Info'}
               callback={Content}
             />
             <Btn
-              img={'./assets/edit.png'}
+              img={'../assets/edit.png'}
               alt={'Edit'}
               btnClass={'btnCustomize'}
               text={'Customize Layout'}
               callback={Layout}
             />
             <Btn
-              img={'./assets/clear.png'}
+              img={'../assets/clear.png'}
               alt={'Clear'}
               btnClass={'btnClear'}
               text={'Clear Resume'}
               callback={hideResume}
             />
             <Btn
-              img={'./assets/example.png'}
+              img={'../assets/example.png'}
               alt={'Example'}
               btnClass={'btnExample'}
               text={'Load Example'}
               callback={showResume}
             />
             <Btn
-              img={'./assets/pdf.png'}
+              img={'../assets/pdf.png'}
               alt={'PDF Downloader'}
               btnClass={'btnPDF rounded-e-xl'}
               text={'Download PDF'}
