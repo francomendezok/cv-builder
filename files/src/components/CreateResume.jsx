@@ -2,6 +2,7 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
 import { useState } from "react"
+import file from './assets/file.png'
 
 
 function CustomizeLayout ({updateLayout, updateColor, updateFonts, color, hideLayout}) {
@@ -322,7 +323,7 @@ export default function CreateResume({updateLayout, updateColor, updateFonts, co
       <div className="infoSection">
         <div className="buttonContainer flex mb-8 rounded-2xl">
             <Btn
-              img={'./assets/file.png'}
+              img={file}
               alt={'Content'}
               btnClass={'btnContent rounded-l-xl'}
               text={'Personal Info'}
