@@ -2,7 +2,13 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
 import { useState } from "react"
-import file from './assets/file.png'
+import fileIMG from './assets/file.png'
+import editIMG from './assets/edit.png'
+import clearIMG from './assets/clear.png'
+import exampleIMG from './assets/example.png'
+import pdfIMG from './assets/pdf.png'
+
+
 
 
 function CustomizeLayout ({updateLayout, updateColor, updateFonts, color, hideLayout}) {
@@ -323,35 +329,35 @@ export default function CreateResume({updateLayout, updateColor, updateFonts, co
       <div className="infoSection">
         <div className="buttonContainer flex mb-8 rounded-2xl">
             <Btn
-              img={file}
+              img={fileIMG}
               alt={'Content'}
               btnClass={'btnContent rounded-l-xl'}
               text={'Personal Info'}
               callback={Content}
             />
             <Btn
-              img={'./assets/edit.png'}
+              img={editIMG}
               alt={'Edit'}
               btnClass={'btnCustomize'}
               text={'Customize Layout'}
               callback={Layout}
             />
             <Btn
-              img={'./assets/clear.png'}
+              img={clearIMG}
               alt={'Clear'}
               btnClass={'btnClear'}
               text={'Clear Resume'}
               callback={hideResume}
             />
             <Btn
-              img={'./assets/example.png'}
+              img={exampleIMG}
               alt={'Example'}
               btnClass={'btnExample'}
               text={'Load Example'}
               callback={showResume}
             />
             <Btn
-              img={'./assets/pdf.png'}
+              img={pdfIMG}
               alt={'PDF Downloader'}
               btnClass={'btnPDF rounded-e-xl'}
               text={'Download PDF'}
