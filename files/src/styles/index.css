@@ -537,7 +537,7 @@ label {
   #resumeTop {
     margin: 0 auto;
     width: 90%;
-    height: 250vh;
+    height: 300vh;
     margin-top: 10rem;
   }
 
@@ -578,7 +578,7 @@ label {
   #resumeLeft {
     margin: 0 auto;
     width: 90%;
-    height: 250vh;
+    height: 300vh;
     display: flex;
     margin-top: 10rem;
   }
@@ -618,7 +618,7 @@ label {
   #resumeRight {
     margin: 0 auto;
     width: 90%;
-    height: 250vh;
+    height: 300vh;
     display: flex;
     flex-direction: row-reverse;
     margin-top: 10rem;
@@ -879,7 +879,7 @@ label {
   #resumeTop {
     margin: 0 auto;
     width: 90%;
-    height: 200vh;
+    height: 300vh;
   }
 
   #resumeTop .personalInfo {
@@ -959,7 +959,7 @@ label {
   #resumeLeft {
     margin: 0 auto;
     width: 90%;
-    height: 200vh;
+    height: 300vh;
     display: flex;
   }
   
@@ -1042,7 +1042,7 @@ label {
   #resumeRight {
     margin: 0 auto;
     width: 90%;
-    height: 200vh;
+    height: 300vh;
     display: flex;
     flex-direction: row-reverse;
   }
@@ -1191,7 +1191,7 @@ label {
 
 }
 
-@media (min-width: 427px) and (max-width: 769px) {
+@media (min-width: 427px) and (max-width: 860px) {
   body {
     width: 100vw;
     height: 100vh;
@@ -1218,7 +1218,7 @@ label {
   #resumeTop {
     margin: 0 auto;
     width: 90%;
-    height: 250vh;
+    height: 350vh;
   }
 
   #resumeTop .personalInfo {
@@ -1299,7 +1299,7 @@ label {
   #resumeLeft {
     margin: 0 auto;
     width: 90%;
-    height: 250vh;
+    height: 350vh;
     display: flex;
   }
   
@@ -1382,7 +1382,7 @@ label {
   #resumeRight {
     margin: 0 auto;
     width: 90%;
-    height: 250vh;
+    height: 350vh;
     display: flex;
     flex-direction: row-reverse;
   }
@@ -1527,6 +1527,140 @@ label {
     width: 90%;
     height: 100%;
     justify-content: space-evenly;
+  }
+
+}
+
+@media (min-width: 861px) and (max-width: 1025px) {
+  body {
+    width: 100vw;
+    height: 100vh;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+  }
+  
+  .container {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    height: 100%;
+    overflow-x: hidden;
+  }
+  
+  .infoSection {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    width: 40vw;
+    border: 4px solid yellow;
+
+  }
+  
+  .infoSection .buttonContainer {
+    border: 4px solid red;
+    width: 80%;
+    height: 20%;
+    margin-bottom: 0;
+  }
+  
+
+
+
+
+  
+  
+  .div-position {
+    width: 3rem; 
+    height: 3rem; 
+    border: 1px solid black;
+  }
+
+  .buttonContainer {
+    margin: 0 auto;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-evenly;
+    width: 100%;
+  }
+  .btnEdit {
+    font-size: 15px;
+    border-radius: 20%;
+    border: 1px solid black;
+    width: 6rem;
+    height: 6rem;
+    background-color: #fff;
+    text-align: center;
+    margin-bottom: 12px;
+    color: black !important;
+  }
+  
+  .btnEdit img {
+    width: 25px;
+    height: 25px;
+  } 
+  
+  input[type=color] {
+    border-radius: 50%;
+    border: 1px solid black;
+    overflow: hidden;
+    cursor: pointer;
+  }
+  
+  input[type=color]::-webkit-color-swatch {
+  border: none;
+  border-radius: 50%;
+  padding: 0;
+  }
+  
+  input[type=color]::-webkit-color-swatch-wrapper {
+    border: none;
+    border-radius: 50%;
+    padding: 0;
+  }
+  
+  input[type=text] {
+    overflow: hidden;
+    background-color: #fefefe;
+    border-bottom: 1px solid lightgrey;
+    color: black;
+    border-radius: 0px;
+  }
+  
+  input[type=text]:focus {
+    border: 2px solid rgb(75, 103, 239);
+  }
+  
+  label {
+    font-weight: bold;
+  }
+
+  .contentSection {
+    margin: 0 auto;
+    width: 90%;
+    height: 100%;
+    justify-content: space-evenly;
+  }
+
+}
+
+@media print {
+  .no-print {
+    display: none;
+  }
+
+  #resumeTop, #resumeLeft, #resumeRight {
+    height: 120%;
+    width: 100%;
+    margin: 0;
+    overflow: hidden;
+    font-size: 12px;
+  }
+
+  body .container {
+    background:white; 
+    margin: 0;
   }
 
 }

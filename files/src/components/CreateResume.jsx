@@ -79,7 +79,6 @@ function Btn ({img, alt, text, btnClass, callback}) {
     )
 }
 
-
 function CompleteYourInfo({example, updateExample, hideContent, updateVisible}) {
   const [openSection, setOpenSection] = useState(0);
 
@@ -325,8 +324,12 @@ export default function CreateResume({updateLayout, updateColor, updateFonts, co
       updateVisible(true)
     }
 
+    function PDF () {
+      window.print()
+    }
+
     return (
-      <div className="infoSection">
+      <div className="no-print infoSection">
         <div className="buttonContainer flex mb-8 rounded-2xl">
             <Btn
               img={fileIMG}
@@ -361,6 +364,7 @@ export default function CreateResume({updateLayout, updateColor, updateFonts, co
               alt={'PDF Downloader'}
               btnClass={'btnPDF rounded-e-xl'}
               text={'Download PDF'}
+              callback={PDF}
             />
           </div>
           <CompleteYourInfo 
